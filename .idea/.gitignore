@@ -1,0 +1,55 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+/sqlDataSources/
+/sqlDataSources.local.xml
+
+# Gradle files
+.gradle/
+build/
+**/build/
+!gradle-wrapper.jar
+!**/src/**/build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Log files
+*.log
+
+# Android Studio files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Keystore files
+*.jks
+
+# External native build folder generated in Android Studio 2.2+
+.externalNativeBuild/
+
+# IntelliJ
+out/
+
+# User-specific configurations
+.idea/workspace.xml
+.idea/libraries
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+.idea/modules.xml
+.idea/.name
+.idea/httpRequests/
+.idea/dataSources/
+.idea/dataSources.local.xml
+.idea/sqlDataSources/
+.idea/sqlDataSources.local.xml
+
+
