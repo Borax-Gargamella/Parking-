@@ -9,7 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class StoricoRepository {
 
     private final FirebaseFirestore db = FirestoreDataSource.getFirestore();
-    private final CollectionReference storicoCollection = db.collection("Storici");
+    private final CollectionReference storicoCollection = db.collection("Storico");
 
     public Task<Void> addStorico(Storico storico) {
         String docId = storicoCollection.document().getId();

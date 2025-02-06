@@ -3,7 +3,7 @@ package com.contest.parking.data.model;
 public class PostoAuto {
     private String id;
     private String categoria;
-    private boolean statoOccupato;
+    private boolean statoOccupato; // true = occupato, false = libero
     private String parcheggioID;
 
     // Empty constructor for Firestore

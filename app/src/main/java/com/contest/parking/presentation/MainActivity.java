@@ -2,9 +2,14 @@ package com.contest.parking.presentation;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.contest.parking.data.model.Luogo;
 import com.contest.parking.data.repository.LuogoRepository;
 import com.contest.parking.presentation.adapter.LuogoAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         luogoRepository = new LuogoRepository();
 
         //Load from firestore
-        luogoRepo.getAllLuoghi().get().addOnSuccessListener(queryDocumentSnapshots -> {
+        luogoRepository.getAllLuoghi().get().addOnSuccessListener(queryDocumentSnapshots -> {
             List<Luogo> luoghiList = queryDocumentSnapshots.toObjects(Luogo.class);
             luogoAdapter.setLuoghiList(luoghiList);
         });
