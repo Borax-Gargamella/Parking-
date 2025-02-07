@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,6 +15,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
+    <!-- Dati utente -->
     <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textNome"
             android:layout_width="wrap_content"
@@ -56,26 +56,39 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp"/>
 
+    <!-- Se vuoi mostrare info sul posto prenotato (id, nome, orario inizio, ecc.) -->
+    <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textPostoPrenotato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Posto auto prenotato: Nessuno"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            app:layout_constraintTop_toBottomOf="@id/textTarga"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"/>
+
+    <!-- Bottone Paga -->
     <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPaga"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Paga"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            app:layout_constraintTop_toBottomOf="@id/textTarga"
+            style="@style/Widget.Material3.Button.TextButton"
+            app:layout_constraintTop_toBottomOf="@id/textPostoPrenotato"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"/>
 
+    <!-- Bottone Logout (facoltativo) -->
     <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
             style="@style/Widget.Material3.Button.TextButton"
-            app:layout_constraintTop_toBottomOf="@id/textTarga"
+            app:layout_constraintTop_toBottomOf="@id/textPostoPrenotato"
             app:layout_constraintStart_toEndOf="@id/btnPaga"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
