@@ -4,16 +4,16 @@ public class PostoAuto {
     private String id;
     private String categoria;
     private boolean statoOccupato; // true = occupato, false = libero
-    private String parcheggioID;
+    private String parcheggioId;
 
     // Empty constructor for Firestore
     public PostoAuto(){}
 
-    public PostoAuto(String id, String categoria, boolean stato, String parcheggioID) {
+    public PostoAuto(String id, String categoria, boolean stato, String parcheggioId) {
         this.id = id;
         this.categoria = categoria;
         this.statoOccupato = stato;
-        this.parcheggioID = parcheggioID;
+        this.parcheggioId = parcheggioId;
     }
 
     public String getId() {
@@ -40,11 +40,11 @@ public class PostoAuto {
         this.statoOccupato = statoOccupato;
     }
 
-    public String getParcheggioID() {
-        return parcheggioID;
+    public String getParcheggioId() {
+        return parcheggioId;
     }
 
-    public void setParcheggioID(String parcheggioID) {
-        this.parcheggioID = parcheggioID;
+    public void setParcheggioId(String parcheggioId) {
+        this.parcheggioId = parcheggioId;
     }
 }

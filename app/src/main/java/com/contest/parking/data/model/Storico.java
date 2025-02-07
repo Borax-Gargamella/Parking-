@@ -2,8 +2,8 @@ package com.contest.parking.data.model;
 
 public class Storico {
     private String id;
-    private String utenteID;
-    private String postoAutoID;
+    private String utenteId;
+    private String postoAutoId;
     private long dataInizio;   //timestamp (System.currentTimeMillis())
     private long dataFine;
     private String targa;
@@ -12,10 +12,10 @@ public class Storico {
     // Empty constructor for Firestore
     public Storico(){}
 
-    public Storico(String id, String utenteID, String postoAutoID, long dataInizio, long dataFine, String targa, double prezzo) {
+    public Storico(String id, String utenteId, String postoAutoId, long dataInizio, long dataFine, String targa, double prezzo) {
         this.id = id;
-        this.utenteID = utenteID;
-        this.postoAutoID = postoAutoID;
+        this.utenteId = utenteId;
+        this.postoAutoId = postoAutoId;
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
         this.targa = targa;
@@ -30,20 +30,20 @@ public class Storico {
         this.id = id;
     }
 
-    public String getUtenteID() {
-        return utenteID;
+    public String getUtenteId() {
+        return utenteId;
     }
 
-    public void setUtenteID(String utenteID) {
-        this.utenteID = utenteID;
+    public void setUtenteId(String utenteId) {
+        this.utenteId = utenteId;
     }
 
-    public String getPostoAutoID() {
-        return postoAutoID;
+    public String getPostoAutoId() {
+        return postoAutoId;
     }
 
-    public void setPostoAutoID(String postoAutoID) {
-        this.postoAutoID = postoAutoID;
+    public void setPostoAutoId(String postoAutoId) {
+        this.postoAutoId = postoAutoId;
     }
 
     public long getDataInizio() {
