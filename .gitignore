@@ -1,1 +1,5 @@
 app/google-services.json
+.gradle/file-system.probe
+.gradle/buildOutputCleanup/outputFiles.bin
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/*
