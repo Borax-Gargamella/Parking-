@@ -4,7 +4,7 @@ public class Storico {
     private String id;
     private String utenteID;
     private String postoAutoID;
-    private long dataInizio;
+    private long dataInizio;   //timestamp (System.currentTimeMillis())
     private long dataFine;
     private String targa;
     private double prezzo;

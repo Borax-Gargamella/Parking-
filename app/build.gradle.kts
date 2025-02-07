@@ -1,13 +1,15 @@
 plugins {
     id("com.android.application")
+    // Add the Google services Gradle plugin
+    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "com.example.parking"
+    namespace = "com.contest.parking"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.parking"
+        applicationId = "com.contest.parking"
         minSdk = 31
         targetSdk = 34
         versionCode = 1
@@ -37,8 +39,8 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    // Firebase BoM
-    implementation(platform("com.google.firebase:firebase-bom:32.1.1"))
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
 
     // Firebase Auth
     implementation("com.google.firebase:firebase-auth")
