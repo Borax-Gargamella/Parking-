@@ -100,7 +100,7 @@ public class UserAreaActivity extends AppCompatActivity {
                 .addOnSuccessListener(querySnapshot -> {
                     if (!querySnapshot.isEmpty()) {
                         // Supponendo che l'utente abbia un solo posto aperto
-                        QueryDocumentSnapshot doc = querySnapshot.getDocuments().get(0);
+                        QueryDocumentSnapshot doc = (QueryDocumentSnapshot) querySnapshot.getDocuments().get(0);
                         String postoId = doc.getString("postoAutoId");
                         textPostoPrenotato.setText("Posto auto prenotato: " + postoId);
                     } else {

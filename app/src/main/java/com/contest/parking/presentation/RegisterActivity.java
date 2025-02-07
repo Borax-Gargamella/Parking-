@@ -10,12 +10,13 @@ import com.contest.parking.R;
 import com.contest.parking.data.model.Utente;
 import com.contest.parking.data.repository.AuthRepository;
 import com.contest.parking.data.repository.UtenteRepository;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.inappmessaging.model.Button;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText editNome, editCognome, editTarga, editEmail, editPassword;
-    private Button registerButton;
+    private MaterialButton registerButton;
     private AuthRepository authRepository;
     private UtenteRepository utenteRepository;
 
