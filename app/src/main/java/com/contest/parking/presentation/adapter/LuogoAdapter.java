@@ -8,14 +8,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.contest.parking.R;
 import com.contest.parking.data.model.Luogo;
-import com.contest.parking.presentation.MainActivity;
 import com.contest.parking.presentation.ParcheggiActivity;
-import com.example.parking.R;
 
 import java.util.List;
 
 public class LuogoAdapter extends RecyclerView.Adapter<LuogoAdapter.LuogoViewHolder> {
+
     private Context context;
     private List<Luogo> luoghiList;
 
@@ -42,7 +42,7 @@ public class LuogoAdapter extends RecyclerView.Adapter<LuogoAdapter.LuogoViewHol
         holder.nomeText.setText(luogo.getNome());
         holder.indirizzoText.setText(luogo.getIndirizzo());
 
-        // Click per aprire la lista parcheggi
+        // Click to open ParcheggiActivity
         holder.itemView.setOnClickListener(v -> {
             Intent i = new Intent(context, ParcheggiActivity.class);
             i.putExtra("luogoId", luogo.getId());

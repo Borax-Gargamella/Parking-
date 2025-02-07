@@ -1,8 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Parking" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Theme.SmartParking" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize principal color -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorSecondary">@color/teal_200</item>
+        <!-- Other item if you want. -->
     </style>
 
     <style name="Theme.Parking" parent="Base.Theme.Parking"/>

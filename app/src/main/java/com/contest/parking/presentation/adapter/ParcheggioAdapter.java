@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.contest.parking.R;
 import com.contest.parking.data.model.Parcheggio;
-import com.example.parking.R;
 
 import java.util.List;
 
@@ -26,11 +26,9 @@ public class ParcheggioAdapter extends RecyclerView.Adapter<ParcheggioAdapter.Pa
         notifyDataSetChanged();
     }
 
-    @NonNull
     @Override
     public ParcheggioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context)
-                .inflate(R.layout.item_parcheggio, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_parcheggio, parent, false);
         return new ParcheggioViewHolder(view);
     }
 
@@ -41,18 +39,20 @@ public class ParcheggioAdapter extends RecyclerView.Adapter<ParcheggioAdapter.Pa
         holder.postiTot.setText(String.valueOf(p.getPostiTot()));
         holder.prezzo.setText(String.valueOf(p.getPrezzo()));
 
-        // Se vuoi gestire un clic su questo item
+        // click to open DettaglioParcheggioActivity
         holder.itemView.setOnClickListener(v -> {
-            // ad es. aprire un DettaglioParcheggioActivity
+            // Intent i = new Intent(context, DettaglioParcheggioActivity.class);
+            // i.putExtra("parcheggioId", p.getId());
+            // context.startActivity(i);
         });
     }
 
     @Override
     public int getItemCount() {
-        return (parcheggioList != null) ? parcheggioList.size() : 0;
+        return (parcheggioList == null) ? 0 : parcheggioList.size();
     }
 
-    public static class ParcheggioViewHolder extends RecyclerView.ViewHolder {
+    static class ParcheggioViewHolder extends RecyclerView.ViewHolder {
         TextView nomeParcheggio, postiTot, prezzo;
 
         public ParcheggioViewHolder(@NonNull View itemView) {

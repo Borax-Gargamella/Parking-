@@ -15,7 +15,7 @@ public class StoricoRepository {
         storico.setId(docId);
         return storicoCollection.document(docId).set(storico);
     }
-    
+
     public CollectionReference getAllStorici() {
         return storicoCollection;
     }
