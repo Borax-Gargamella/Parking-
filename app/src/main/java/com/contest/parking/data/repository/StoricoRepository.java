@@ -1,6 +1,5 @@
 package com.contest.parking.data.repository;
 
-import com.contest.parking.data.FirestoreDataSource;
 import com.contest.parking.data.model.Storico;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -16,7 +15,7 @@ public class StoricoRepository {
         storico.setId(docId);
         return storicoCollection.document(docId).set(storico);
     }
-
+    
     public CollectionReference getAllStorici() {
         return storicoCollection;
     }

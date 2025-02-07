@@ -1,6 +1,5 @@
 package com.contest.parking.data.repository;
 
-import com.contest.parking.data.FirestoreDataSource;
 import com.contest.parking.data.model.Parcheggio;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -18,13 +17,21 @@ public class ParcheggioRepository {
         return parcheggioCollection.document(docId).set(parcheggio);
     }
 
+    public Task<Void> updateParcheggio(Parcheggio p) {
+        return parcheggioCollection.document(p.getId()).set(p);
+    }
+
+    public Task<Void> deleteParcheggio(String parcheggioId) {
+        return parcheggioCollection.document(parcheggioId).delete();
+    }
+
     public  CollectionReference getAllParcheggi() {
         return parcheggioCollection;
     }
 
+    // Query
     public Query getParcheggiByLuogo(String luogoId) {
         return parcheggioCollection.whereEqualTo("luogoId", luogoId);
     }
 
-    // Other methods CRUD if needed
 }

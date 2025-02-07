@@ -1,4 +1,4 @@
-package com.contest.parking.data;
+package com.contest.parking.data.repository;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 

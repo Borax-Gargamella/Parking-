@@ -1,10 +1,10 @@
 package com.contest.parking.data.repository;
 
-import com.contest.parking.data.FirestoreDataSource;
 import com.contest.parking.data.model.PostoAuto;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 public class PostoAutoRepository {
 
@@ -21,8 +21,13 @@ public class PostoAutoRepository {
         return postoAutoRepositoryCollection;
     }
 
-    public void updateStatoPostoAuto(String id, boolean stato) {
-        postoAutoRepositoryCollection.document(id).update("stato", stato);
+    //CRUD
+    public Task<Void> updateStatoPostoAuto(String postoId, boolean occupato) {
+        return postoAutoRepositoryCollection.document(postoId).update("statoOccupato", occupato);
     }
-    // Other methods CRUD if needed
+
+    //Query
+    public Query getPostiByParcheggio(String parcheggioId) {
+        return postoAutoRepositoryCollection.whereEqualTo("parcheggioId", parcheggioId);
+    }
 }

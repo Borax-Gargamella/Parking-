@@ -1,6 +1,5 @@
 package com.contest.parking.data.repository;
 
-import com.contest.parking.data.FirestoreDataSource;
 import com.contest.parking.data.model.Luogo;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -15,6 +14,14 @@ public class LuogoRepository {
         String docId = luogoCollection.document().getId();
         luogo.setId(docId);
         return luogoCollection.document(docId).set(luogo);
+    }
+
+    public Task<Void> updateLuogo(Luogo luogo) {
+        return luogoCollection.document(luogo.getId()).set(luogo);
+    }
+
+    public Task<Void> deleteLuogo(String luogoId) {
+        return luogoCollection.document(luogoId).delete();
     }
 
     public  CollectionReference getAllLuoghi() {

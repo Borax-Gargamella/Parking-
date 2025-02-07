@@ -16,6 +16,10 @@ public class AuthRepository {
         return auth.getCurrentUser();
     }
 
+    public String getCurrentUserId() {
+        return (auth.getCurrentUser() != null) ? auth.getCurrentUser().getUid() : null;
+    }
+
     public void registerUser(String email, String password, OnCompleteListener onCompleteListener) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(onCompleteListener);
     }
