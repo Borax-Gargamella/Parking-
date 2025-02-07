@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.contest.parking.data.model.Luogo;
 import com.contest.parking.data.repository.LuogoRepository;
 import com.contest.parking.presentation.adapter.LuogoAdapter;
+import com.example.parking.R;
 
 import java.util.ArrayList;
 import java.util.List;

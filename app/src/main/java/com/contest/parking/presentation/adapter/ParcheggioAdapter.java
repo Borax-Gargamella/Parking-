@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.contest.parking.data.model.Parcheggio;
+import com.example.parking.R;
 
 import java.util.List;
 

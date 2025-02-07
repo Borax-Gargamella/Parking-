@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.contest.parking.data.model.Luogo;
 import com.contest.parking.presentation.MainActivity;
 import com.contest.parking.presentation.ParcheggiActivity;
+import com.example.parking.R;
 
 import java.util.List;
 
