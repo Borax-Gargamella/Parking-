@@ -4,3 +4,4 @@ app/google-services.json
 *.bin
 .gradle/
 local.properties
+gradle.properties
