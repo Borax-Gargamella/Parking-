@@ -2,3 +2,5 @@
 
 # Chiavi private
 /google-services.json
+*.lock
+*.bin

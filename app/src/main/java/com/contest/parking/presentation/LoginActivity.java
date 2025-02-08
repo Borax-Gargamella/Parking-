@@ -15,42 +15,45 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import com.contest.parking.data.repository.AuthRepository;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 
 public class LoginActivity extends BaseActivity {
 
-    private EditText emailField, passwordField;
-    private Button loginButton, registerButton;
+    // Usa TextInputEditText per i campi email e password
+    private TextInputEditText editEmail, editPassword;
+    private MaterialButton loginButton, registerButton;
     private AuthRepository authRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        // Inietta il layout specifico per LoginActivity
+        // Inietta il layout specifico per LoginActivity nel container di BaseActivity
         setActivityLayout(R.layout.activity_login);
 
         authRepository = new AuthRepository();
 
-        // Se l'utente è già loggato, vai alla MainActivity
+        // Se l'utente è già loggato, vai direttamente alla MainActivity
         if (authRepository.getCurrentUser() != null) {
             goToMainActivity();
         }
 
-        // Binding delle view
-        emailField = findViewById(R.id.emailField);
-        passwordField = findViewById(R.id.passwordField);
+        // Binding delle view usando gli ID dei campi editabili
+        editEmail = findViewById(R.id.editEmail);
+        editPassword = findViewById(R.id.editPassword);
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
 
-        // Login
-        loginButton.setOnClickListener((View v) -> {
-            String email = emailField.getText().toString().trim();
-            String password = passwordField.getText().toString().trim();
+        // Imposta il listener per il bottone Login
+        loginButton.setOnClickListener(v -> {
+            String email = editEmail.getText().toString().trim();
+            String password = editPassword.getText().toString().trim();
             doLogin(email, password);
         });
 
-        // Vai a RegisterActivity
-        registerButton.setOnClickListener((View v) -> {
+        // Imposta il listener per il bottone Registrati
+        registerButton.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
     }
@@ -61,8 +64,7 @@ public class LoginActivity extends BaseActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "Login OK", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
+                    goToMainActivity();
                 } else {
                     Toast.makeText(LoginActivity.this, "Login fallito: " + task.getException(), Toast.LENGTH_LONG).show();
                 }

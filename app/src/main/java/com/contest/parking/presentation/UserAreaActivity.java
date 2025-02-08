@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +16,16 @@ import com.contest.parking.data.repository.UtenteRepository;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-public class UserAreaActivity extends AppCompatActivity {
+public class UserAreaActivity extends BaseActivity {
 
+    // Gruppo view per utente loggato
+    private LinearLayout llUserData;
     private TextView textNome, textCognome, textEmail, textTarga, textPostoPrenotato;
-    private MaterialButton btnPaga, btnLogout, btnLogin;
+    private MaterialButton btnPaga, btnLogout;
+
+    // Gruppo view per autenticazione (non loggato)
+    private LinearLayout llAuthButtons;
+    private MaterialButton btnLogin, btnRegister;
 
     private AuthRepository authRepository;
     private UtenteRepository utenteRepository;
@@ -29,9 +36,11 @@ public class UserAreaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_area);
+        // Inietta il layout specifico per UserAreaActivity nel container di BaseActivity
+        setActivityLayout(R.layout.activity_user_area);
 
-        // Riferimenti alle view per l'utente loggato
+        // Binding delle view per la sezione utente loggato
+        llUserData = findViewById(R.id.llUserData);
         textNome = findViewById(R.id.textNome);
         textCognome = findViewById(R.id.textCognome);
         textEmail = findViewById(R.id.textEmail);
@@ -40,62 +49,49 @@ public class UserAreaActivity extends AppCompatActivity {
         btnPaga = findViewById(R.id.btnPaga);
         btnLogout = findViewById(R.id.btnLogout);
 
-        // Riferimento al bottone Login/Registrazione
+        // Binding delle view per la sezione autenticazione (non loggato)
+        llAuthButtons = findViewById(R.id.llAuthButtons);
         btnLogin = findViewById(R.id.btnLogin);
+        btnRegister = findViewById(R.id.btnRegister);
 
         // Inizializza i repository
         authRepository = new AuthRepository();
         utenteRepository = new UtenteRepository();
         storicoRepository = new StoricoRepository();
 
-        // Ottieni l'ID utente corrente
+        // Controlla se l'utente è loggato
         currentUid = authRepository.getCurrentUserId();
         if (currentUid == null) {
-            // Nessun utente loggato:
-            Toast.makeText(this, "Nessun utente loggato", Toast.LENGTH_SHORT).show();
+            // Nessun utente loggato: nascondi le view per utente e mostra il pannello di autenticazione
+            llUserData.setVisibility(View.GONE);
+            llAuthButtons.setVisibility(View.VISIBLE);
 
-            // Nascondi le view destinate all'utente loggato
-            textNome.setVisibility(View.GONE);
-            textCognome.setVisibility(View.GONE);
-            textEmail.setVisibility(View.GONE);
-            textTarga.setVisibility(View.GONE);
-            textPostoPrenotato.setVisibility(View.GONE);
-            btnPaga.setVisibility(View.GONE);
-            btnLogout.setVisibility(View.GONE);
-
-            // Rendi visibile il bottone per login/registrazione
-            btnLogin.setVisibility(View.VISIBLE);
             btnLogin.setOnClickListener(v -> {
-                // Avvia la LoginActivity
-                Intent intent = new Intent(UserAreaActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();  // Termina questa activity se lo desideri
+                startActivity(new Intent(UserAreaActivity.this, LoginActivity.class));
             });
-            return;  // Interrompe l'esecuzione del resto del codice
+            btnRegister.setOnClickListener(v -> {
+                startActivity(new Intent(UserAreaActivity.this, RegisterActivity.class));
+            });
+        } else {
+            // Utente loggato: mostra le view per utente e nascondi il pannello di autenticazione
+            llUserData.setVisibility(View.VISIBLE);
+            llAuthButtons.setVisibility(View.GONE);
+            // Carica i dati utente
+            caricaDatiUtente(currentUid);
+            // Carica il posto prenotato, se presente
+            caricaPostoPrenotato(currentUid);
+
+            // Gestione click sui bottoni
+            btnPaga.setOnClickListener(v -> {
+                // Avvia PaymentActivity
+                startActivity(new Intent(UserAreaActivity.this, PaymentActivity.class));
+            });
+            btnLogout.setOnClickListener(v -> {
+                authRepository.logoutUser();
+                startActivity(new Intent(UserAreaActivity.this, LoginActivity.class));
+                finish();
+            });
         }
-
-        // Se l'utente è loggato, assicurati che il bottone Login sia nascosto
-        btnLogin.setVisibility(View.GONE);
-
-        // 1. Carica i dati utente
-        caricaDatiUtente(currentUid);
-
-        // 2. Verifica se c'è un posto prenotato (Storico aperto, dataFine = 0)
-        caricaPostoPrenotato(currentUid);
-
-        // Click Paga -> apri PaymentActivity o la tua "CompletaPagamentoActivity"
-        btnPaga.setOnClickListener(v -> {
-            Intent i = new Intent(UserAreaActivity.this, PaymentActivity.class);
-            startActivity(i);
-        });
-
-        // Click Logout
-        btnLogout.setOnClickListener(v -> {
-            authRepository.logoutUser();
-            Intent intent = new Intent(UserAreaActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        });
     }
 
     private void caricaDatiUtente(String uid) {
