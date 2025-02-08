@@ -5,3 +5,4 @@ app/google-services.json
 .gradle/*
 *.lock
 *.bin
+/.gradle/
