@@ -21,6 +21,30 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- Dichiarazione delle altre Activity -->
+        <activity
+                android:name="com.contest.parking.presentation.CompletaPagamentoActivity"
+                android:exported="true"/>
+        <activity
+                android:name="com.contest.parking.presentation.DettaglioParcheggioActivity"
+                android:exported="true"/>
+        <activity
+                android:name="com.contest.parking.presentation.LoginActivity"
+                android:exported="true"/>
+        <activity
+                android:name="com.contest.parking.presentation.ParcheggiActivity"
+                android:exported="true"/>
+        <activity
+                android:name="com.contest.parking.presentation.PaymentActivity"
+                android:exported="true"/>
+        <activity
+                android:name="com.contest.parking.presentation.RegisterActivity"
+                android:exported="true"/>
+        <activity
+                android:name="com.contest.parking.presentation.UserAreaActivity"
+                android:exported="true"/>
+
     </application>
 
 </manifest>
