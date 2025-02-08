@@ -62,16 +62,9 @@ public class UserAreaActivity extends BaseActivity {
         // Controlla se l'utente è loggato
         currentUid = authRepository.getCurrentUserId();
         if (currentUid == null) {
-            // Nessun utente loggato: nascondi le view per utente e mostra il pannello di autenticazione
-            llUserData.setVisibility(View.GONE);
-            llAuthButtons.setVisibility(View.VISIBLE);
-
-            btnLogin.setOnClickListener(v -> {
-                startActivity(new Intent(UserAreaActivity.this, LoginActivity.class));
-            });
-            btnRegister.setOnClickListener(v -> {
-                startActivity(new Intent(UserAreaActivity.this, RegisterActivity.class));
-            });
+            // Nessun utente loggato: rimanda alla LoginActivity
+            startActivity(new Intent(UserAreaActivity.this, LoginActivity.class));
+            finish();
         } else {
             // Utente loggato: mostra le view per utente e nascondi il pannello di autenticazione
             llUserData.setVisibility(View.VISIBLE);
