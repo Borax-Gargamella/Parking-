@@ -13,7 +13,7 @@ import com.contest.parking.presentation.adapter.ParcheggioAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParcheggiActivity extends AppCompatActivity {
+public class ParcheggiActivity extends BaseActivity {
 
     private ParcheggioRepository parcheggioRepository;
     private RecyclerView recyclerViewParcheggi;
@@ -23,7 +23,8 @@ public class ParcheggiActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_parcheggi);
+        // Inietta il layout specifico per ParcheggiActivity
+        setActivityLayout(R.layout.activity_parcheggi);
 
         recyclerViewParcheggi = findViewById(R.id.rvParcheggi);
         recyclerViewParcheggi.setLayoutManager(new LinearLayoutManager(this));
@@ -33,8 +34,9 @@ public class ParcheggiActivity extends AppCompatActivity {
 
         parcheggioRepository = new ParcheggioRepository();
 
+        // Ricevi l'ID del luogo tramite Intent
         luogoId = getIntent().getStringExtra("luogoId");
-        // Query Firestore
+        // Query Firestore per ottenere i parcheggi
         parcheggioRepository.getParcheggiByLuogo(luogoId)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {

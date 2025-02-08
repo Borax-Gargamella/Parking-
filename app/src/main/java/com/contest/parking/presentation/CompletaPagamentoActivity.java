@@ -11,7 +11,7 @@ import com.contest.parking.data.repository.StoricoRepository;
 import com.contest.parking.domain.UseCaseCompletaPagamento;
 import com.google.android.material.button.MaterialButton;
 
-public class CompletaPagamentoActivity extends AppCompatActivity {
+public class CompletaPagamentoActivity extends BaseActivity {
 
     private TextView textRiepilogo;
     private MaterialButton btnConfermaPagamento;
@@ -24,28 +24,28 @@ public class CompletaPagamentoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment);  // o un layout differente
+        // Inietta il layout specifico per CompletaPagamentoActivity
+        setActivityLayout(R.layout.activity_payment);
 
         textRiepilogo = findViewById(R.id.textPaymentTitle);
         btnConfermaPagamento = findViewById(R.id.btnPagaOnline);
 
-        // Repos e use case
+        // Inizializza repository e use case
         useCaseCompletaPagamento = new UseCaseCompletaPagamento(
                 new PostoAutoRepository(),
                 new StoricoRepository()
         );
         authRepository = new AuthRepository();
 
-        // Ricevi info da Intent
+        // Ricevi l'ID del posto tramite Intent
         postoId = getIntent().getStringExtra("postoId");
-        // Eventualmente mostra un riepilogo in textRiepilogo (puoi calcolare tempo, costo, ecc.)
+        // Qui puoi mostrare un riepilogo (es. tempo, costo, ecc.) in textRiepilogo
 
         btnConfermaPagamento.setOnClickListener(v -> {
             String userId = authRepository.getCurrentUserId();
-
             useCaseCompletaPagamento.completaPagamento(postoId, userId, aVoid -> {
                 Toast.makeText(CompletaPagamentoActivity.this, "Pagamento completato, posto liberato!", Toast.LENGTH_SHORT).show();
-                finish(); // torniamo indietro
+                finish(); // Torna indietro
             });
         });
     }

@@ -15,7 +15,7 @@ import com.contest.parking.data.repository.StoricoRepository;
 import com.contest.parking.domain.UseCasePrenotaPosto;
 import com.google.android.material.button.MaterialButton;
 
-public class DettaglioParcheggioActivity extends AppCompatActivity {
+public class DettaglioParcheggioActivity extends BaseActivity {
 
     private TextView textNomeParcheggio, textDescrizione, textPrezzo;
     private MaterialButton btnPrenota, btnCompletaPagamento;
@@ -30,7 +30,8 @@ public class DettaglioParcheggioActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dettaglio_parcheggio);
+        // Inietta il layout specifico per DettaglioParcheggioActivity
+        setActivityLayout(R.layout.activity_dettaglio_parcheggio);
 
         textNomeParcheggio = findViewById(R.id.textNomeParcheggioDettaglio);
         textDescrizione = findViewById(R.id.textDescrizioneParcheggio);
@@ -39,12 +40,12 @@ public class DettaglioParcheggioActivity extends AppCompatActivity {
         btnPrenota = findViewById(R.id.buttonPrenota);
         btnCompletaPagamento = findViewById(R.id.buttonCompletaPagamento);
 
-        // Repos & UseCase
+        // Inizializza i repository e UseCase
         parcheggioRepo = new ParcheggioRepository();
         useCasePrenota = new UseCasePrenotaPosto(new PostoAutoRepository(), new StoricoRepository());
         authRepository = new AuthRepository();
 
-        // Ricevi l'ID del parcheggio
+        // Ricevi l'ID del parcheggio tramite Intent
         parcheggioId = getIntent().getStringExtra("parcheggioId");
 
         // Carica i dettagli del parcheggio
@@ -52,12 +53,10 @@ public class DettaglioParcheggioActivity extends AppCompatActivity {
 
         // Click su Prenota
         btnPrenota.setOnClickListener(v -> {
-            // Esempio: Prenotiamo un "posto generico"?
-            // In un'app reale, potresti aprire la "mappa PostiAuto" e selezionare un ID.
-            // Qui semplifichiamo e prendiamo un posto di test:
+            // Esempio: prenota un posto generico
             String samplePostoId = "somePostoId";
             String userId = authRepository.getCurrentUserId();
-            String targa = "AB123CD"; // Se ce l'hai caricata
+            String targa = "AB123CD"; // Se disponibile
             double prezzo = parcheggioCorrente != null ? parcheggioCorrente.getPrezzo() : 2.5;
 
             useCasePrenota.prenotaPosto(samplePostoId, userId, targa, prezzo, aVoid -> {
@@ -65,11 +64,10 @@ public class DettaglioParcheggioActivity extends AppCompatActivity {
             });
         });
 
-        // Click su Paga ora -> Apriamo un'altra Activity
+        // Click su "Completa Pagamento"
         btnCompletaPagamento.setOnClickListener(v -> {
             Intent i = new Intent(DettaglioParcheggioActivity.this, CompletaPagamentoActivity.class);
-            // passiamo info per "completare" il pagamento, ad es. l'ID del Posto
-            i.putExtra("postoId", "somePostoId");
+            i.putExtra("postoId", "somePostoId"); // Passa le informazioni necessarie
             startActivity(i);
         });
     }

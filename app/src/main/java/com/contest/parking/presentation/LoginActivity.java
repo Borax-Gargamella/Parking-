@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.contest.parking.data.repository.AuthRepository;
 import com.google.firebase.auth.AuthResult;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private EditText emailField, passwordField;
     private Button loginButton, registerButton;
@@ -26,17 +26,17 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login); // R.layout.activity_login is not defined
+        // Inietta il layout specifico per LoginActivity
+        setActivityLayout(R.layout.activity_login);
 
-        // Initialize repository
         authRepository = new AuthRepository();
 
-        // if user is already logged in, go to MainActivity
+        // Se l'utente è già loggato, vai alla MainActivity
         if (authRepository.getCurrentUser() != null) {
             goToMainActivity();
         }
 
-        // View binding
+        // Binding delle view
         emailField = findViewById(R.id.emailField);
         passwordField = findViewById(R.id.passwordField);
         loginButton = findViewById(R.id.loginButton);
@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
             doLogin(email, password);
         });
 
-        // Go to RegisterActivity
+        // Vai a RegisterActivity
         registerButton.setOnClickListener((View v) -> {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
