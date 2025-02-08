@@ -9,3 +9,4 @@ app/google-services.json
 .gradle/8.2/fileHashes/fileHashes.lock
 .gradle/8.2/fileHashes/fileHashes.bin
 .gradle/8.2/executionHistory/executionHistory.lock
+.idea/assetWizardSettings.xml
