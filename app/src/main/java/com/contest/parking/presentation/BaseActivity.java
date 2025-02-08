@@ -21,15 +21,21 @@ public abstract class BaseActivity extends AppCompatActivity {
         MaterialButton btnUser = findViewById(R.id.btnUser);
 
         btnHome.setOnClickListener(v -> {
-            // Esempio: se la home è la MainActivity, puoi controllare se non sei già lì oppure forzare il refresh
-            Toast.makeText(BaseActivity.this, "Sei nella Home", Toast.LENGTH_SHORT).show();
-            // Se necessario, avvia MainActivity:
-            // Intent intent = new Intent(BaseActivity.this, MainActivity.class);
-            // startActivity(intent);
+            // Se si è già nella Home, mostra un Toast
+            if (this instanceof MainActivity) {
+                Toast.makeText(BaseActivity.this, "Sei già nella Home", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Intent intent = new Intent(BaseActivity.this, MainActivity.class);
+            startActivity(intent);
         });
 
         btnUser.setOnClickListener(v -> {
             // Avvia la UserAreaActivity
+            if (this instanceof UserAreaActivity) {
+                Toast.makeText(BaseActivity.this, "Sei già nella tua area", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Intent intent = new Intent(BaseActivity.this, UserAreaActivity.class);
             startActivity(intent);
         });
