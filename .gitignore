@@ -1,7 +1,21 @@
-app/google-services.json
-.gradle/*
-*.lock
-*.bin
+# Gradle
 .gradle/
+build/
 local.properties
 gradle.properties
+*.lock
+*.bin
+
+# Android Studio
+.idea/
+*.iml
+
+# Log e file di sistema
+*.log
+.DS_Store
+
+# Google Services (opzionale, se contiene dati sensibili)
+app/google-services.json
+
+# File generati da build
+app/build/
