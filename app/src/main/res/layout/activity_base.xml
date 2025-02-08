@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/base_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <!-- Topbar comune -->
+    <LinearLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:padding="8dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+        <!-- Bottone Home -->
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnHome"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_home"
+                android:contentDescription="@string/home"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <!-- Titolo centrato -->
+        <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Parcheggio Smart"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:gravity="center"
+                android:textColor="@android:color/white" />
+
+        <!-- Bottone Utente -->
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUser"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_person"
+                android:contentDescription="@string/user_area"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+    </LinearLayout>
+
+    <!-- Container per il contenuto specifico di ogni Activity -->
+    <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="56dp" />  <!-- Regola il margine in base all'altezza della topbar -->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

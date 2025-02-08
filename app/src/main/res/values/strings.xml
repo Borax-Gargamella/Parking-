@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Parking</string>
+    <string name="home">Home</string>
+    <string name="user_area">Area Utente</string>
 </resources>
