@@ -1,7 +1,7 @@
 package com.contest.parking.data.model;
 
 public class Utente {
-    private  String id;
+    private String id;
     private String nome;
     private String cognome;
     private String targa;
