@@ -17,3 +17,5 @@ app/google-services.json
 .gradle/8.2/fileHashes/resourceHashesCache.bin
 .gradle/buildOutputCleanup/buildOutputCleanup.lock
 .gradle/buildOutputCleanup/outputFiles.bin
+*.lock
+*.bin
