@@ -3,3 +3,4 @@ app/google-services.json
 *.lock
 *.bin
 .gradle/
+local.properties
