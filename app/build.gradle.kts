@@ -52,6 +52,9 @@ dependencies {
     // ZXing per QR code
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
 
+    // Gson per gestire JSON
+    implementation("com.google.code.gson:gson:2.10.1")
+
     // Glide (se ti serve per caricare immagini) Per gestire immagini (se vuoi usare Glide o simili, anche se qui hai immagini locali)
     implementation("com.github.bumptech.glide:glide:4.14.2")
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")

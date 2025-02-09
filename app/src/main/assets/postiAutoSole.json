@@ -1,0 +1,476 @@
+{
+  "parkingAreas": [
+    {
+      "parkingId": "areaA",
+      "spots": [
+        {
+          "id": "A1",
+          "xPercent": 0.04819,
+          "yPercent": 0.08305,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A2",
+          "xPercent": 0.04819,
+          "yPercent": 0.19166,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A3",
+          "xPercent": 0.04819,
+          "yPercent": 0.30104,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A4",
+          "xPercent": 0.04819,
+          "yPercent": 0.41038,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A5",
+          "xPercent": 0.04819,
+          "yPercent": 0.51938,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A6",
+          "xPercent": 0.04819,
+          "yPercent": 0.62872,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A7",
+          "xPercent": 0.04819,
+          "yPercent": 0.73772,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A8",
+          "xPercent": 0.04819,
+          "yPercent": 0.84674,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A9",
+          "xPercent": 0.48193,
+          "yPercent": 0.19166,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A10",
+          "xPercent": 0.48193,
+          "yPercent": 0.30104,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A11",
+          "xPercent": 0.48193,
+          "yPercent": 0.41038,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A12",
+          "xPercent": 0.48193,
+          "yPercent": 0.51938,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A13",
+          "xPercent": 0.48193,
+          "yPercent": 0.62872,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A14",
+          "xPercent": 0.48193,
+          "yPercent": 0.73772,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A15",
+          "xPercent": 0.48193,
+          "yPercent": 0.84674,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A16",
+          "xPercent": 0.67077,
+          "yPercent": 0.19166,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A17",
+          "xPercent": 0.67077,
+          "yPercent": 0.30104,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A18",
+          "xPercent": 0.67077,
+          "yPercent": 0.41038,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A19",
+          "xPercent": 0.67077,
+          "yPercent": 0.51938,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A20",
+          "xPercent": 0.67077,
+          "yPercent": 0.62872,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A21",
+          "xPercent": 0.67077,
+          "yPercent": 0.73772,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "A22",
+          "xPercent": 0.67077,
+          "yPercent": 0.84674,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        }
+      ]
+    },
+    {
+      "parkingId": "areaB",
+      "spots": [
+        {
+          "id": "B1",
+          "xPercent": 0.02477,
+          "yPercent": 0.08290,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B2",
+          "xPercent": 0.02477,
+          "yPercent": 0.19188,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B3",
+          "xPercent": 0.02477,
+          "yPercent": 0.30052,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B4",
+          "xPercent": 0.02477,
+          "yPercent": 0.40932,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B5",
+          "xPercent": 0.02477,
+          "yPercent": 0.51745,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B6",
+          "xPercent": 0.02477,
+          "yPercent": 0.62730,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B7",
+          "xPercent": 0.02477,
+          "yPercent": 0.73506,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B8",
+          "xPercent": 0.02477,
+          "yPercent": 0.84421,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B9",
+          "xPercent": 0.24796,
+          "yPercent": 0.19188,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B10",
+          "xPercent": 0.24796,
+          "yPercent": 0.30052,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B11",
+          "xPercent": 0.24796,
+          "yPercent": 0.40932,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B12",
+          "xPercent": 0.24796,
+          "yPercent": 0.51745,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B13",
+          "xPercent": 0.24796,
+          "yPercent": 0.62730,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B14",
+          "xPercent": 0.24796,
+          "yPercent": 0.73506,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B15",
+          "xPercent": 0.24796,
+          "yPercent": 0.84421,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B16",
+          "xPercent": 0.34457,
+          "yPercent": 0.19188,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B17",
+          "xPercent": 0.34457,
+          "yPercent": 0.30052,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B18",
+          "xPercent": 0.34457,
+          "yPercent": 0.40932,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B19",
+          "xPercent": 0.34457,
+          "yPercent": 0.51745,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B20",
+          "xPercent": 0.34457,
+          "yPercent": 0.62730,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B21",
+          "xPercent": 0.34457,
+          "yPercent": 0.73506,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B22",
+          "xPercent": 0.34457,
+          "yPercent": 0.84421,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B23",
+          "xPercent": 0.56027,
+          "yPercent": 0.19188,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B24",
+          "xPercent": 0.56027,
+          "yPercent": 0.30052,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B25",
+          "xPercent": 0.56027,
+          "yPercent": 0.40932,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B26",
+          "xPercent": 0.56027,
+          "yPercent": 0.51745,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B27",
+          "xPercent": 0.56027,
+          "yPercent": 0.62730,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B28",
+          "xPercent": 0.56027,
+          "yPercent": 0.73506,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B29",
+          "xPercent": 0.56027,
+          "yPercent": 0.84421,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B30",
+          "xPercent": 0.65726,
+          "yPercent": 0.19188,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B31",
+          "xPercent": 0.65726,
+          "yPercent": 0.30052,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B32",
+          "xPercent": 0.65726,
+          "yPercent": 0.40932,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B33",
+          "xPercent": 0.65726,
+          "yPercent": 0.51745,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B34",
+          "xPercent": 0.65726,
+          "yPercent": 0.62730,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B35",
+          "xPercent": 0.65726,
+          "yPercent": 0.73506,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B36",
+          "xPercent": 0.65726,
+          "yPercent": 0.84421,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B37",
+          "xPercent": 0.89574,
+          "yPercent": 0.08290,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B38",
+          "xPercent": 0.89574,
+          "yPercent": 0.19188,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B39",
+          "xPercent": 0.89574,
+          "yPercent": 0.30052,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B40",
+          "xPercent": 0.89574,
+          "yPercent": 0.40932,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B41",
+          "xPercent": 0.89574,
+          "yPercent": 0.51745,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B42",
+          "xPercent": 0.89574,
+          "yPercent": 0.62730,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B43",
+          "xPercent": 0.89574,
+          "yPercent": 0.73506,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        },
+        {
+          "id": "B44",
+          "xPercent": 0.89574,
+          "yPercent": 0.84421,
+          "widthPercent": 0.08217,
+          "heightPercent": 0.10536
+        }
+      ]
+    }
+  ]
+}
