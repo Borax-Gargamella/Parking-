@@ -9,11 +9,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class UtenteRepository {
 
     private final FirebaseFirestore db = FirestoreDataSource.getFirestore();
-    private final CollectionReference utenteCollection = db.collection("Utenti");
+    private final CollectionReference utenteCollection = db.collection("Utente");
 
     public Task<Void> addUtente(Utente utente) {
-        String docId = utenteCollection.document().getId();
-        utente.setId(docId);
+        String docId = utente.getId();
         return utenteCollection.document(docId).set(utente);
     }
 

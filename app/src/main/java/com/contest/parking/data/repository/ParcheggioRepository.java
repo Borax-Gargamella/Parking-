@@ -10,7 +10,7 @@ import com.google.firebase.firestore.Query;
 public class ParcheggioRepository {
 
     private final FirebaseFirestore db = FirestoreDataSource.getFirestore();
-    private final CollectionReference parcheggioCollection = db.collection("Parcheggi");
+    private final CollectionReference parcheggioCollection = db.collection("Parcheggio");
 
     public Task<Void> addParcheggio(Parcheggio parcheggio) {
         String docId = parcheggioCollection.document().getId();

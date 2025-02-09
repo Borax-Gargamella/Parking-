@@ -38,9 +38,9 @@ public class UseCaseRegistraUtente {
             if (task.isSuccessful()) {
                 // Ottieni l'UID dell'utente registrato
                 String uid = authRepository.getCurrentUserId();
-                // Crea un oggetto Utente
+                // Crea un oggetto Utente usando l'UID
                 Utente utente = new Utente(uid, nome, cognome, targa, email);
-                // Salva l'utente su Firestore
+                // Salva l'utente su Firestore usando l'UID come documento ID
                 utenteRepository.addUtente(utente)
                         .addOnSuccessListener(unused -> listener.onSuccess())
                         .addOnFailureListener(e -> listener.onFailure(e));

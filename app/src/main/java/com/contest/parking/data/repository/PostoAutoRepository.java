@@ -9,7 +9,7 @@ import com.google.firebase.firestore.Query;
 public class PostoAutoRepository {
 
     private final FirebaseFirestore db = FirestoreDataSource.getFirestore();
-    private final CollectionReference postoAutoRepositoryCollection = db.collection("PostiAuto");
+    private final CollectionReference postoAutoRepositoryCollection = db.collection("PostoAuto");
 
     public Task<Void> addPostoAuto(PostoAuto postoAuto) {
         String docId = postoAutoRepositoryCollection.document().getId();

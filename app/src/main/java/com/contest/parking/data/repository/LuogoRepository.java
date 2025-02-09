@@ -8,7 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class LuogoRepository {
 
     private final FirebaseFirestore db = FirestoreDataSource.getFirestore();
-    private final CollectionReference luogoCollection = db.collection("Luoghi");
+    private final CollectionReference luogoCollection = db.collection("Luogo");
 
     public Task<Void> addLuogo(Luogo luogo) {
         String docId = luogoCollection.document().getId();
