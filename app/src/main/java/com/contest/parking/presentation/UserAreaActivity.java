@@ -25,7 +25,6 @@ public class UserAreaActivity extends BaseActivity {
 
     // Gruppo view per autenticazione (non loggato)
     private LinearLayout llAuthButtons;
-    private MaterialButton btnLogin, btnRegister;
 
     private AuthRepository authRepository;
     private UtenteRepository utenteRepository;
@@ -51,8 +50,6 @@ public class UserAreaActivity extends BaseActivity {
 
         // Binding delle view per la sezione autenticazione (non loggato)
         llAuthButtons = findViewById(R.id.llAuthButtons);
-        btnLogin = findViewById(R.id.btnLogin);
-        btnRegister = findViewById(R.id.btnRegister);
 
         // Inizializza i repository
         authRepository = new AuthRepository();
