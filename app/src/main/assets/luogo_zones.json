@@ -1,0 +1,28 @@
+{
+  "sole": [
+    {
+      "id": "A1",
+      "xPercent": 0.00051,
+      "yPercent": 0.50854,
+      "widthPercent": 0.33865,
+      "heightPercent": 0.49063
+    },
+    {
+      "id": "A2",
+      "xPercent": 0.34100,
+      "yPercent": 0.50854,
+      "widthPercent": 0.65808,
+      "heightPercent": 0.49063
+    }
+  ],
+  "luogo2": [
+    {
+      "id": "B1",
+      "xPercent": 0.1,
+      "yPercent": 0.3,
+      "widthPercent": 0.4,
+      "heightPercent": 0.5
+    }
+  ]
+}
+

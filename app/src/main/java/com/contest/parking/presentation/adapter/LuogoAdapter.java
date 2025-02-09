@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.contest.parking.R;
 import com.contest.parking.data.model.Luogo;
+import com.contest.parking.presentation.AreaSelectionActivity;
 import com.contest.parking.presentation.DettaglioParcheggioActivity;
 import com.contest.parking.presentation.ParcheggiActivity;
 
@@ -61,7 +62,7 @@ public class LuogoAdapter extends RecyclerView.Adapter<LuogoAdapter.LuogoViewHol
 
         // Click: ad esempio, apri ParcheggiActivity per il luogo selezionato
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ParcheggiActivity.class);
+            Intent intent = new Intent(context, AreaSelectionActivity.class);
             intent.putExtra("luogoId", luogo.getId());
             context.startActivity(intent);
         });
