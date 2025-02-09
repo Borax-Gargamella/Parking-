@@ -23,9 +23,6 @@ public class UserAreaActivity extends BaseActivity {
     private TextView textNome, textCognome, textEmail, textTarga, textPostoPrenotato;
     private MaterialButton btnPaga, btnLogout;
 
-    // Gruppo view per autenticazione (non loggato)
-    private LinearLayout llAuthButtons;
-
     private AuthRepository authRepository;
     private UtenteRepository utenteRepository;
     private StoricoRepository storicoRepository;
@@ -48,9 +45,6 @@ public class UserAreaActivity extends BaseActivity {
         btnPaga = findViewById(R.id.btnPaga);
         btnLogout = findViewById(R.id.btnLogout);
 
-        // Binding delle view per la sezione autenticazione (non loggato)
-        llAuthButtons = findViewById(R.id.llAuthButtons);
-
         // Inizializza i repository
         authRepository = new AuthRepository();
         utenteRepository = new UtenteRepository();
@@ -65,7 +59,6 @@ public class UserAreaActivity extends BaseActivity {
         } else {
             // Utente loggato: mostra le view per utente e nascondi il pannello di autenticazione
             llUserData.setVisibility(View.VISIBLE);
-            llAuthButtons.setVisibility(View.GONE);
             // Carica i dati utente
             caricaDatiUtente(currentUid);
             // Carica il posto prenotato, se presente
