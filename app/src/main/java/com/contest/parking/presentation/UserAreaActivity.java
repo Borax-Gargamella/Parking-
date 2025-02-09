@@ -13,6 +13,8 @@ import com.contest.parking.data.model.Utente;
 import com.contest.parking.data.repository.AuthRepository;
 import com.contest.parking.data.repository.StoricoRepository;
 import com.contest.parking.data.repository.UtenteRepository;
+import com.contest.parking.domain.UseCaseCaricaDatiUtente;
+import com.contest.parking.domain.UseCaseCaricaPostoPrenotato;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -24,10 +26,11 @@ public class UserAreaActivity extends BaseActivity {
     private MaterialButton btnPaga, btnLogout;
 
     private AuthRepository authRepository;
-    private UtenteRepository utenteRepository;
-    private StoricoRepository storicoRepository;
-
     private String currentUid; // ID utente corrente
+
+    // Use case per il caricamento dei dati
+    private UseCaseCaricaDatiUtente useCaseCaricaDatiUtente;
+    private UseCaseCaricaPostoPrenotato useCaseCaricaPostoPrenotato;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +48,10 @@ public class UserAreaActivity extends BaseActivity {
         btnPaga = findViewById(R.id.btnPaga);
         btnLogout = findViewById(R.id.btnLogout);
 
-        // Inizializza i repository
+        // Inizializza i repository (per l'autenticazione) e i use case
         authRepository = new AuthRepository();
-        utenteRepository = new UtenteRepository();
-        storicoRepository = new StoricoRepository();
+        useCaseCaricaDatiUtente = new UseCaseCaricaDatiUtente();
+        useCaseCaricaPostoPrenotato = new UseCaseCaricaPostoPrenotato();
 
         // Controlla se l'utente è loggato
         currentUid = authRepository.getCurrentUserId();
@@ -57,12 +60,44 @@ public class UserAreaActivity extends BaseActivity {
             startActivity(new Intent(UserAreaActivity.this, LoginActivity.class));
             finish();
         } else {
-            // Utente loggato: mostra le view per utente e nascondi il pannello di autenticazione
+            // Utente loggato: mostra le view per utente
             llUserData.setVisibility(View.VISIBLE);
-            // Carica i dati utente
-            caricaDatiUtente(currentUid);
-            // Carica il posto prenotato, se presente
-            caricaPostoPrenotato(currentUid);
+
+            // Carica i dati utente tramite il use case
+            useCaseCaricaDatiUtente.loadUserData(currentUid, new UseCaseCaricaDatiUtente.OnUserDataLoadedListener() {
+                @Override
+                public void onSuccess(Utente utente) {
+                    textNome.setText("Nome: " + utente.getNome());
+                    textCognome.setText("Cognome: " + utente.getCognome());
+                    textEmail.setText("Email: " + utente.getEmail());
+                    textTarga.setText("Targa: " + utente.getTarga());
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Toast.makeText(UserAreaActivity.this, "Errore caricamento utente: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            // Carica il posto prenotato tramite il use case
+            useCaseCaricaPostoPrenotato.loadPostoPrenotato(currentUid, new UseCaseCaricaPostoPrenotato.OnPostoPrenotatoLoadedListener() {
+                @Override
+                public void onSuccess(String postoId) {
+                    if (postoId != null) {
+                        textPostoPrenotato.setText("Posto auto prenotato: " + postoId);
+                        btnPaga.setVisibility(View.VISIBLE);
+                    } else {
+                        textPostoPrenotato.setText("Posto auto prenotato: Nessuno");
+                        btnPaga.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Toast.makeText(UserAreaActivity.this, "Errore caricamento posto prenotato: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    btnPaga.setVisibility(View.GONE);
+                }
+            });
 
             // Gestione click sui bottoni
             btnPaga.setOnClickListener(v -> {
@@ -75,39 +110,5 @@ public class UserAreaActivity extends BaseActivity {
                 finish();
             });
         }
-    }
-
-    private void caricaDatiUtente(String uid) {
-        utenteRepository.getUtente(uid).get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        Utente u = documentSnapshot.toObject(Utente.class);
-                        if (u != null) {
-                            textNome.setText("Nome: " + u.getNome());
-                            textCognome.setText("Cognome: " + u.getCognome());
-                            textEmail.setText("Email: " + u.getEmail());
-                            textTarga.setText("Targa: " + u.getTarga());
-                        }
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Errore caricamento utente: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
-    }
-
-    private void caricaPostoPrenotato(String uid) {
-        storicoRepository.getStoricoApertoByUtente(uid)
-                .addOnSuccessListener(querySnapshot -> {
-                    if (!querySnapshot.isEmpty()) {
-                        QueryDocumentSnapshot doc = (QueryDocumentSnapshot) querySnapshot.getDocuments().get(0);
-                        String postoId = doc.getString("postoAutoId");
-                        textPostoPrenotato.setText("Posto auto prenotato: " + postoId);
-                    } else {
-                        textPostoPrenotato.setText("Posto auto prenotato: Nessuno");
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Errore caricamento posto prenotato: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
     }
 }
