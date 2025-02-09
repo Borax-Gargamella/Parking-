@@ -4,14 +4,16 @@ public class Luogo {
     private String id;
     private String nome;
     private String indirizzo;
+    private String imageNome;
 
     // Empty constructor for Firestore
     public Luogo(){}
 
-    public Luogo(String id, String nome, String indirizzo) {
+    public Luogo(String id, String nome, String indirizzo, String imageNome) {
         this.id = id;
         this.nome = nome;
         this.indirizzo = indirizzo;
+        this.imageNome = imageNome;
     }
 
     public String getId() {
@@ -37,4 +39,8 @@ public class Luogo {
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
     }
+
+    public String getImageNome() {return imageNome;}
+
+    public void setImageNome(String imageName) {this.imageNome = imageName;}
 }

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!-- res/layout/item_luogo.xml -->
 <com.google.android.material.card.MaterialCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,24 +8,43 @@
         android:layout_margin="8dp"
         app:cardCornerRadius="12dp">
 
-    <LinearLayout
+    <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
+        <!-- ImageView per l'immagine del luogo -->
+        <ImageView
+                android:id="@+id/itemLuogoImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder" />
+
+        <!-- Contenitore per il testo, posizionato in basso a sinistra -->
+        <LinearLayout
+                android:id="@+id/itemLuogoTextContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="#80000000"
+                android:layout_gravity="bottom|start">
 
         <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemLuogoNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
+                android:text="Nome Luogo"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@android:color/white" />
 
         <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemLuogoIndirizzo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"/>
-
+                android:text="Indirizzo Luogo"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="@android:color/white" />
     </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
-
+</FrameLayout>
+        </com.google.android.material.card.MaterialCardView>

@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.contest.parking.R;
 import com.contest.parking.data.model.Luogo;
+import com.contest.parking.presentation.DettaglioParcheggioActivity;
 import com.contest.parking.presentation.ParcheggiActivity;
 
 import java.util.List;
@@ -42,11 +44,26 @@ public class LuogoAdapter extends RecyclerView.Adapter<LuogoAdapter.LuogoViewHol
         holder.nomeText.setText(luogo.getNome());
         holder.indirizzoText.setText(luogo.getIndirizzo());
 
-        // Click to open ParcheggiActivity
+        // Carica l'immagine dinamicamente in base al campo imageNome
+        String imageName = luogo.getImageNome(); // Assicurati che il modello Luogo abbia questo campo
+        if (imageName != null && !imageName.isEmpty()) {
+            int imageResId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
+            if (imageResId != 0) {
+                holder.imageView.setImageResource(imageResId);
+            } else {
+                // Se l'immagine non viene trovata, imposta un placeholder
+                holder.imageView.setImageResource(R.drawable.placeholder);
+            }
+        } else {
+            // Se non è definito imageName, imposta un'immagine di default
+            holder.imageView.setImageResource(R.drawable.placeholder);
+        }
+
+        // Click: ad esempio, apri ParcheggiActivity per il luogo selezionato
         holder.itemView.setOnClickListener(v -> {
-            Intent i = new Intent(context, ParcheggiActivity.class);
-            i.putExtra("luogoId", luogo.getId());
-            context.startActivity(i);
+            Intent intent = new Intent(context, ParcheggiActivity.class);
+            intent.putExtra("luogoId", luogo.getId());
+            context.startActivity(intent);
         });
     }
 
@@ -57,11 +74,13 @@ public class LuogoAdapter extends RecyclerView.Adapter<LuogoAdapter.LuogoViewHol
 
     public static class LuogoViewHolder extends RecyclerView.ViewHolder {
         TextView nomeText, indirizzoText;
+        ImageView imageView;
 
         public LuogoViewHolder(@NonNull View itemView) {
             super(itemView);
             nomeText = itemView.findViewById(R.id.itemLuogoNome);
             indirizzoText = itemView.findViewById(R.id.itemLuogoIndirizzo);
+            imageView = itemView.findViewById(R.id.itemLuogoImage);
         }
     }
 }
