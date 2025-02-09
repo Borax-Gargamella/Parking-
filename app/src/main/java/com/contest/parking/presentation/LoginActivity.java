@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.contest.parking.R;
+import com.contest.parking.domain.UseCaseLogInUtente;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -21,25 +22,26 @@ import com.google.firebase.auth.AuthResult;
 
 public class LoginActivity extends BaseActivity {
 
-    // Usa TextInputEditText per i campi email e password
     private TextInputEditText editEmail, editPassword;
     private MaterialButton loginButton, registerButton;
     private AuthRepository authRepository;
+    private UseCaseLogInUtente useCaseLogInUtente;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Inietta il layout specifico per LoginActivity nel container di BaseActivity
         setActivityLayout(R.layout.activity_login);
 
         authRepository = new AuthRepository();
+        useCaseLogInUtente = new UseCaseLogInUtente();
 
         // Se l'utente è già loggato, vai direttamente alla MainActivity
         if (authRepository.getCurrentUser() != null) {
             goToMainActivity();
         }
 
-        // Binding delle view usando gli ID dei campi editabili
+        // Binding delle view
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
         loginButton = findViewById(R.id.loginButton);
@@ -49,26 +51,25 @@ public class LoginActivity extends BaseActivity {
         loginButton.setOnClickListener(v -> {
             String email = editEmail.getText().toString().trim();
             String password = editPassword.getText().toString().trim();
-            doLogin(email, password);
+
+            // Invoca il use case per il login
+            useCaseLogInUtente.logIn(email, password, new UseCaseLogInUtente.OnLogInCompleteListener() {
+                @Override
+                public void onSuccess() {
+                    Toast.makeText(LoginActivity.this, "Login OK", Toast.LENGTH_SHORT).show();
+                    goToMainActivity();
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Toast.makeText(LoginActivity.this, "Login fallito: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
         });
 
         // Imposta il listener per il bottone Registrati
         registerButton.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-        });
-    }
-
-    private void doLogin(String email, String password) {
-        authRepository.loginUser(email, password, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "Login OK", Toast.LENGTH_SHORT).show();
-                    goToMainActivity();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Login fallito: " + task.getException(), Toast.LENGTH_LONG).show();
-                }
-            }
         });
     }
 
