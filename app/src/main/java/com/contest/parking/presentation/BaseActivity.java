@@ -48,7 +48,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         //Quando sta nella home cliccli 2 volte per chiudere l'app
         btnBack.setOnClickListener(v -> {
-            if (this instanceof MainActivity) {
+            if (this instanceof MainActivity && isTaskRoot()) {
                 if (doubleBackToExitPressedOnce) {
                     finish();
                     return;
