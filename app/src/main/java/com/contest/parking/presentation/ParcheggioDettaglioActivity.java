@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.contest.parking.R;
 import com.contest.parking.data.model.Parcheggio;
 import com.contest.parking.data.repository.ParcheggioRepository;
+import com.contest.parking.data.repository.StoricoRepository;
+import com.contest.parking.domain.UseCaseOccupato;
 import com.contest.parking.presentation.utils.JsonUtils;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.DocumentReference;
@@ -33,7 +35,7 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Inietta il layout specifico
-        setActivityLayout(R.layout.activity_luogo_detail);
+        setActivityLayout(R.layout.activity_parcheggio_dettaglio);
 
         // Binding delle view
         frameLayoutContainer = findViewById(R.id.frameLayoutContainer);
@@ -127,7 +129,13 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                 return;
                             }
 
-                            // Per ogni spot, crea un bottone dinamico posizionato in base alle percentuali
+                            // All'interno del listener onGlobalLayout, dopo aver ottenuto imageWidth e imageHeight:
+                            long currentTime = System.currentTimeMillis();
+
+                            // Crea un'istanza di UseCaseOccupato (si assume che StoricoRepository sia correttamente implementato)
+                            StoricoRepository storicoRepository = new StoricoRepository();
+                            UseCaseOccupato useCaseOccupato = new UseCaseOccupato(new StoricoRepository());
+
                             for (int i = 0; i < spotsArray.length(); i++) {
                                 JSONObject spotObj = spotsArray.optJSONObject(i);
                                 if (spotObj == null) continue;
@@ -143,26 +151,52 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                 int width = (int) (widthPercent * imageWidth);
                                 int height = (int) (heightPercent * imageHeight);
 
-                                // Crea un bottone per lo spot (puoi usare MaterialButton o Button)
+                                // Crea il bottone per il posto auto
                                 MaterialButton spotButton = new MaterialButton(ParcheggioDettaglioActivity.this);
                                 spotButton.setText(spotId);
-                                // Personalizza lo stile, ad es. colore trasparente di sfondo, testo in bianco, ecc.
-                                spotButton.setBackgroundColor(Color.parseColor("#990000FF")); // colore semi-trasparente
-                                spotButton.setTextColor(Color.WHITE);
+                                spotButton.setGravity(android.view.Gravity.CENTER); // Centra il testo
 
-                                // Imposta il click per aprire ad esempio una Activity di dettaglio del posto o eseguire un'altra azione
-                                spotButton.setOnClickListener(v -> {
-                                    // Esempio: avvia una nuova activity passando l'ID dello spot
-                                    Intent intent = new Intent(ParcheggioDettaglioActivity.this, PrenotaPostoActivity.class);
-                                    intent.putExtra("spotId", spotId);
-                                    startActivity(intent);
+                                // Imposta uno stato predefinito (verde e abilitato)
+                                spotButton.setBackgroundColor(Color.GREEN);
+                                spotButton.setEnabled(true);
+
+                                // Verifica lo stato di occupazione per il posto usando il timestamp corrente
+                                useCaseOccupato.isSpotOccupied(spotId, currentTime, currentTime, new UseCaseOccupato.OnOccupiedCheckListener() {
+                                    @Override
+                                    public void onOccupied() {
+                                        // Se il posto è occupato: imposta il bottone in rosso e disabilitalo
+                                        spotButton.setBackgroundColor(Color.RED);
+                                        spotButton.setEnabled(false);
+                                    }
+
+                                    @Override
+                                    public void onFree() {
+                                        // Se libero: assicura il colore verde e abilita il bottone
+                                        spotButton.setBackgroundColor(Color.GREEN);
+                                        spotButton.setEnabled(true);
+                                    }
+
+                                    @Override
+                                    public void onFailure(Exception e) {
+                                        // In caso di errore, puoi scegliere un comportamento di default (qui lasciamo il bottone abilitato e in verde)
+                                        Toast.makeText(ParcheggioDettaglioActivity.this, "Errore nel controllo occupazione: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
                                 });
 
-                                // Imposta i parametri di layout per posizionare il bottone
+                                // Imposta il click listener: se il bottone è abilitato (cioè, il posto è libero) si avvia la PrenotaPostoActivity
+                                spotButton.setOnClickListener(v -> {
+                                    if (spotButton.isEnabled()) {
+                                        Intent intent = new Intent(ParcheggioDettaglioActivity.this, PrenotaPostoActivity.class);
+                                        intent.putExtra("spotId", spotId);
+                                        // Puoi passare altri dati se necessario
+                                        startActivity(intent);
+                                    }
+                                });
+
+                                // Imposta i parametri di layout per posizionare il bottone nel FrameLayout
                                 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
                                 params.leftMargin = left;
                                 params.topMargin = top;
-                                // Aggiungi il bottone al container (sovrapposto all'immagine)
                                 frameLayoutContainer.addView(spotButton, params);
                             }
                         }

@@ -27,24 +27,25 @@ public class UseCaseOccupato {
      * @param desiredStart la data richiesta (in millisecondi)
      * @param listener     il callback che notifica se il posto è occupato, libero o in caso di errore
      */
-    public void isSpotOccupied(String spotId, long desiredStart, OnOccupiedCheckListener listener) {
+    public void isSpotOccupied(String spotId, long desiredStart, long desiredEnd, OnOccupiedCheckListener listener) {
         // Recupera tutti i record di prenotazione per il posto auto
         storicoRepository.getStoricoForSpot(spotId)
                 .addOnSuccessListener((QuerySnapshot querySnapshot) -> {
-                    boolean occupied = false;
-                    // Se non ci sono record, consideriamo il posto libero
+                    // Se non ci sono record, il posto è libero
                     if (querySnapshot.isEmpty()) {
                         listener.onFree();
                         return;
                     }
-                    // Itera tra i documenti per verificare se desiredStart ricade in uno degli intervalli
+                    boolean occupied = false;
+                    // Itera tra i documenti per verificare se l'intervallo desiderato si sovrappone a uno già presente
                     for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
                         Storico s = doc.toObject(Storico.class);
                         if (s != null) {
                             long start = s.getDataInizio();
                             long end = s.getDataFine();
-                            // Se desiredStart è compreso tra start e end, il posto è occupato
-                            if (desiredStart >= start && desiredStart <= end) {
+                            // Gli intervalli si sovrappongono se:
+                            // desiredStart < end && start < desiredEnd
+                            if (desiredStart < end && start < desiredEnd) {
                                 occupied = true;
                                 break;
                             }
