@@ -31,7 +31,6 @@ public class AreaSelectionActivity extends BaseActivity {
         // Recupera l'ID del luogo (passato tramite Intent)
         luogoId = getIntent().getStringExtra("luogoId");  // Es. "luogo1"
 
-        System.out.println("///////////////Luogo ID: " + luogoId);
 
         // Carica il file JSON dagli assets
         JSONObject zonesJson = JsonUtils.loadJSONFromAsset(getAssets(), "luogo_zones.json");

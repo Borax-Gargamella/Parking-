@@ -27,7 +27,7 @@
                 android:name="com.contest.parking.presentation.CompletaPagamentoActivity"
                 android:exported="true"/>
         <activity
-                android:name="com.contest.parking.presentation.DettaglioParcheggioActivity"
+                android:name="com.contest.parking.presentation.XXXDettaglioParcheggioActivity"
                 android:exported="true"/>
         <activity
                 android:name="com.contest.parking.presentation.ParcheggioDettaglioActivity"

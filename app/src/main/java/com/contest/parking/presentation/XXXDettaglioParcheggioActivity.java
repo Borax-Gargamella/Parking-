@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.contest.parking.R;
 import com.contest.parking.data.model.Parcheggio;
@@ -15,7 +14,7 @@ import com.contest.parking.data.repository.StoricoRepository;
 import com.contest.parking.domain.UseCasePrenotaPosto;
 import com.google.android.material.button.MaterialButton;
 
-public class DettaglioParcheggioActivity extends BaseActivity {
+public class XXXDettaglioParcheggioActivity extends BaseActivity {
 
     private TextView textNomeParcheggio, textDescrizione, textPrezzo;
     private MaterialButton btnPrenota, btnCompletaPagamento;
@@ -66,7 +65,7 @@ public class DettaglioParcheggioActivity extends BaseActivity {
 
         // Click su "Completa Pagamento"
         btnCompletaPagamento.setOnClickListener(v -> {
-            Intent i = new Intent(DettaglioParcheggioActivity.this, CompletaPagamentoActivity.class);
+            Intent i = new Intent(XXXDettaglioParcheggioActivity.this, CompletaPagamentoActivity.class);
             i.putExtra("postoId", "somePostoId"); // Passa le informazioni necessarie
             startActivity(i);
         });

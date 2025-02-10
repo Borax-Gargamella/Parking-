@@ -1,14 +1,14 @@
 {
   "sole": [
     {
-      "id": "A1",
+      "id": "soleA",
       "xPercent": 0.00051,
       "yPercent": 0.50854,
       "widthPercent": 0.33865,
       "heightPercent": 0.49063
     },
     {
-      "id": "A2",
+      "id": "soleB",
       "xPercent": 0.34100,
       "yPercent": 0.50854,
       "widthPercent": 0.65808,

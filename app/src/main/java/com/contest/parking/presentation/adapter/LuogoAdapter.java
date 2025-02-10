@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.contest.parking.R;
 import com.contest.parking.data.model.Luogo;
 import com.contest.parking.presentation.AreaSelectionActivity;
-import com.contest.parking.presentation.DettaglioParcheggioActivity;
-import com.contest.parking.presentation.ParcheggiActivity;
 
 import java.util.List;
 

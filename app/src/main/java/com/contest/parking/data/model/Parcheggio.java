@@ -6,6 +6,7 @@ public class Parcheggio {
     private int postiTot;
     private double prezzo;
     private String luogoId;
+    private String imageFolder;
 
     // Empty constructor for Firestore
     public Parcheggio(){}
@@ -56,5 +57,13 @@ public class Parcheggio {
 
     public void setLuogoId(String luogoId) {
         this.luogoId = luogoId;
+    }
+
+    public String getImageFolder() {
+        return imageFolder;
+    }
+
+    public void setImageFolder(String imageFolder) {
+        this.imageFolder = imageFolder;
     }
 }
