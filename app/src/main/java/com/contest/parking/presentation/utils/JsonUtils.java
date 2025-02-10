@@ -18,8 +18,8 @@ public class JsonUtils {
             is.close();
             jsonString = new String(buffer, "UTF-8");
             return new JSONObject(jsonString);
-        } catch (IOException | JSONException ex) {
-            ex.printStackTrace();
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
             return null;
         }
     }
