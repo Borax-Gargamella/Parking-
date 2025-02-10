@@ -40,5 +40,9 @@ public class StoricoRepository {
                 .get();
     }
 
+    public Task<QuerySnapshot> getStoricoForSpot(String spotId) {
+        return storicoCollection.whereEqualTo("postoAutoId", spotId).get();
+    }
+
     // Other methods CRUD if needed
 }

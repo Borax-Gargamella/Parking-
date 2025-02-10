@@ -1,6 +1,7 @@
 package com.contest.parking.presentation;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
@@ -21,7 +22,7 @@ import java.util.Locale;
 
 public class PrenotaPostoActivity extends BaseActivity {
 
-    private TextInputEditText editNome, editCognome, editTarga, editDataInizio;
+    private TextInputEditText editNome, editCognome, editTarga, editDataInizio, editDataFine;
     private MaterialButton btnPrenota;
 
     // Use case e repository
@@ -45,6 +46,7 @@ public class PrenotaPostoActivity extends BaseActivity {
         editCognome = findViewById(R.id.editCognome);
         editTarga = findViewById(R.id.editTarga);
         editDataInizio = findViewById(R.id.editDataInizio);
+        editDataFine = findViewById(R.id.editDataFine);
         btnPrenota = findViewById(R.id.btnPrenota);
 
         // Inizializza repository e use case
@@ -89,41 +91,45 @@ public class PrenotaPostoActivity extends BaseActivity {
                     Toast.makeText(PrenotaPostoActivity.this, "Errore caricamento dati utente: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
 
-        // Imposta il listener sul campo Data Inizio per aprire un DatePickerDialog
+        // Imposta il listener per il campo Data Inizio
         editDataInizio.setOnClickListener(v -> {
-            Calendar calendar = Calendar.getInstance();
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog datePickerDialog = new DatePickerDialog(PrenotaPostoActivity.this,
-                    (view, selectedYear, selectedMonth, selectedDay) -> {
-                        String data = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear);
-                        editDataInizio.setText(data);
-                    }, year, month, day);
-            datePickerDialog.show();
+            pickDateTime(editDataInizio);
+        });
+
+        // Imposta il listener per il campo Data Fine
+        editDataFine.setOnClickListener(v -> {
+            pickDateTime(editDataFine);
         });
 
         // Listener per il bottone Prenota
         btnPrenota.setOnClickListener(v -> {
             String dataInizioStr = editDataInizio.getText().toString().trim();
-            if (dataInizioStr.isEmpty()) {
-                Toast.makeText(PrenotaPostoActivity.this, "Seleziona la data di prenotazione", Toast.LENGTH_SHORT).show();
+            String dataFineStr = editDataFine.getText().toString().trim();
+            if (dataInizioStr.isEmpty() || dataFineStr.isEmpty()) {
+                Toast.makeText(PrenotaPostoActivity.this, "Seleziona le date di prenotazione", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Converte la data in formato "dd/MM/yyyy" in un timestamp (millisecondi)
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            long dataInizio;
+            // Converte le date in formato "dd/MM/yyyy HH:mm" in timestamp (millisecondi)
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+            long dataInizio, dataFine;
             try {
                 dataInizio = sdf.parse(dataInizioStr).getTime();
+                dataFine = sdf.parse(dataFineStr).getTime();
             } catch (ParseException e) {
                 e.printStackTrace();
                 Toast.makeText(PrenotaPostoActivity.this, "Formato data non valido", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Chiama il use case per prenotare il posto auto, passando anche dataInizio
-            useCasePrenotaPosto.prenotaPosto(spotId, utenteId, editTarga.getText().toString().trim(), prezzo, dataInizio,
+            // Verifica che la data fine sia successiva alla data inizio
+            if (dataFine <= dataInizio) {
+                Toast.makeText(PrenotaPostoActivity.this, "La data fine deve essere successiva alla data inizio", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Chiama il use case per prenotare il posto auto, passando dataInizio e dataFine
+            useCasePrenotaPosto.prenotaPosto(spotId, utenteId, editTarga.getText().toString().trim(), prezzo, dataInizio, dataFine,
                     new UseCasePrenotaPosto.OnPrenotaPostoCompleteListener() {
                         @Override
                         public void onSuccess() {
@@ -137,5 +143,32 @@ public class PrenotaPostoActivity extends BaseActivity {
                         }
                     });
         });
+    }
+
+    /**
+     * Mostra un DatePickerDialog seguito da un TimePickerDialog per selezionare data e ora,
+     * e imposta il risultato formattato nel campo di input passato.
+     *
+     * Il formato utilizzato è "dd/MM/yyyy HH:mm".
+     */
+    private void pickDateTime(TextInputEditText targetField) {
+        Calendar calendar = Calendar.getInstance();
+        // Mostra il DatePickerDialog
+        DatePickerDialog datePickerDialog = new DatePickerDialog(PrenotaPostoActivity.this,
+                (view, selectedYear, selectedMonth, selectedDay) -> {
+                    // Una volta selezionata la data, mostra il TimePickerDialog
+                    Calendar newCalendar = Calendar.getInstance();
+                    newCalendar.set(selectedYear, selectedMonth, selectedDay);
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(PrenotaPostoActivity.this,
+                            (timePicker, selectedHour, selectedMinute) -> {
+                                // Imposta la data e ora formattate
+                                newCalendar.set(Calendar.HOUR_OF_DAY, selectedHour);
+                                newCalendar.set(Calendar.MINUTE, selectedMinute);
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+                                targetField.setText(sdf.format(newCalendar.getTime()));
+                            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
+                    timePickerDialog.show();
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
     }
 }
