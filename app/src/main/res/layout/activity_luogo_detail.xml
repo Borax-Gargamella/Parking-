@@ -10,57 +10,50 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <ImageView
-                android:id="@+id/imageViewArea"
+        <!-- Contenitore per l'immagine ed eventuali overlay -->
+        <FrameLayout
+                android:id="@+id/frameLayoutContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                android:layout_gravity="top|center_horizontal"
-                android:src="@drawable/sole" />
+                android:layout_height="wrap_content">
 
+            <ImageView
+                    android:id="@+id/imageViewArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="top|center_horizontal"
+                    android:src="@drawable/placeholder" />
+        </FrameLayout>
+
+        <!-- Altri dati testuali -->
         <TextView
                 android:id="@+id/textId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID:"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:padding="8dp"
-                android:layout_marginTop="16dp"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center_vertical" />
+                android:layout_marginTop="16dp" />
 
         <TextView
                 android:id="@+id/textNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nome:"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:padding="8dp"
-                android:layout_marginTop="8dp"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center_vertical" />
+                android:layout_marginTop="8dp" />
 
         <TextView
                 android:id="@+id/textPostiTot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Posti Totali:"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:padding="8dp"
-                android:layout_marginTop="8dp"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center_vertical" />
+                android:layout_marginTop="8dp" />
 
         <TextView
                 android:id="@+id/textPrezzo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Prezzo:"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:padding="8dp"
-                android:layout_marginTop="8dp"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center_vertical"/>
+                android:layout_marginTop="8dp" />
     </LinearLayout>
 </ScrollView>
+

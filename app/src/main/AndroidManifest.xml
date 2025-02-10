@@ -44,6 +44,9 @@
         <activity
                 android:name="com.contest.parking.presentation.AreaSelectionActivity"
                 android:exported="true"/>
+        <activity
+                android:name="com.contest.parking.presentation.PrenotaPostoActivity"
+                android:exported="true"/>
 
     </application>
 

@@ -1,7 +1,7 @@
 {
   "parkingAreas": [
     {
-      "parkingId": "areaA",
+      "parkingId": "soleA",
       "spots": [
         {
           "id": "A1",
@@ -160,7 +160,7 @@
       ]
     },
     {
-      "parkingId": "areaB",
+      "parkingId": "soleB",
       "spots": [
         {
           "id": "B1",
