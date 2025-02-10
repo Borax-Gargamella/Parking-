@@ -169,6 +169,7 @@ public class PrenotaPostoActivity extends BaseActivity {
                             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
                     timePickerDialog.show();
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
         datePickerDialog.show();
     }
 }
