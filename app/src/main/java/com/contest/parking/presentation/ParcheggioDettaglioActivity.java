@@ -1,5 +1,6 @@
 package com.contest.parking.presentation;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.core.widget.TextViewCompat;
 import com.contest.parking.R;
 import com.contest.parking.data.model.Parcheggio;
 import com.contest.parking.data.repository.ParcheggioRepository;
@@ -87,12 +89,18 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                     imageViewArea.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                         @Override
                         public void onGlobalLayout() {
+                            // Rimuovi il listener per evitare chiamate multiple
                             imageViewArea.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                            // Rimuovi eventuali overlay già presenti (se l'activity viene ricreata)
+                            frameLayoutContainer.removeAllViews();
+                            // Riaggiungi l'ImageView (opzionale, se il layout lo richiede)
+                            frameLayoutContainer.addView(imageViewArea);
+
                             int imageWidth = imageViewArea.getWidth();
                             int imageHeight = imageViewArea.getHeight();
 
-                            // Costruisci il nome del file JSON
-                            // Supponiamo che il file JSON si chiami "postiAuto" + imageFolder + ".json" (es. "postiAutosole.json")
+                            // Costruisci il nome del file JSON (es. "postiAuto" + luogoId + ".json")
                             String jsonFileName = "postiAuto" + luogoId + ".json";
                             JSONObject jsonObject = JsonUtils.loadJSONFromAsset(getAssets(), jsonFileName);
                             if (jsonObject == null) {
@@ -100,14 +108,14 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                 return;
                             }
 
-                            // Il JSON ha una struttura con un array "parkingAreas".
+                            // Il JSON contiene un array "parkingAreas"
                             JSONArray parkingAreas = jsonObject.optJSONArray("parkingAreas");
                             if (parkingAreas == null) {
                                 Toast.makeText(ParcheggioDettaglioActivity.this, "Nessun area di parcheggio nel JSON", Toast.LENGTH_SHORT).show();
                                 return;
                             }
 
-                            // Cerca l'area di parcheggio che corrisponde all'ID del parcheggio (o un campo specifico, ad es. parkingId)
+                            // Cerca l'area corrispondente all'ID del parcheggio (o un campo specifico, ad esempio "parkingId")
                             JSONObject areaObj = null;
                             for (int i = 0; i < parkingAreas.length(); i++) {
                                 JSONObject obj = parkingAreas.optJSONObject(i);
@@ -129,13 +137,7 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                 return;
                             }
 
-                            // All'interno del listener onGlobalLayout, dopo aver ottenuto imageWidth e imageHeight:
-                            long currentTime = System.currentTimeMillis();
-
-                            // Crea un'istanza di UseCaseOccupato (si assume che StoricoRepository sia correttamente implementato)
-                            StoricoRepository storicoRepository = new StoricoRepository();
-                            UseCaseOccupato useCaseOccupato = new UseCaseOccupato(new StoricoRepository());
-
+                            // Per ogni spot, crea un bottone dinamico
                             for (int i = 0; i < spotsArray.length(); i++) {
                                 JSONObject spotObj = spotsArray.optJSONObject(i);
                                 if (spotObj == null) continue;
@@ -151,49 +153,31 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                 int width = (int) (widthPercent * imageWidth);
                                 int height = (int) (heightPercent * imageHeight);
 
-                                // Crea il bottone per il posto auto
+                                // Crea il bottone per lo spot
                                 MaterialButton spotButton = new MaterialButton(ParcheggioDettaglioActivity.this);
                                 spotButton.setText(spotId);
-                                spotButton.setGravity(android.view.Gravity.CENTER); // Centra il testo
+                                spotButton.setGravity(android.view.Gravity.CENTER);
+                                spotButton.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM);
 
-                                // Imposta uno stato predefinito (verde e abilitato)
-                                spotButton.setBackgroundColor(Color.GREEN);
-                                spotButton.setEnabled(true);
-
-                                // Verifica lo stato di occupazione per il posto usando il timestamp corrente
-                                useCaseOccupato.isSpotOccupied(spotId, currentTime, currentTime, new UseCaseOccupato.OnOccupiedCheckListener() {
-                                    @Override
-                                    public void onOccupied() {
-                                        // Se il posto è occupato: imposta il bottone in rosso e disabilitalo
-                                        spotButton.setBackgroundColor(Color.RED);
-                                        spotButton.setEnabled(false);
-                                    }
-
-                                    @Override
-                                    public void onFree() {
-                                        // Se libero: assicura il colore verde e abilita il bottone
-                                        spotButton.setBackgroundColor(Color.GREEN);
-                                        spotButton.setEnabled(true);
-                                    }
-
-                                    @Override
-                                    public void onFailure(Exception e) {
-                                        // In caso di errore, puoi scegliere un comportamento di default (qui lasciamo il bottone abilitato e in verde)
-                                        Toast.makeText(ParcheggioDettaglioActivity.this, "Errore nel controllo occupazione: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
-                                // Imposta il click listener: se il bottone è abilitato (cioè, il posto è libero) si avvia la PrenotaPostoActivity
-                                spotButton.setOnClickListener(v -> {
-                                    if (spotButton.isEnabled()) {
+                                // Verifica lo stato del posto (qui, per esempio, potresti avere un campo nel JSON oppure eseguire una query al database)
+                                // Per questo esempio, supponiamo che il JSON contenga un campo "occupato" (boolean) per ogni spot.
+                                boolean occupato = spotObj.optBoolean("occupato", false);
+                                if (occupato) {
+                                    spotButton.setBackgroundColor(Color.RED);
+                                    spotButton.setEnabled(false);
+                                } else {
+                                    spotButton.setBackgroundColor(Color.GREEN);
+                                    spotButton.setEnabled(true);
+                                    spotButton.setOnClickListener(v -> {
+                                        // Se cliccato, avvia PrenotaPostoActivity (passando i dati necessari)
                                         Intent intent = new Intent(ParcheggioDettaglioActivity.this, PrenotaPostoActivity.class);
                                         intent.putExtra("spotId", spotId);
-                                        // Puoi passare altri dati se necessario
+                                        // Puoi passare ulteriori dati se necessario
                                         startActivity(intent);
-                                    }
-                                });
+                                    });
+                                }
 
-                                // Imposta i parametri di layout per posizionare il bottone nel FrameLayout
+                                // Imposta i parametri di layout per posizionare il bottone
                                 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
                                 params.leftMargin = left;
                                 params.topMargin = top;
