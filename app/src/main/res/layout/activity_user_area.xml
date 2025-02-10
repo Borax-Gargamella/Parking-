@@ -8,13 +8,27 @@
 
     <!-- Titolo dell'area utente -->
     <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/titleUserArea"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Area Utente"
-            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+        android:id="@+id/titleUserArea"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Area Utente"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/llUserData"
+        android:gravity="center"
+    android:background="#FAFAFA"/>
+
+    <View
+            android:id="@+id/lineBelowTitle"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/titleUserArea"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
 
     <!-- Sezione per i dati utente (visibile se loggato) -->
     <LinearLayout
@@ -29,11 +43,15 @@
             android:visibility="gone">
 
         <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textNome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nome: "
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>
+                    android:id="@+id/textNome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nome: "
+                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                    android:padding="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"/>
 
         <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textCognome"
@@ -41,7 +59,10 @@
                 android:layout_height="wrap_content"
                 android:text="Cognome: "
                 android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_marginTop="8dp"/>
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"/>
 
         <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textEmail"
@@ -49,7 +70,10 @@
                 android:layout_height="wrap_content"
                 android:text="Email: "
                 android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_marginTop="8dp"/>
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"/>
 
         <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textTarga"
@@ -57,7 +81,10 @@
                 android:layout_height="wrap_content"
                 android:text="Targa: "
                 android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_marginTop="8dp"/>
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"/>
 
         <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textPostoPrenotato"
@@ -65,7 +92,10 @@
                 android:layout_height="wrap_content"
                 android:text="Posto auto prenotato: Nessuno"
                 android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_marginTop="16dp"/>
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"/>
 
         <!-- Bottoni per utente loggato -->
         <LinearLayout
@@ -86,11 +116,16 @@
                     android:layout_height="wrap_content" />
 
             <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnLogout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Logout"
-                    style="@style/Widget.Material3.Button.TextButton"/>
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:padding="12dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/button_background_tint"
+                android:textColor="@android:color/white"/>
+
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

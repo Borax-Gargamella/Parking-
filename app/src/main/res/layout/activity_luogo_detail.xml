@@ -24,27 +24,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID:"
-                android:layout_marginTop="16dp" />
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:padding="8dp"
+                android:layout_marginTop="16dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical" />
 
         <TextView
                 android:id="@+id/textNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nome:"
-                android:layout_marginTop="8dp" />
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical" />
 
         <TextView
                 android:id="@+id/textPostiTot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Posti Totali:"
-                android:layout_marginTop="8dp" />
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical" />
 
         <TextView
                 android:id="@+id/textPrezzo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Prezzo:"
-                android:layout_marginTop="8dp" />
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"/>
     </LinearLayout>
 </ScrollView>

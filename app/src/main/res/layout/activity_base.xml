@@ -19,6 +19,52 @@
         <!-- Bottone Home -->
 
         <!-- Titolo centrato -->
+
+        <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="247dp"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:layout_weight="3"
+                android:text="Parcheggio Smart"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:gravity="center"
+                android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+    <!-- Container per il contenuto specifico di ogni Activity -->
+    <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="56dp" />  <!-- Regola il margine in base all'altezza della topbar -->
+
+    <FrameLayout
+            android:id="@+id/bottomLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:padding="8dp"
+            android:orientation="horizontal"
+            android:layout_gravity="end|bottom"
+            android:layout_marginBottom="0dp">
+
+        <!-- Bottone Indietro -->
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="64dp"
+                android:layout_height="50dp"
+                app:icon="@drawable/ico_back"
+                app:iconTint="#D0CECE"
+                app:iconSize="30dp"
+                app:iconGravity="end"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="@string/back"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        <!-- Bottone Home -->
         <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnHome"
                 style="@style/Widget.MaterialComponents.Button.Icon"
@@ -28,17 +74,9 @@
                 app:iconTint="#D0CECE"
                 app:iconSize="30dp"
                 app:iconGravity="end"
+                android:layout_gravity="bottom|center"
                 android:contentDescription="@string/home"
                 android:background="?attr/selectableItemBackgroundBorderless"/>
-        <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="247dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Parcheggio Smart"
-                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:gravity="center"
-                android:textColor="@android:color/white"/>
 
         <!-- Bottone Utente -->
         <com.google.android.material.button.MaterialButton
@@ -50,15 +88,9 @@
                 app:iconTint="#D0CECE"
                 app:iconSize="30dp"
                 app:iconGravity="end"
+                android:layout_gravity="bottom|start"
                 android:contentDescription="@string/user_area"
                 android:background="?attr/selectableItemBackgroundBorderless"/>
-    </LinearLayout>
 
-    <!-- Container per il contenuto specifico di ogni Activity -->
-    <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="56dp" />  <!-- Regola il margine in base all'altezza della topbar -->
-
+    </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

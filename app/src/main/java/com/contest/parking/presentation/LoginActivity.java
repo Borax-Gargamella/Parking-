@@ -56,7 +56,7 @@ public class LoginActivity extends BaseActivity {
             useCaseLogInUtente.logIn(email, password, new UseCaseLogInUtente.OnLogInCompleteListener() {
                 @Override
                 public void onSuccess() {
-                    Toast.makeText(LoginActivity.this, "Login OK", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Login effettuato", Toast.LENGTH_SHORT).show();
                     goToMainActivity();
                 }
 
