@@ -56,7 +56,7 @@ public class AreaSelectionActivity extends BaseActivity {
                             continue;
                         }
 
-                        String zoneId = zone.optString("id");
+                        String parcheggioId = zone.optString("id");
                         double xPercent = zone.optDouble("xPercent");
                         double yPercent = zone.optDouble("yPercent");
                         double widthPercent = zone.optDouble("widthPercent");
@@ -73,10 +73,9 @@ public class AreaSelectionActivity extends BaseActivity {
                         // Imposta un colore semi-trasparente per debug (modifica o rimuovi per produzione)
                         zoneView.setBackgroundColor(Color.parseColor("#55FF0000"));
                         zoneView.setOnClickListener(v -> {
-                            // Avvia la Activity di dettaglio passando l'ID della zona o altre info
+                            // Avvia la Activity di dettaglio passando l'ID della zona e del luogo
                             Intent intent = new Intent(AreaSelectionActivity.this, ParcheggioDettaglioActivity.class);
-                            intent.putExtra("zoneId", zoneId);
-                            // Puoi anche passare l'ID del luogo se necessario
+                            intent.putExtra("parcheggioId", parcheggioId);
                             intent.putExtra("luogoId", luogoId);
                             startActivity(intent);
                         });
