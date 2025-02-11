@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
 import com.contest.parking.R;
 import com.contest.parking.presentation.utils.JsonUtils;
 import org.json.JSONArray;
@@ -17,7 +16,7 @@ public class AreaSelectionActivity extends BaseActivity {
 
     private ImageView imageViewLuogo;
     private FrameLayout frameLayoutContainer;
-    private String luogoId;  // Ad esempio "luogo1"
+    private String luogoId, luogoNome;  // Ad esempio "luogo1"
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public class AreaSelectionActivity extends BaseActivity {
         frameLayoutContainer = findViewById(R.id.frameLayoutContainer);
 
         // Recupera l'ID del luogo (passato tramite Intent)
-        luogoId = getIntent().getStringExtra("luogoId");  // Es. "luogo1"
+        luogoId = getIntent().getStringExtra("luogoId");
 
 
         // Carica il file JSON dagli assets
@@ -40,7 +39,14 @@ public class AreaSelectionActivity extends BaseActivity {
         imageViewLuogo.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
+                // Rimuovi il listener per evitare di essere chiamato più volte
                 imageViewLuogo.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                // Rimuovi eventuali overlay già presenti (se l'activity viene ricreata)
+                frameLayoutContainer.removeAllViews();
+                // Riaggiungi l'ImageView (opzionale, se il layout lo richiede)
+                frameLayoutContainer.addView(imageViewLuogo);
+
                 int imageWidth = imageViewLuogo.getWidth();
                 int imageHeight = imageViewLuogo.getHeight();
 
@@ -70,6 +76,8 @@ public class AreaSelectionActivity extends BaseActivity {
 
                         // Crea una view trasparente per la zona
                         View zoneView = new View(AreaSelectionActivity.this);
+                        //zoneView.setBackgroundColor(Color.parseColor("#55FF0000"));
+
                         // Imposta un colore semi-trasparente per debug (modifica o rimuovi per produzione)
                         zoneView.setBackgroundColor(Color.parseColor("#55FF0000"));
                         zoneView.setOnClickListener(v -> {

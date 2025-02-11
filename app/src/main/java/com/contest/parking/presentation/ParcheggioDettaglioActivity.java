@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -154,10 +155,10 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                 int height = (int) (heightPercent * imageHeight);
 
                                 // Crea il bottone per lo spot
-                                MaterialButton spotButton = new MaterialButton(ParcheggioDettaglioActivity.this);
-                                spotButton.setText(spotId);
-                                spotButton.setGravity(android.view.Gravity.CENTER);
-                                spotButton.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+                                View spotButton = new View(ParcheggioDettaglioActivity.this);
+                                //spotButton.setText(spotId);
+                                //spotButton.setGravity(android.view.Gravity.CENTER);
+                                //spotButton.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM);
 
                                 // Verifica lo stato del posto (qui, per esempio, potresti avere un campo nel JSON oppure eseguire una query al database)
                                 // Per questo esempio, supponiamo che il JSON contenga un campo "occupato" (boolean) per ogni spot.
