@@ -17,6 +17,10 @@ public class PostoAutoRepository {
         return postoAutoRepositoryCollection.document(docId).set(postoAuto);
     }
 
+    public Task<Void> addPostoAutoWithId(PostoAuto postoAuto) {
+        return postoAutoRepositoryCollection.document(postoAuto.getId()).set(postoAuto);
+    }
+
     public CollectionReference getAllPostiAuto() {
         return postoAutoRepositoryCollection;
     }

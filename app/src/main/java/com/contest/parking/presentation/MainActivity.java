@@ -13,6 +13,7 @@ import com.contest.parking.R;
 import com.contest.parking.data.model.Luogo;
 import com.contest.parking.data.repository.LuogoRepository;
 import com.contest.parking.presentation.adapter.LuogoAdapter;
+import com.contest.parking.presentation.utils.PostoAutoInserter;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 
@@ -36,6 +37,11 @@ public class MainActivity extends BaseActivity {
         recyclerViewLuoghi = findViewById(R.id.recyclerViewLuoghi);
         recyclerViewLuoghi.setLayoutManager(new LinearLayoutManager(this));
 
+        /*
+        PostoAutoInserter inserter = new PostoAutoInserter(getAssets());
+        inserter.inserisciPostiAuto("postiAutosole.json");
+        */
+
         luogoAdapter = new LuogoAdapter(this, new ArrayList<>());
         recyclerViewLuoghi.setAdapter(luogoAdapter);
 
@@ -44,7 +50,7 @@ public class MainActivity extends BaseActivity {
             List<Luogo> luoghiList = queryDocumentSnapshots.toObjects(Luogo.class);
             luogoAdapter.setLuoghiList(luoghiList);
         }).addOnFailureListener(e -> {
-            // Gestione dell'errore
+            Toast.makeText(this, "Errore nel caricamento dei luoghi", Toast.LENGTH_SHORT).show();
         });
     }
 }
