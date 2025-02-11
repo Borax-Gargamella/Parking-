@@ -2,6 +2,7 @@ package com.contest.parking.presentation;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
@@ -134,6 +135,8 @@ public class PrenotaPostoActivity extends BaseActivity {
                         @Override
                         public void onSuccess() {
                             Toast.makeText(PrenotaPostoActivity.this, "Prenotazione effettuata con successo!", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(PrenotaPostoActivity.this, UserAreaActivity.class);
+                            startActivity(i);
                             finish();
                         }
 
