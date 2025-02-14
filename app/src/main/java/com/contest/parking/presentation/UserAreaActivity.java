@@ -113,7 +113,7 @@ public class UserAreaActivity extends BaseActivity {
                 } else if (storiciNonPagati.isEmpty()) {
                     textPostoPrenotato.setText("Nessun posto auto prenotato");
                 } else {
-                    textPostoPrenotato.setText("Posti auto prenotati:" + storiciNonPagati.size());
+                    textPostoPrenotato.setText("Posti auto prenotati: " + storiciNonPagati.size());
                 }
                 setupRecyclerView(storiciNonPagati);
             }
