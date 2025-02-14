@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="16dp">
 
     <com.google.android.material.textview.MaterialTextView
@@ -12,10 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pagamento"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/lineBelowTitle"
+            android:layout_gravity="center"
             android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
             android:background="#FAFAFA"/>
 
@@ -25,17 +23,19 @@
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:background="?attr/colorPrimary"
-            app:layout_constraintTop_toBottomOf="@id/textPaymentTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_gravity="center"
             android:layout_marginTop="8dp" />
 
+    <TextView
+            android:id="@+id/textImporto"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     <ImageView
             android:id="@+id/qrCodeImage"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            app:layout_constraintTop_toBottomOf="@id/textPaymentTitle"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_gravity="center"
             android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -45,9 +45,7 @@
             android:layout_height="wrap_content"
             android:text="Vai al sito di pagamento"
             style="@style/Widget.Material3.Button.OutlinedButton"
-            app:layout_constraintTop_toBottomOf="@id/qrCodeImage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_gravity="center"
             android:layout_marginTop="24dp"/>
     <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSimulaPagamento"
@@ -55,9 +53,7 @@
             android:layout_height="wrap_content"
             android:text="Simula pagamento"
             style="@style/Widget.Material3.Button.OutlinedButton"
-            app:layout_constraintTop_toBottomOf="@id/btnPagaOnline"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_gravity="center"
             android:layout_marginTop="24dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

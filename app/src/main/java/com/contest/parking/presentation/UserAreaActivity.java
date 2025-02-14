@@ -130,6 +130,7 @@ public class UserAreaActivity extends BaseActivity {
             Intent intent = new Intent(UserAreaActivity.this, PaymentActivity.class);
             intent.putExtra("Data", item.getDataInizio() + " " + item.getDataFine());
             intent.putExtra("storicoId", item.getId());
+            intent.putExtra("importo", item.getPrezzo());
             startActivity(intent);
         });
         recyclerPrenotazioni.setAdapter(storicoAdapter);

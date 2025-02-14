@@ -47,13 +47,14 @@ public class StoricoAdapter extends RecyclerView.Adapter<StoricoAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvId, tvData;
+        private TextView tvId, tvDataInizio, tvDataFine;
         private Button btnPaga;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvId = itemView.findViewById(R.id.tvIdPrenotazione);
-            tvData = itemView.findViewById(R.id.tvDataPrenotazione);
+            tvDataInizio = itemView.findViewById(R.id.tvDataPrenotazioneInizio);
+            tvDataFine = itemView.findViewById(R.id.tvDataPrenotazioneFine);
             btnPaga = itemView.findViewById(R.id.btnPaga);
         }
 
@@ -61,8 +62,9 @@ public class StoricoAdapter extends RecyclerView.Adapter<StoricoAdapter.ViewHold
             tvId.setText(item.getPostoAutoId());// o un substring se è troppo lungo
             tvId.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
-            String dataString = convertMillisToDate(item.getDataInizio())+ " " + convertMillisToDate(item.getDataFine());
-            tvData.setText(dataString);
+            //String dataString = "Da: "++ "\na:"+ convertMillisToDate(item.getDataFine());
+            tvDataInizio.setText(convertMillisToDate(item.getDataInizio()));
+            tvDataFine.setText(convertMillisToDate(item.getDataFine()));
             tvId.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
             // Se 'pagato' è false, mostra il bottone. Altrimenti potresti nasconderlo

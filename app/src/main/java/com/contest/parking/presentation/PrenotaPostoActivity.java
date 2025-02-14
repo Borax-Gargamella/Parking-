@@ -114,7 +114,7 @@ public class PrenotaPostoActivity extends BaseActivity {
         editDataFine.setOnClickListener(openRangePickerListener);
 
         // Click su Prenota
-        btnPrenota.setOnClickListener(v -> effettuaPrenotazione());
+        btnPrenota.setOnClickListener(v -> effettuaPrenotazione(prezzo));
     }
 
     /**
@@ -208,7 +208,7 @@ public class PrenotaPostoActivity extends BaseActivity {
     /**
      * Al click su "Prenota" recuperiamo dataInizio e dataFine e chiamiamo il UseCase prenota.
      */
-    private void effettuaPrenotazione() {
+    private void effettuaPrenotazione(double prezzo) {
         String dataInizioStr = editDataInizio.getText().toString().trim();
         String dataFineStr = editDataFine.getText().toString().trim();
 
@@ -252,8 +252,9 @@ public class PrenotaPostoActivity extends BaseActivity {
             return;
         }
 
+        //Prezzo uguale prezzo * giorni
+        prezzo = prezzo * ((dataFineGiornoIntero - dataInizioMs) / 86400000L + 1);
 
-        // ESEMPIO: chiama il UseCase prenota
         // Nel DB memorizzi: dataInizioMs, dataFineGiornoIntero
         useCasePrenotaPosto.prenotaPosto(spotId, utenteId, targa,
                 prezzo, dataInizioMs, dataFineGiornoIntero, new UseCasePrenotaPosto.OnPrenotaPostoCompleteListener() {

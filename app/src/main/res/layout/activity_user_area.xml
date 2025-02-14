@@ -115,6 +115,7 @@
                     android:id="@+id/textPostoPrenotato"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:text="Posto auto prenotato: Nessuno"
                     android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                     android:padding="8dp"

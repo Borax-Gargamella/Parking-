@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.contest.parking.R;
@@ -18,6 +19,7 @@ public class PaymentActivity extends BaseActivity {
     private Button pagaOnlineButton, btnSimulaPagamento;
     private ImageView qrCodeImage;
     private StoricoRepository storicoRepository;
+    private TextView textImporto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +32,16 @@ public class PaymentActivity extends BaseActivity {
         pagaOnlineButton = findViewById(R.id.btnPagaOnline);
         btnSimulaPagamento = findViewById(R.id.btnSimulaPagamento);
         qrCodeImage = findViewById(R.id.qrCodeImage);
+        textImporto = findViewById(R.id.textImporto);
 
         // Genera un QR Code
         Intent intent = getIntent();
         String data = intent.getStringExtra("Data");
         String idStorico = intent.getStringExtra("storicoId");
+        Double importo = intent.getDoubleExtra("importo", 0.0);
         generateQrCode(data);
+
+        textImporto.setText(String.format("Importo: %.2f €", importo));
 
         pagaOnlineButton.setOnClickListener(v -> {
             // Apri un sito web (esempio di finto pagamento)
