@@ -25,6 +25,8 @@ public class PaymentActivity extends BaseActivity {
         // Inietta il layout specifico per PaymentActivity nel container della BaseActivity
         setActivityLayout(R.layout.activity_payment);
 
+        storicoRepository = new StoricoRepository();
+
         pagaOnlineButton = findViewById(R.id.btnPagaOnline);
         btnSimulaPagamento = findViewById(R.id.btnSimulaPagamento);
         qrCodeImage = findViewById(R.id.qrCodeImage);
@@ -33,8 +35,6 @@ public class PaymentActivity extends BaseActivity {
         Intent intent = getIntent();
         String data = intent.getStringExtra("Data");
         String idStorico = intent.getStringExtra("storicoId");
-        Toast.makeText(this, idStorico, Toast.LENGTH_SHORT).show();
-        Boolean pagato = true;
         generateQrCode(data);
 
         pagaOnlineButton.setOnClickListener(v -> {
@@ -45,10 +45,11 @@ public class PaymentActivity extends BaseActivity {
 
         // Simula un pagamento
         btnSimulaPagamento.setOnClickListener(v -> {
-            storicoRepository.updatePagato(idStorico, pagato)
+            storicoRepository.updatePagato(idStorico, true)
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(this, "Pagamento effettuato", Toast.LENGTH_SHORT).show();
-                        finish();
+                        Intent intent1 = new Intent(this, MainActivity.class);
+                        startActivity(intent1);
                     })
                     .addOnFailureListener(e -> Toast.makeText(this, "Errore nel Pagamento", Toast.LENGTH_SHORT).show());
         });
