@@ -150,7 +150,7 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
 
                                 // Crea il bottone per lo spot
                                 View spotButton = new View(ParcheggioDettaglioActivity.this);
-                                spotButton.setBackgroundColor(Color.GREEN);
+                                spotButton.setBackgroundColor(Color.parseColor("#4ac32c"));
                                 spotButton.setEnabled(true);
                                 spotButton.setOnClickListener(v -> {
                                     // Se cliccato, avvia PrenotaPostoActivity (passando i dati necessari)
@@ -168,7 +168,7 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                 storicoRepository.isOggiOccupato(spotId)
                                         .addOnSuccessListener(isOccupied -> {
                                             if (isOccupied) {
-                                                spotButton.setBackgroundColor(Color.RED);
+                                                spotButton.setBackgroundColor(Color.parseColor("#b8452b"));
                                             }
                                         });
 
