@@ -15,6 +15,7 @@ import com.contest.parking.data.repository.StoricoRepository;
 import com.contest.parking.data.repository.UtenteRepository;
 import com.contest.parking.domain.UseCasePrenotaPosto;
 import com.contest.parking.presentation.utils.CustomDateValidator;
+import com.contest.parking.presentation.utils.Validator;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.CompositeDateValidator;
@@ -28,7 +29,7 @@ import java.util.*;
 
 public class PrenotaPostoActivity extends BaseActivity {
 
-    private TextInputEditText editNome, editCognome, editTarga, editDataInizio, editDataFine;
+    private TextInputEditText editNome, editCognome, editTarga, editDataInizio, editDataFine, editPrezzo;
     private MaterialButton btnPrenota;
 
     // Repositories e Use Case (adattali al tuo progetto)
@@ -57,6 +58,8 @@ public class PrenotaPostoActivity extends BaseActivity {
         editTarga = findViewById(R.id.editTarga);
         editDataInizio = findViewById(R.id.editDataInizio);
         editDataFine = findViewById(R.id.editDataFine);
+        editPrezzo = findViewById(R.id.editPrezzo);
+        editPrezzo.setEnabled(false);
         btnPrenota = findViewById(R.id.btnPrenota);
 
         // Inizializza repository
@@ -201,6 +204,7 @@ public class PrenotaPostoActivity extends BaseActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                 editDataInizio.setText(sdf.format(new Date(startDay)));
                 editDataFine.setText(sdf.format(new Date(endDay)));
+                editPrezzo.setText(String.format(Locale.getDefault(), "%.2f", prezzo * ((endDay - startDay) / 86400000L + 1)));
             }
         });
     }
@@ -247,7 +251,7 @@ public class PrenotaPostoActivity extends BaseActivity {
 
         // Controllo formato targa AA000AA
         String targa = editTarga.getText().toString().trim();
-        if (!targa.matches("[A-Z]{2}\\d{3}[A-Z]{2}")) {
+        if (!Validator.isValidTarga(targa)) {
             Toast.makeText(this, "Formato targa non valido", Toast.LENGTH_SHORT).show();
             return;
         }

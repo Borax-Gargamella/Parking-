@@ -1,6 +1,5 @@
 package com.contest.parking.domain;
 
-import android.util.Patterns;
 import com.contest.parking.data.model.Utente;
 import com.contest.parking.data.repository.AuthRepository;
 import com.contest.parking.data.repository.UtenteRepository;

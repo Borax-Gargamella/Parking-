@@ -14,7 +14,6 @@ import com.contest.parking.data.model.Utente;
 import com.contest.parking.data.repository.AuthRepository;
 import com.contest.parking.data.repository.StoricoRepository;
 import com.contest.parking.domain.UseCaseCaricaDatiUtente;
-import com.contest.parking.domain.UseCaseCaricaPostoPrenotato;
 import com.contest.parking.domain.UseCaseCaricaPrenotazioniNonPagate;
 import com.contest.parking.presentation.adapter.StoricoAdapter;
 import com.google.android.material.button.MaterialButton;
