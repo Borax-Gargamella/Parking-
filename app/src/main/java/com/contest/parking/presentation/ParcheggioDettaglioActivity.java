@@ -15,6 +15,7 @@ import com.contest.parking.R;
 import com.contest.parking.data.model.Parcheggio;
 import com.contest.parking.data.repository.ParcheggioRepository;
 import com.contest.parking.data.repository.StoricoRepository;
+import com.contest.parking.presentation.utils.ImageCache;
 import com.contest.parking.presentation.utils.JsonUtils;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -70,9 +71,16 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                     if (imageFolder != null && !imageFolder.isEmpty()) {
                         String imagePath = "parcheggi/" + imageFolder + "/parcheggio.png";
                         try {
-                            InputStream is = getAssets().open(imagePath);
-                            Bitmap bitmap = BitmapFactory.decodeStream(is);
-                            imageViewArea.setImageBitmap(bitmap);
+                            // Controllo se l'immagine è presente nella cache
+                            ImageCache imageCache = new ImageCache();
+                            Bitmap bitmapFromMemCache = imageCache.getBitmapFromMemCache(imagePath);
+                            if (bitmapFromMemCache != null) {
+                                imageViewArea.setImageBitmap(bitmapFromMemCache);
+                            } else {
+                                InputStream is = getAssets().open(imagePath);
+                                Bitmap bitmap = BitmapFactory.decodeStream(is);
+                                imageViewArea.setImageBitmap(bitmap);
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                             Toast.makeText(ParcheggioDettaglioActivity.this, "Immagine non trovata", Toast.LENGTH_SHORT).show();
