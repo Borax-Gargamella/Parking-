@@ -117,7 +117,7 @@ public class PrenotaPostoActivity extends BaseActivity {
         editDataFine.setOnClickListener(openRangePickerListener);
 
         // Click su Prenota
-        btnPrenota.setOnClickListener(v -> effettuaPrenotazione(prezzo));
+        btnPrenota.setOnClickListener(v -> effettuaPrenotazione());
     }
 
     /**
@@ -212,9 +212,10 @@ public class PrenotaPostoActivity extends BaseActivity {
     /**
      * Al click su "Prenota" recuperiamo dataInizio e dataFine e chiamiamo il UseCase prenota.
      */
-    private void effettuaPrenotazione(double prezzo) {
+    private void effettuaPrenotazione() {
         String dataInizioStr = editDataInizio.getText().toString().trim();
         String dataFineStr = editDataFine.getText().toString().trim();
+        Double prezzo = Double.parseDouble(editPrezzo.getText().toString().trim());
 
         if (dataInizioStr.isEmpty() || dataFineStr.isEmpty()) {
             Toast.makeText(this, "Seleziona un intervallo di giorni", Toast.LENGTH_SHORT).show();
