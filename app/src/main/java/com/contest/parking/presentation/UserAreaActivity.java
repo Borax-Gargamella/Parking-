@@ -28,7 +28,7 @@ public class UserAreaActivity extends BaseActivity {
 
     private LinearLayout llUserData;
     private TextView textNome, textCognome, textEmail, textTarga, textPostoPrenotato;
-    private MaterialButton btnPaga, btnLogout;
+    private MaterialButton btnLogout;
 
     private RecyclerView recyclerPrenotazioni; // la "tabella"
     private StoricoAdapter storicoAdapter;
@@ -54,7 +54,6 @@ public class UserAreaActivity extends BaseActivity {
         textEmail = findViewById(R.id.textEmail);
         textTarga = findViewById(R.id.textTarga);
         textPostoPrenotato = findViewById(R.id.textPostoPrenotato);
-        btnPaga = findViewById(R.id.btnPaga);
         btnLogout = findViewById(R.id.btnLogout);
 
         recyclerPrenotazioni = findViewById(R.id.recyclerPrenotazioni);
@@ -72,7 +71,6 @@ public class UserAreaActivity extends BaseActivity {
         } else {
             llUserData.setVisibility(View.VISIBLE);
             caricaDatiUtente();
-            caricaPostoPrenotato();
             caricaPrenotazioniNonPagate(); // Nuovo metodo
         }
 
@@ -100,30 +98,6 @@ public class UserAreaActivity extends BaseActivity {
                         Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    private void caricaPostoPrenotato() {
-        // Tua vecchia logica: se c'è un "postoId", mostra il bottone paga "classico"
-        useCaseCaricaPostoPrenotato.loadPostoPrenotato(currentUid, new UseCaseCaricaPostoPrenotato.OnPostoPrenotatoLoadedListener() {
-            @Override
-            public void onSuccess(String postoId) {
-                if (postoId != null) {
-                    //textPostoPrenotato.setText("Posto auto prenotato: ");
-                } else {
-                    //textPostoPrenotato.setText("Posto auto prenotato: Nessuno");
-                }
-            }
-            @Override
-            public void onFailure(Exception e) {
-                Toast.makeText(UserAreaActivity.this,
-                        "Errore caricamento posto prenotato: " + e.getMessage(),
-                        Toast.LENGTH_LONG).show();
-                btnPaga.setVisibility(View.GONE);
-            }
-        });
-
-        // Se vuoi puoi anche rimuovere questa vecchia logica
-        // e far gestire tutto dal "recycler di prenotazioni"
     }
 
     /**
