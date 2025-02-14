@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.contest.parking.R;
 import com.contest.parking.data.model.Parcheggio;
 import com.contest.parking.data.repository.ParcheggioRepository;
+import com.contest.parking.data.repository.StoricoRepository;
 import com.contest.parking.presentation.utils.JsonUtils;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -156,23 +157,24 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                 //spotButton.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM);
 
                                 // Verifica lo stato del posto (qui, per esempio, potresti avere un campo nel JSON oppure eseguire una query al database)
-                                // Per questo esempio, supponiamo che il JSON contenga un campo "occupato" (boolean) per ogni spot.
-                                boolean occupato = spotObj.optBoolean("occupato", false);
-                                if (occupato) {
-                                    spotButton.setBackgroundColor(Color.RED);
-                                    spotButton.setEnabled(false);
-                                } else {
-                                    spotButton.setBackgroundColor(Color.GREEN);
-                                    spotButton.setEnabled(true);
-                                    spotButton.setOnClickListener(v -> {
-                                        // Se cliccato, avvia PrenotaPostoActivity (passando i dati necessari)
-                                        Intent intent = new Intent(ParcheggioDettaglioActivity.this, PrenotaPostoActivity.class);
-                                        intent.putExtra("spotId", spotId);
-                                        intent.putExtra("prezzo", p.getPrezzo());
-                                        // Puoi passare ulteriori dati se necessario
-                                        startActivity(intent);
-                                    });
-                                }
+                                StoricoRepository storicoRepository = new StoricoRepository();
+                                storicoRepository.isOggiOccupato(spotId)
+                                        .addOnSuccessListener(isOccupied -> {
+                                            if (isOccupied) {
+                                                spotButton.setBackgroundColor(Color.RED);
+                                                spotButton.setEnabled(true);
+                                            } else {
+                                                spotButton.setBackgroundColor(Color.GREEN);
+                                                spotButton.setEnabled(true);
+                                                spotButton.setOnClickListener(v -> {
+                                                    // Se cliccato, avvia PrenotaPostoActivity (passando i dati necessari)
+                                                    Intent intent = new Intent(ParcheggioDettaglioActivity.this, PrenotaPostoActivity.class);
+                                                    intent.putExtra("spotId", spotId);
+                                                    intent.putExtra("prezzo", p.getPrezzo());
+                                                    startActivity(intent);
+                                                });
+                                            }
+                                        });
 
                                 // Imposta i parametri di layout per posizionare il bottone
                                 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);

@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class StoricoRepository {
@@ -98,6 +99,54 @@ public class StoricoRepository {
 
     public Task<Void> updatePagato(String docId, boolean pagato) {
         return storicoCollection.document(docId).update("pagato", pagato);
+    }
+
+
+    public interface OnCheckOggiListener {
+        void onResult(boolean isOccupato);
+        void onError(Exception e);
+    }
+
+    private long getTodayStartInMillis() {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        return c.getTimeInMillis();
+    }
+
+    private long getTodayEndInMillis() {
+        return getTodayStartInMillis() + 86400000L - 1;
+    }
+
+    public Task<Boolean> isOggiOccupato(String postoAutoId) {
+        long dayStart = getTodayStartInMillis();
+        long dayEnd = getTodayEndInMillis();
+
+        // 1) Esegui la query su Firestore
+        Task<QuerySnapshot> queryTask = storicoCollection
+                .whereEqualTo("postoAutoId", postoAutoId)
+                .whereEqualTo("pagato", false)
+                .whereLessThanOrEqualTo("dataInizio", dayEnd)
+                .whereGreaterThanOrEqualTo("dataFine", dayStart)
+                .get();
+
+        // 2) Usa "continueWith(...)": al termine della query,
+        //    restituisci un Task<Boolean> che indica se la snapshot è vuota o no.
+        return queryTask.continueWith(task -> {
+            // Se la query ha fallito, solleva l'eccezione
+            if (!task.isSuccessful()) {
+                Exception e = task.getException() != null ? task.getException() :
+                        new Exception("Query Storico fallita");
+                throw e;
+            }
+            // Altrimenti, se la query è riuscita
+            QuerySnapshot snap = task.getResult();
+            // isEmpty() = nessun documento -> false (NON occupato)
+            // !isEmpty() = almeno un documento -> true (occupato)
+            return !snap.isEmpty();
+        });
     }
 }
 
