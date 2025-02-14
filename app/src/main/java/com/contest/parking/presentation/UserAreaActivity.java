@@ -3,11 +3,9 @@ package com.contest.parking.presentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.contest.parking.R;
@@ -15,12 +13,10 @@ import com.contest.parking.data.model.Storico;
 import com.contest.parking.data.model.Utente;
 import com.contest.parking.data.repository.AuthRepository;
 import com.contest.parking.data.repository.StoricoRepository;
-import com.contest.parking.data.repository.UtenteRepository;
 import com.contest.parking.domain.UseCaseCaricaDatiUtente;
 import com.contest.parking.domain.UseCaseCaricaPostoPrenotato;
 import com.contest.parking.presentation.adapter.StoricoAdapter;
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.List;
 

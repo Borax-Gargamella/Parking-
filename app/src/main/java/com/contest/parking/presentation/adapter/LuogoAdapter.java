@@ -62,6 +62,8 @@ public class LuogoAdapter extends RecyclerView.Adapter<LuogoAdapter.LuogoViewHol
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, AreaSelectionActivity.class);
             intent.putExtra("luogoId", luogo.getId());
+            intent.putExtra("nome", luogo.getNome());
+            intent.putExtra("descrizione", luogo.getDescrizione());
             context.startActivity(intent);
         });
     }
@@ -80,6 +82,7 @@ public class LuogoAdapter extends RecyclerView.Adapter<LuogoAdapter.LuogoViewHol
             nomeText = itemView.findViewById(R.id.itemLuogoNome);
             indirizzoText = itemView.findViewById(R.id.itemLuogoIndirizzo);
             imageView = itemView.findViewById(R.id.itemLuogoImage);
+
         }
     }
 }

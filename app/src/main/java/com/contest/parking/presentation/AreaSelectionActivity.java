@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import com.contest.parking.R;
 import com.contest.parking.presentation.utils.JsonUtils;
 import org.json.JSONArray;
@@ -14,9 +15,10 @@ import org.json.JSONObject;
 
 public class AreaSelectionActivity extends BaseActivity {
 
+    private TextView textDescrizione, textNome;
     private ImageView imageViewLuogo;
     private FrameLayout frameLayoutContainer;
-    private String luogoId, luogoNome;  // Ad esempio "luogo1"
+    private String luogoId, luogoDescrizione, nome;  // Ad esempio "luogo1"
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +28,16 @@ public class AreaSelectionActivity extends BaseActivity {
 
         imageViewLuogo = findViewById(R.id.imageViewSole);
         frameLayoutContainer = findViewById(R.id.frameLayoutContainer);
+        textDescrizione = findViewById(R.id.itemLuogoDescrizione);
+        textNome = findViewById(R.id.itemLuogoNome);
 
         // Recupera l'ID del luogo (passato tramite Intent)
         luogoId = getIntent().getStringExtra("luogoId");
+        nome = getIntent().getStringExtra("nome");
+        luogoDescrizione = getIntent().getStringExtra("descrizione");
 
+        textDescrizione.setText(luogoDescrizione);
+        textNome.setText(nome);
 
         // Carica il file JSON dagli assets
         JSONObject zonesJson = JsonUtils.loadJSONFromAsset(getAssets(), "luogo_zones.json");
