@@ -4,7 +4,6 @@ package com.contest.parking.presentation;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 import com.contest.parking.R;
 import com.contest.parking.data.model.Range;
@@ -96,7 +95,7 @@ public class PrenotaPostoActivity extends BaseActivity {
                             // Rendi i campi non editabili
                             editNome.setEnabled(false);
                             editCognome.setEnabled(false);
-                            editTarga.setEnabled(false);
+                            editTarga.setEnabled(true);
                         }
                     }
                 })
@@ -245,6 +244,14 @@ public class PrenotaPostoActivity extends BaseActivity {
             Toast.makeText(this, "Le date selezionate si sovrappongono a un'altra prenotazione!", Toast.LENGTH_LONG).show();
             return;
         }
+
+        // Controllo formato targa AA000AA
+        String targa = editTarga.getText().toString().trim();
+        if (!targa.matches("[A-Z]{2}\\d{3}[A-Z]{2}")) {
+            Toast.makeText(this, "Formato targa non valido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
 
         // ESEMPIO: chiama il UseCase prenota
         // Nel DB memorizzi: dataInizioMs, dataFineGiornoIntero

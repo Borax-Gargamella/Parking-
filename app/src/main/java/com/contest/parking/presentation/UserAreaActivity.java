@@ -108,11 +108,9 @@ public class UserAreaActivity extends BaseActivity {
             @Override
             public void onSuccess(String postoId) {
                 if (postoId != null) {
-                    textPostoPrenotato.setText("Posto auto prenotato: " + postoId);
-                    btnPaga.setVisibility(View.VISIBLE);
+                    //textPostoPrenotato.setText("Posto auto prenotato: ");
                 } else {
-                    textPostoPrenotato.setText("Posto auto prenotato: Nessuno");
-                    btnPaga.setVisibility(View.GONE);
+                    //textPostoPrenotato.setText("Posto auto prenotato: Nessuno");
                 }
             }
             @Override
@@ -136,6 +134,13 @@ public class UserAreaActivity extends BaseActivity {
         storicoRepository.getStoricoNonPagatoByUtente(currentUid, new StoricoRepository.OnStoricoLoadedListener() {
             @Override
             public void onStoricoLoaded(List<Storico> storiciNonPagati) {
+                if (storiciNonPagati.size()==1) {
+                    textPostoPrenotato.setText("Posto auto prenotato:" + storiciNonPagati.size());
+                } else if (storiciNonPagati.isEmpty()) {
+                    textPostoPrenotato.setText("Nessun posto auto prenotato");
+                } else {
+                    textPostoPrenotato.setText("Posti auto prenotati:" + storiciNonPagati.size());
+                }
                 setupRecyclerView(storiciNonPagati);
             }
 

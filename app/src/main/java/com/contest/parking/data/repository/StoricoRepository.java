@@ -102,12 +102,6 @@ public class StoricoRepository {
         return storicoCollection.document(docId).update("pagato", pagato);
     }
 
-
-    public interface OnCheckOggiListener {
-        void onResult(boolean isOccupato);
-        void onError(Exception e);
-    }
-
     private long getTodayStartInMillis() {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.HOUR_OF_DAY, 0);
