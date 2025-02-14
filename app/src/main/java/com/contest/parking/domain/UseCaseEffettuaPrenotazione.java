@@ -54,7 +54,7 @@ public class UseCaseEffettuaPrenotazione {
         }
         */
 
-        double prezzo = Double.parseDouble(prezzoStr.trim());
+        String prezzo = prezzoStr.trim();
 
         // Conversione delle date da "dd/MM/yyyy" a millisecondi (a mezzanotte)
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -90,11 +90,11 @@ public class UseCaseEffettuaPrenotazione {
 
         // Calcola il numero di giorni (inclusivi) e il prezzo totale
         long giorni = ((dataFineGiornoIntero - dataInizioMs) / 86400000L) + 1;
-        prezzo = prezzo * giorni;
+        //prezzo = prezzo * giorni;
 
         // Esegue la prenotazione nel DB
         useCasePrenotaPosto.prenotaPosto(spotId, utenteId, targa,
-                prezzo, dataInizioMs, dataFineGiornoIntero, new UseCasePrenotaPosto.OnPrenotaPostoCompleteListener() {
+                (Double.parseDouble(prezzo) * giorni), dataInizioMs, dataFineGiornoIntero, new UseCasePrenotaPosto.OnPrenotaPostoCompleteListener() {
                     @Override
                     public void onSuccess() {
                         callback.onSuccess();
