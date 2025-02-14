@@ -13,7 +13,7 @@ android {
         minSdk = 31
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,6 +39,9 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+
+    // Android material design
+    implementation("com.google.android.material:material:1.12.0")
 
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.8.0"))

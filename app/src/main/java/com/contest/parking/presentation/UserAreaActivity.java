@@ -8,37 +8,46 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.contest.parking.R;
+import com.contest.parking.data.model.Storico;
 import com.contest.parking.data.model.Utente;
 import com.contest.parking.data.repository.AuthRepository;
 import com.contest.parking.data.repository.StoricoRepository;
 import com.contest.parking.data.repository.UtenteRepository;
 import com.contest.parking.domain.UseCaseCaricaDatiUtente;
 import com.contest.parking.domain.UseCaseCaricaPostoPrenotato;
+import com.contest.parking.presentation.adapter.StoricoAdapter;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.List;
+
 public class UserAreaActivity extends BaseActivity {
 
-    // Gruppo view per utente loggato
     private LinearLayout llUserData;
     private TextView textNome, textCognome, textEmail, textTarga, textPostoPrenotato;
     private MaterialButton btnPaga, btnLogout;
 
-    private AuthRepository authRepository;
-    private String currentUid; // ID utente corrente
+    private RecyclerView recyclerPrenotazioni; // la "tabella"
+    private StoricoAdapter storicoAdapter;
 
-    // Use case per il caricamento dei dati
+    private AuthRepository authRepository;
+    private String currentUid;
+
     private UseCaseCaricaDatiUtente useCaseCaricaDatiUtente;
     private UseCaseCaricaPostoPrenotato useCaseCaricaPostoPrenotato;
+
+    // Aggiungi un tuo repository/storico
+    private StoricoRepository storicoRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Inietta il layout specifico per UserAreaActivity nel container di BaseActivity
         setActivityLayout(R.layout.activity_user_area);
 
-        // Binding delle view per la sezione utente loggato
+        // Binding
         llUserData = findViewById(R.id.llUserData);
         textNome = findViewById(R.id.textNome);
         textCognome = findViewById(R.id.textCognome);
@@ -48,67 +57,105 @@ public class UserAreaActivity extends BaseActivity {
         btnPaga = findViewById(R.id.btnPaga);
         btnLogout = findViewById(R.id.btnLogout);
 
-        // Inizializza i repository (per l'autenticazione) e i use case
+        recyclerPrenotazioni = findViewById(R.id.recyclerPrenotazioni);
+        recyclerPrenotazioni.setLayoutManager(new LinearLayoutManager(this));
+
         authRepository = new AuthRepository();
         useCaseCaricaDatiUtente = new UseCaseCaricaDatiUtente();
         useCaseCaricaPostoPrenotato = new UseCaseCaricaPostoPrenotato();
+        storicoRepository = new StoricoRepository(); // supponendo tu abbia questo
 
-        // Controlla se l'utente è loggato
         currentUid = authRepository.getCurrentUserId();
         if (currentUid == null) {
-            // Nessun utente loggato: rimanda alla LoginActivity
             startActivity(new Intent(UserAreaActivity.this, LoginActivity.class));
             finish();
         } else {
-            // Utente loggato: mostra le view per utente
             llUserData.setVisibility(View.VISIBLE);
+            caricaDatiUtente();
+            caricaPostoPrenotato();
+            caricaPrenotazioniNonPagate(); // Nuovo metodo
+        }
 
-            // Carica i dati utente tramite il use case
-            useCaseCaricaDatiUtente.loadUserData(currentUid, new UseCaseCaricaDatiUtente.OnUserDataLoadedListener() {
-                @Override
-                public void onSuccess(Utente utente) {
-                    textNome.setText("Nome: " + utente.getNome());
-                    textCognome.setText("Cognome: " + utente.getCognome());
-                    textEmail.setText("Email: " + utente.getEmail());
-                    textTarga.setText("Targa: " + utente.getTarga());
-                }
+        // Gestione click logout
+        btnLogout.setOnClickListener(v -> {
+            authRepository.logoutUser();
+            startActivity(new Intent(UserAreaActivity.this, LoginActivity.class));
+            finish();
+        });
+    }
 
-                @Override
-                public void onFailure(Exception e) {
-                    Toast.makeText(UserAreaActivity.this, "Errore caricamento utente: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
+    private void caricaDatiUtente() {
+        useCaseCaricaDatiUtente.loadUserData(currentUid, new UseCaseCaricaDatiUtente.OnUserDataLoadedListener() {
+            @Override
+            public void onSuccess(Utente utente) {
+                textNome.setText("Nome: " + utente.getNome());
+                textCognome.setText("Cognome: " + utente.getCognome());
+                textEmail.setText("Email: " + utente.getEmail());
+                textTarga.setText("Targa: " + utente.getTarga());
+            }
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(UserAreaActivity.this,
+                        "Errore caricamento utente: " + e.getMessage(),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
-            // Carica il posto prenotato tramite il use case
-            useCaseCaricaPostoPrenotato.loadPostoPrenotato(currentUid, new UseCaseCaricaPostoPrenotato.OnPostoPrenotatoLoadedListener() {
-                @Override
-                public void onSuccess(String postoId) {
-                    if (postoId != null) {
-                        textPostoPrenotato.setText("Posto auto prenotato: " + postoId);
-                        btnPaga.setVisibility(View.VISIBLE);
-                    } else {
-                        textPostoPrenotato.setText("Posto auto prenotato: Nessuno");
-                        btnPaga.setVisibility(View.GONE);
-                    }
-                }
-
-                @Override
-                public void onFailure(Exception e) {
-                    Toast.makeText(UserAreaActivity.this, "Errore caricamento posto prenotato: " + e.getMessage(), Toast.LENGTH_LONG).show();
+    private void caricaPostoPrenotato() {
+        // Tua vecchia logica: se c'è un "postoId", mostra il bottone paga "classico"
+        useCaseCaricaPostoPrenotato.loadPostoPrenotato(currentUid, new UseCaseCaricaPostoPrenotato.OnPostoPrenotatoLoadedListener() {
+            @Override
+            public void onSuccess(String postoId) {
+                if (postoId != null) {
+                    textPostoPrenotato.setText("Posto auto prenotato: " + postoId);
+                    btnPaga.setVisibility(View.VISIBLE);
+                } else {
+                    textPostoPrenotato.setText("Posto auto prenotato: Nessuno");
                     btnPaga.setVisibility(View.GONE);
                 }
-            });
+            }
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(UserAreaActivity.this,
+                        "Errore caricamento posto prenotato: " + e.getMessage(),
+                        Toast.LENGTH_LONG).show();
+                btnPaga.setVisibility(View.GONE);
+            }
+        });
 
-            // Gestione click sui bottoni
-            btnPaga.setOnClickListener(v -> {
-                // Avvia PaymentActivity
-                startActivity(new Intent(UserAreaActivity.this, PaymentActivity.class));
-            });
-            btnLogout.setOnClickListener(v -> {
-                authRepository.logoutUser();
-                startActivity(new Intent(UserAreaActivity.this, LoginActivity.class));
-                finish();
-            });
-        }
+        // Se vuoi puoi anche rimuovere questa vecchia logica
+        // e far gestire tutto dal "recycler di prenotazioni"
+    }
+
+    /**
+     * Carica tutti i record di Storico per l'utente currentUid
+     * con "pagato" = false (es: prenotazioni in sospeso).
+     */
+    private void caricaPrenotazioniNonPagate() {
+        storicoRepository.getStoricoNonPagatoByUtente(currentUid, new StoricoRepository.OnStoricoLoadedListener() {
+            @Override
+            public void onStoricoLoaded(List<Storico> storiciNonPagati) {
+                setupRecyclerView(storiciNonPagati);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(UserAreaActivity.this,
+                        "Errore caricamento prenotazioni non pagate: " + e.getMessage(),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void setupRecyclerView(List<Storico> list) {
+        storicoAdapter = new StoricoAdapter(list, item -> {
+            // onPagaClick
+            // Avvia PaymentActivity, passandogli l'ID del doc (o i dati che servono)
+            Intent intent = new Intent(UserAreaActivity.this, PaymentActivity.class);
+            intent.putExtra("STORICO_ID", item.getId());
+            startActivity(intent);
+        });
+        recyclerPrenotazioni.setAdapter(storicoAdapter);
     }
 }

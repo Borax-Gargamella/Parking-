@@ -8,11 +8,12 @@ public class Storico {
     private long dataFine;
     private String targa;
     private double prezzo;
+    private boolean pagato;
 
     // Empty constructor for Firestore
     public Storico(){}
 
-    public Storico(String id, String utenteId, String postoAutoId, long dataInizio, long dataFine, String targa, double prezzo) {
+    public Storico(String id, String utenteId, String postoAutoId, long dataInizio, long dataFine, String targa, double prezzo, boolean pagato) {
         this.id = id;
         this.utenteId = utenteId;
         this.postoAutoId = postoAutoId;
@@ -20,6 +21,7 @@ public class Storico {
         this.dataFine = dataFine;
         this.targa = targa;
         this.prezzo = prezzo;
+        this.pagato = pagato;
     }
 
     public String getId() {
@@ -76,5 +78,13 @@ public class Storico {
 
     public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
+    }
+
+    public boolean isPagato() {
+        return pagato;
+    }
+
+    public void setPagato(boolean pagato) {
+        this.pagato = pagato;
     }
 }

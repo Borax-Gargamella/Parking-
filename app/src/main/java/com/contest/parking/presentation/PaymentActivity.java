@@ -26,7 +26,7 @@ public class PaymentActivity extends BaseActivity {
         qrCodeImage = findViewById(R.id.qrCodeImage);
 
         // Genera un QR Code (esempio)
-        generateQrCode("Targa:AB123CD-PostoAuto:XYZ-Data:2023...");
+        generateQrCode("");
 
         pagaOnlineButton.setOnClickListener(v -> {
             // Apri un sito web (esempio di finto pagamento)

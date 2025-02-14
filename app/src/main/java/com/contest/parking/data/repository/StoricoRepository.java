@@ -3,8 +3,12 @@ package com.contest.parking.data.repository;
 import com.contest.parking.data.model.Storico;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StoricoRepository {
 
@@ -28,13 +32,11 @@ public class StoricoRepository {
                 .get();
     }
 
-    // e updateDataFine:
     public Task<Void> updateDataFine(String docId, long fine) {
         return storicoCollection.document(docId).update("dataFine", fine);
     }
 
     public Task<QuerySnapshot> getStoricoApertoByUtente(String utenteId) {
-        // Filtra con dataFine = 0, utenteId = ...
         return storicoCollection.whereEqualTo("utenteId", utenteId)
                 .whereEqualTo("dataFine", 0)
                 .get();
@@ -44,5 +46,58 @@ public class StoricoRepository {
         return storicoCollection.whereEqualTo("postoAutoId", spotId).get();
     }
 
-    // Other methods CRUD if needed
+    /**
+     * Callback per restituire una lista di Storico
+     */
+    public interface OnStoricoLoadedListener {
+        void onStoricoLoaded(List<Storico> listaStorico);
+        void onError(Exception e);
+    }
+
+    /**
+     * Esempio di metodo che restituisce tutti i record di Storico
+     * con "postoAutoId" = spotId, e li converte in List<Storico>
+     */
+    public void getStoricoBySpotId(String spotId, OnStoricoLoadedListener callback) {
+        getStoricoForSpot(spotId)
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<Storico> lista = new ArrayList<>();
+                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        if (doc.exists()) {
+                            Storico storico = doc.toObject(Storico.class);
+                            lista.add(storico);
+                        }
+                    }
+                    callback.onStoricoLoaded(lista);
+                })
+                .addOnFailureListener(e -> callback.onError(e));
+    }
+
+    public void getStoricoNonPagatoByUtente(String uid, OnStoricoLoadedListener cb) {
+        storicoCollection
+                .whereEqualTo("utenteId", uid)
+                .whereEqualTo("pagato", false)
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    List<Storico> risultato = new ArrayList<>();
+                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
+                        if (doc.exists()) {
+                            Storico s = doc.toObject(Storico.class);
+                            // Se "s" deve avere un campo "id" uguale all'ID del documento, impostalo qui
+                            s.setId(doc.getId());
+                            risultato.add(s);
+                        }
+                    }
+                    // Chiama il callback con la lista
+                    cb.onStoricoLoaded(risultato);
+                })
+                .addOnFailureListener(e -> {
+                    cb.onError(e);
+                });
+    }
+
+    public Task<Void> updatePagato(String docId, boolean pagato) {
+        return storicoCollection.document(docId).update("pagato", pagato);
+    }
 }
+

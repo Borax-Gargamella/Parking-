@@ -57,6 +57,7 @@ public class UseCasePrenotaPosto {
                     s.setPrezzo(prezzo);
                     s.setDataInizio(dataInizio);
                     s.setDataFine(dataFine); // Imposta la data fine passata come parametro
+                    s.setPagato(false); // Inizialmente non pagato
 
                     storicoRepository.addStorico(s)
                             .addOnSuccessListener(unused -> listener.onSuccess())

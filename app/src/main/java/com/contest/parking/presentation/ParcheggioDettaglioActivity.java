@@ -1,6 +1,5 @@
 package com.contest.parking.presentation;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,14 +11,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.core.widget.TextViewCompat;
 import com.contest.parking.R;
 import com.contest.parking.data.model.Parcheggio;
 import com.contest.parking.data.repository.ParcheggioRepository;
-import com.contest.parking.data.repository.StoricoRepository;
-import com.contest.parking.domain.UseCaseOccupato;
 import com.contest.parking.presentation.utils.JsonUtils;
-import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import org.json.JSONArray;
@@ -173,6 +168,7 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                         // Se cliccato, avvia PrenotaPostoActivity (passando i dati necessari)
                                         Intent intent = new Intent(ParcheggioDettaglioActivity.this, PrenotaPostoActivity.class);
                                         intent.putExtra("spotId", spotId);
+                                        intent.putExtra("prezzo", p.getPrezzo());
                                         // Puoi passare ulteriori dati se necessario
                                         startActivity(intent);
                                     });
