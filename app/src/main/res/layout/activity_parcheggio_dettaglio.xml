@@ -14,7 +14,8 @@
         <FrameLayout
                 android:id="@+id/frameLayoutContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
 
             <ImageView
                     android:id="@+id/imageViewArea"
@@ -27,32 +28,36 @@
         </FrameLayout>
 
         <!-- Altri dati testuali -->
-        <TextView
-                android:id="@+id/textId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ID:"
-                android:layout_marginTop="16dp" />
 
         <TextView
                 android:id="@+id/textNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nome:"
-                android:layout_marginTop="8dp" />
+                android:text=""
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+                android:textStyle="bold"
+                android:textColor="#100028"/>
+
 
         <TextView
                 android:id="@+id/textPostiTot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Posti Totali:"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="#000000"/>
 
         <TextView
                 android:id="@+id/textPrezzo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Prezzo:"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="#000000"/>
     </LinearLayout>
 </ScrollView>

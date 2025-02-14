@@ -39,7 +39,6 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
         // Binding delle view
         frameLayoutContainer = findViewById(R.id.frameLayoutContainer);
         imageViewArea = findViewById(R.id.imageViewArea);
-        textId = findViewById(R.id.textId);
         textNome = findViewById(R.id.textNome);
         textPostiTot = findViewById(R.id.textPostiTot);
         textPrezzo = findViewById(R.id.textPrezzo);
@@ -62,8 +61,7 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                 Parcheggio p = documentSnapshot.toObject(Parcheggio.class);
                 if (p != null) {
                     // Aggiorna la UI
-                    textId.setText("ID: " + p.getId());
-                    textNome.setText("Nome: " + p.getNome());
+                    textNome.setText(p.getNome());
                     textPostiTot.setText("Posti Totali: " + p.getPostiTot());
                     textPrezzo.setText("Prezzo: " + p.getPrezzo() + " €");
 
@@ -152,7 +150,7 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
 
                                 // Crea il bottone per lo spot
                                 View spotButton = new View(ParcheggioDettaglioActivity.this);
-                                spotButton.setBackgroundColor(Color.GREEN);
+                                spotButton.setBackgroundColor(Color.parseColor("#4ac32c"));
                                 spotButton.setEnabled(true);
                                 spotButton.setOnClickListener(v -> {
                                     // Se cliccato, avvia PrenotaPostoActivity (passando i dati necessari)
@@ -170,7 +168,7 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                 storicoRepository.isOggiOccupato(spotId)
                                         .addOnSuccessListener(isOccupied -> {
                                             if (isOccupied) {
-                                                spotButton.setBackgroundColor(Color.RED);
+                                                spotButton.setBackgroundColor(Color.parseColor("#b8452b"));
                                             }
                                         });
 
