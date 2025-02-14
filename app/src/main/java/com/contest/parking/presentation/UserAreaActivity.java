@@ -15,6 +15,7 @@ import com.contest.parking.data.repository.AuthRepository;
 import com.contest.parking.data.repository.StoricoRepository;
 import com.contest.parking.domain.UseCaseCaricaDatiUtente;
 import com.contest.parking.domain.UseCaseCaricaPostoPrenotato;
+import com.contest.parking.domain.UseCaseCaricaPrenotazioniNonPagate;
 import com.contest.parking.presentation.adapter.StoricoAdapter;
 import com.google.android.material.button.MaterialButton;
 
@@ -33,7 +34,7 @@ public class UserAreaActivity extends BaseActivity {
     private String currentUid;
 
     private UseCaseCaricaDatiUtente useCaseCaricaDatiUtente;
-    private UseCaseCaricaPostoPrenotato useCaseCaricaPostoPrenotato;
+    private UseCaseCaricaPrenotazioniNonPagate useCaseCaricaPrenotazioniNonPagate; // Nuovo caso d'uso
 
     // Aggiungi un tuo repository/storico
     private StoricoRepository storicoRepository;
@@ -57,7 +58,8 @@ public class UserAreaActivity extends BaseActivity {
 
         authRepository = new AuthRepository();
         useCaseCaricaDatiUtente = new UseCaseCaricaDatiUtente();
-        useCaseCaricaPostoPrenotato = new UseCaseCaricaPostoPrenotato();
+        storicoRepository = new StoricoRepository();
+        useCaseCaricaPrenotazioniNonPagate = new UseCaseCaricaPrenotazioniNonPagate(storicoRepository);
         storicoRepository = new StoricoRepository(); // supponendo tu abbia questo
 
         currentUid = authRepository.getCurrentUserId();
@@ -67,7 +69,7 @@ public class UserAreaActivity extends BaseActivity {
         } else {
             llUserData.setVisibility(View.VISIBLE);
             caricaDatiUtente();
-            caricaPrenotazioniNonPagate(); // Nuovo metodo
+            caricaPrenotazioniNonPagate();
         }
 
         // Gestione click logout
@@ -101,11 +103,12 @@ public class UserAreaActivity extends BaseActivity {
      * con "pagato" = false (es: prenotazioni in sospeso).
      */
     private void caricaPrenotazioniNonPagate() {
-        storicoRepository.getStoricoNonPagatoByUtente(currentUid, new StoricoRepository.OnStoricoLoadedListener() {
+        useCaseCaricaPrenotazioniNonPagate.execute(currentUid, new UseCaseCaricaPrenotazioniNonPagate.Callback() {
             @Override
-            public void onStoricoLoaded(List<Storico> storiciNonPagati) {
-                if (storiciNonPagati.size()==1) {
-                    textPostoPrenotato.setText("Posto auto prenotato:" + storiciNonPagati.size());
+            public void onSuccess(List<Storico> storiciNonPagati) {
+                // Aggiornamento della UI
+                if (storiciNonPagati.size() == 1) {
+                    textPostoPrenotato.setText("Posto auto prenotato: " + storiciNonPagati.size());
                 } else if (storiciNonPagati.isEmpty()) {
                     textPostoPrenotato.setText("Nessun posto auto prenotato");
                 } else {

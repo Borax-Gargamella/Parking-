@@ -74,4 +74,14 @@ public class Validator {
         // Regex: almeno 6 caratteri, almeno una cifra, una minuscola, una maiuscola, un carattere speciale e nessuno spazio
         return password != null && password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{6,}$");
     }
+
+    /**
+     * Verifica se la targa è in un formato valido.
+     *
+     * @param targa la targa da verificare
+     * @return true se la targa è valida, false altrimenti
+     */
+    public static boolean isValidTarga(String targa) {
+        return targa != null && !targa.trim().isEmpty() && targa.matches("^[A-Z]{2}[0-9]{3}[A-Z]{2}$");
+    }
 }

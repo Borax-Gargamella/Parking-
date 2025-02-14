@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.contest.parking.R;
 import com.contest.parking.data.repository.StoricoRepository;
+import com.contest.parking.domain.UseCaseProcessPagamento;
+import com.contest.parking.presentation.utils.PagamentoQrCodeGenerator;
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
@@ -18,8 +20,10 @@ public class PaymentActivity extends BaseActivity {
 
     private Button pagaOnlineButton, btnSimulaPagamento;
     private ImageView qrCodeImage;
-    private StoricoRepository storicoRepository;
     private TextView textImporto;
+
+    private StoricoRepository storicoRepository;
+    private UseCaseProcessPagamento useCaseProcessPayment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,7 @@ public class PaymentActivity extends BaseActivity {
         setActivityLayout(R.layout.activity_payment);
 
         storicoRepository = new StoricoRepository();
+        useCaseProcessPayment = new UseCaseProcessPagamento(storicoRepository);
 
         pagaOnlineButton = findViewById(R.id.btnPagaOnline);
         btnSimulaPagamento = findViewById(R.id.btnSimulaPagamento);
@@ -39,10 +44,17 @@ public class PaymentActivity extends BaseActivity {
         String data = intent.getStringExtra("Data");
         String idStorico = intent.getStringExtra("storicoId");
         Double importo = intent.getDoubleExtra("importo", 0.0);
-        generateQrCode(data);
+
+        try {
+            Bitmap qrBitmap = PagamentoQrCodeGenerator.generateQrCode(data, 400, 400);
+            qrCodeImage.setImageBitmap(qrBitmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         textImporto.setText(String.format("Importo: %.2f €", importo));
 
+        // Apri un sito web (simula un pagamento)
         pagaOnlineButton.setOnClickListener(v -> {
             // Apri un sito web (esempio di finto pagamento)
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"));
@@ -51,13 +63,19 @@ public class PaymentActivity extends BaseActivity {
 
         // Simula un pagamento
         btnSimulaPagamento.setOnClickListener(v -> {
-            storicoRepository.updatePagato(idStorico, true)
-                    .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(this, "Pagamento effettuato", Toast.LENGTH_SHORT).show();
-                        Intent intent1 = new Intent(this, MainActivity.class);
-                        startActivity(intent1);
-                    })
-                    .addOnFailureListener(e -> Toast.makeText(this, "Errore nel Pagamento", Toast.LENGTH_SHORT).show());
+            useCaseProcessPayment.processPayment(idStorico, new UseCaseProcessPagamento.PaymentCallback() {
+                @Override
+                public void onSuccess() {
+                    Toast.makeText(PaymentActivity.this, "Pagamento effettuato", Toast.LENGTH_SHORT).show();
+                    Intent intent1 = new Intent(PaymentActivity.this, MainActivity.class);
+                    startActivity(intent1);
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Toast.makeText(PaymentActivity.this, "Errore nel Pagamento: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 
