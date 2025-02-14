@@ -86,7 +86,7 @@ public class PostoAutoInserter {
                 posto.setId(spotId);  // Usa l'ID definito nel JSON come ID del documento
                 posto.setCategoria("normale");
                 // Categoria fissa per tutti
-                  // Posto libero di default
+
 
                 // Inserisci il posto auto nel database usando il metodo che rispetta l'ID specificato
                 postoAutoRepository.addPostoAutoWithId(posto)
