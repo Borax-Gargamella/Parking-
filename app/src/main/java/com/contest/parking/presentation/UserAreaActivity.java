@@ -153,7 +153,8 @@ public class UserAreaActivity extends BaseActivity {
             // onPagaClick
             // Avvia PaymentActivity, passandogli l'ID del doc (o i dati che servono)
             Intent intent = new Intent(UserAreaActivity.this, PaymentActivity.class);
-            intent.putExtra("STORICO_ID", item.getId());
+            intent.putExtra("Data", item.getDataInizio() + " " + item.getDataFine());
+            intent.putExtra("storicoId", item.getId());
             startActivity(intent);
         });
         recyclerPrenotazioni.setAdapter(storicoAdapter);
