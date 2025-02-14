@@ -152,6 +152,15 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
 
                                 // Crea il bottone per lo spot
                                 View spotButton = new View(ParcheggioDettaglioActivity.this);
+                                spotButton.setBackgroundColor(Color.GREEN);
+                                spotButton.setEnabled(true);
+                                spotButton.setOnClickListener(v -> {
+                                    // Se cliccato, avvia PrenotaPostoActivity (passando i dati necessari)
+                                    Intent intent = new Intent(ParcheggioDettaglioActivity.this, PrenotaPostoActivity.class);
+                                    intent.putExtra("spotId", spotId);
+                                    intent.putExtra("prezzo", p.getPrezzo());
+                                    startActivity(intent);
+                                });
                                 //spotButton.setText(spotId);
                                 //spotButton.setGravity(android.view.Gravity.CENTER);
                                 //spotButton.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM);
@@ -162,17 +171,6 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                         .addOnSuccessListener(isOccupied -> {
                                             if (isOccupied) {
                                                 spotButton.setBackgroundColor(Color.RED);
-                                                spotButton.setEnabled(true);
-                                            } else {
-                                                spotButton.setBackgroundColor(Color.GREEN);
-                                                spotButton.setEnabled(true);
-                                                spotButton.setOnClickListener(v -> {
-                                                    // Se cliccato, avvia PrenotaPostoActivity (passando i dati necessari)
-                                                    Intent intent = new Intent(ParcheggioDettaglioActivity.this, PrenotaPostoActivity.class);
-                                                    intent.putExtra("spotId", spotId);
-                                                    intent.putExtra("prezzo", p.getPrezzo());
-                                                    startActivity(intent);
-                                                });
                                             }
                                         });
 
