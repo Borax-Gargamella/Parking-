@@ -12,9 +12,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pagamento"
-            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/lineBelowTitle"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+            android:background="#FAFAFA"/>
+
+    <!-- Linea colorata sotto il titolo -->
+    <View
+            android:id="@+id/lineBelowTitle"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/textPaymentTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
 
     <ImageView
             android:id="@+id/qrCodeImage"
