@@ -79,7 +79,7 @@ public class Validator {
      */
     public static boolean isValidPassword(String password) {
         // Regex: almeno 6 caratteri, almeno una cifra, una minuscola, una maiuscola, un carattere speciale e nessuno spazio
-        return password != null && password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{6,}$");
+        return password != null && password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!.?])(?=\\S+$).{6,}$");
     }
 
     /**

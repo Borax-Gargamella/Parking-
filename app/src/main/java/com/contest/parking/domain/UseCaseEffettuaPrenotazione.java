@@ -41,7 +41,7 @@ public class UseCaseEffettuaPrenotazione {
                     dataFineStr,
                     prezzoStr,
                     targa,
-                    dateOccupate  // Assicurati che questa lista sia accessibile in questo contesto
+                    dateOccupate
             );
         } catch (IllegalArgumentException ex) {
             callback.onFailure(ex.getMessage());
