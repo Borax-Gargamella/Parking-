@@ -3,7 +3,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="@drawable/paga_posti"
+        android:layout_marginBottom="0.5dp">
 
     <TextView
             android:id="@+id/tvIdPrenotazione"
@@ -11,7 +13,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="ID"
-            android:textSize="14sp" />
+            android:textSize="16sp"
+            android:textStyle="bold"/>
 
     <TextView
             android:id="@+id/tvDataPrenotazione"
