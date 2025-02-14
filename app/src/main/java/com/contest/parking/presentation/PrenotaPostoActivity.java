@@ -255,7 +255,7 @@ public class PrenotaPostoActivity extends BaseActivity {
 
         // ESEMPIO: chiama il UseCase prenota
         // Nel DB memorizzi: dataInizioMs, dataFineGiornoIntero
-        useCasePrenotaPosto.prenotaPosto(spotId, utenteId, /* targa?? */ "ABC123",
+        useCasePrenotaPosto.prenotaPosto(spotId, utenteId, targa,
                 prezzo, dataInizioMs, dataFineGiornoIntero, new UseCasePrenotaPosto.OnPrenotaPostoCompleteListener() {
                     @Override
                     public void onSuccess() {
