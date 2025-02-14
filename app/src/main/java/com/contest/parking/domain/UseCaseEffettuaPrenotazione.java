@@ -44,6 +44,7 @@ public class UseCaseEffettuaPrenotazione {
         }
 
         // Parsing del prezzo base
+        /*
         double prezzo;
         try {
             prezzo = Double.parseDouble(prezzoStr.trim());
@@ -51,6 +52,9 @@ public class UseCaseEffettuaPrenotazione {
             callback.onFailure("Prezzo non valido");
             return;
         }
+        */
+
+        double prezzo = Double.parseDouble(prezzoStr.trim());
 
         // Conversione delle date da "dd/MM/yyyy" a millisecondi (a mezzanotte)
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());

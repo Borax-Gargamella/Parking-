@@ -1,6 +1,7 @@
 package com.contest.parking.presentation;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -179,6 +180,8 @@ public class PrenotaPostoActivity extends BaseActivity {
             @Override
             public void onSuccess() {
                 Toast.makeText(PrenotaPostoActivity.this, "Prenotazione effettuata!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(PrenotaPostoActivity.this, MainActivity.class);
+                startActivity(intent);
                 finish();
             }
 
