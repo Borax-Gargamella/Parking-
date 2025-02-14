@@ -22,9 +22,6 @@
 
         <!-- Dichiarazione delle altre Activity -->
         <activity
-                android:name="com.contest.parking.presentation.CompletaPagamentoActivity"
-                android:exported="true"/>
-        <activity
                 android:name="com.contest.parking.presentation.ParcheggioDettaglioActivity"
                 android:exported="true"/>
         <activity
