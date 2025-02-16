@@ -182,7 +182,7 @@ public class Validator {
     private static boolean isSovrapposto(long start, long end, List<Range> dateOccupate) {
         Range range = new Range(start, end);
         for (Range r : dateOccupate) {
-            if (r.overlaps(range)) { // Assicurati che overlaps restituisca un booleano
+            if (r.overlaps(range)) {
                 return true;
             }
         }
