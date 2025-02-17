@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.contest.parking.R;
 import com.contest.parking.data.model.Parcheggio;
 import com.contest.parking.data.repository.ParcheggioRepository;
+import com.contest.parking.data.repository.PostoAutoRepository;
 import com.contest.parking.data.repository.StoricoRepository;
 import com.contest.parking.presentation.utils.ImageCache;
 import com.contest.parking.presentation.utils.JsonUtils;
@@ -140,6 +142,8 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                 return;
                             }
 
+                            PostoAutoRepository postoAutoRepository = new PostoAutoRepository();
+
                             // Per ogni spot, crea un bottone dinamico
                             for (int i = 0; i < spotsArray.length(); i++) {
                                 JSONObject spotObj = spotsArray.optJSONObject(i);
@@ -171,7 +175,28 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                 //spotButton.setGravity(android.view.Gravity.CENTER);
                                 //spotButton.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM);
 
-                                // Verifica lo stato del posto (qui, per esempio, potresti avere un campo nel JSON oppure eseguire una query al database)
+                                // Ottieni il colore dello spot
+                                postoAutoRepository.getCategoria(spotId, new PostoAutoRepository.OnCategoriaLoadedListener() {
+                                    @Override
+                                    public void onCategoriaLoaded(String categoria) {
+                                        if ("disabili".equalsIgnoreCase(categoria)) {
+                                            spotButton.setBackgroundColor(Color.parseColor("#800080"));
+                                        } else if ("elettrico".equalsIgnoreCase(categoria)) {
+                                            spotButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+                                        } else {
+                                            // Per "normale" o altre categorie puoi lasciare il colore di default
+                                            spotButton.setBackgroundColor(Color.parseColor("#4ac32c"));
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(Exception e) {
+                                        // Gestisci l'errore, per esempio loggandolo
+                                        Log.e("SpotColor", "Errore nel recupero della categoria: " + e.getMessage());
+                                    }
+                                });
+
+                                // Controlla se lo spot è occupato oggi
                                 StoricoRepository storicoRepository = new StoricoRepository();
                                 storicoRepository.isOggiOccupato(spotId)
                                         .addOnSuccessListener(isOccupied -> {

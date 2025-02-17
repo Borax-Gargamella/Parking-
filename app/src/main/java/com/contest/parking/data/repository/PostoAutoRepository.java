@@ -3,6 +3,7 @@ package com.contest.parking.data.repository;
 import com.contest.parking.data.model.PostoAuto;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -33,5 +34,29 @@ public class PostoAutoRepository {
     //Query
     public Query getPostiByParcheggio(String parcheggioId) {
         return postoAutoRepositoryCollection.whereEqualTo("parcheggioId", parcheggioId);
+    }
+
+    public Task<DocumentSnapshot> getPostoAutoById(String postoId) {
+        return postoAutoRepositoryCollection.document(postoId).get();
+    }
+
+    public interface OnCategoriaLoadedListener {
+        void onCategoriaLoaded(String categoria);
+        void onError(Exception e);
+    }
+
+    public void getCategoria(String spotId, OnCategoriaLoadedListener listener) {
+        db.collection("PostoAuto")
+                .document(spotId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String categoria = documentSnapshot.getString("categoria");
+                        listener.onCategoriaLoaded(categoria);
+                    } else {
+                        listener.onError(new Exception("Documento non esistente"));
+                    }
+                })
+                .addOnFailureListener(listener::onError);
     }
 }

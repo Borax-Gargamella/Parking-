@@ -1,5 +1,6 @@
 package com.contest.parking.domain;
 
+import android.widget.Toast;
 import com.contest.parking.data.model.Storico;
 import com.contest.parking.data.repository.PostoAutoRepository;
 import com.contest.parking.data.repository.StoricoRepository;
@@ -46,7 +47,7 @@ public class UseCasePrenotaPosto {
                              long dataFine,
                              OnPrenotaPostoCompleteListener listener) {
         // Aggiorna lo stato del posto auto a "occupato"
-        postoAutoRepository.updateStatoPostoAuto(postoId, true)
+        postoAutoRepository.getPostoAutoById(postoId)
                 .addOnSuccessListener(aVoid -> {
                     // Crea il record dello storico
                     Storico s = new Storico();
@@ -61,12 +62,8 @@ public class UseCasePrenotaPosto {
 
                     storicoRepository.addStorico(s)
                             .addOnSuccessListener(unused -> listener.onSuccess())
-                            .addOnFailureListener(e -> {
-                                // In caso di errore nel salvataggio dello storico, ripristina lo stato del posto auto
-                                postoAutoRepository.updateStatoPostoAuto(postoId, false)
-                                        .addOnCompleteListener(task -> listener.onFailure(e));
-                            });
+                            .addOnFailureListener(listener::onFailure);
                 })
-                .addOnFailureListener(e -> listener.onFailure(e));
+                .addOnFailureListener(listener::onFailure);
     }
 }
