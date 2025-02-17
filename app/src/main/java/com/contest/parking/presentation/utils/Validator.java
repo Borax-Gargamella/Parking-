@@ -21,17 +21,23 @@ public class Validator {
      * @param email    l'email
      * @param password la password
      */
-    public static void validateRegistrationInputs(String nome, String cognome, String targa, String email, String password) {
+    public static void validateRegistrationInputs(String nome, String cognome, String targa, String email, String password, String password2) {
         if (nome == null || nome.trim().isEmpty() ||
                 cognome == null || cognome.trim().isEmpty() ||
                 targa == null || targa.trim().isEmpty() ||
                 email == null || email.trim().isEmpty() ||
-                password == null || password.trim().isEmpty()) {
+                password == null || password.trim().isEmpty() ||
+                password2 == null || password2.trim().isEmpty()) {
             throw new IllegalArgumentException("Tutti i campi sono obbligatori");
         }
         if (!isValidEmail(email)) {
             throw new IllegalArgumentException("Email non valida");
         }
+
+        if (!password.equals(password2)) {
+            throw new IllegalArgumentException("Le password non corrispondono");
+        }
+
         if (!isValidPassword(password)) {
             throw new IllegalArgumentException("Password non valida");
         }

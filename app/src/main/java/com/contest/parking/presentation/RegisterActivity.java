@@ -11,7 +11,7 @@ import com.google.android.material.button.MaterialButton;
 
 public class RegisterActivity extends BaseActivity {
 
-    private EditText editNome, editCognome, editTarga, editEmail, editPassword;
+    private EditText editNome, editCognome, editTarga, editEmail, editPassword, editPassword2;
     private MaterialButton registerButton;
     private UseCaseRegistraUtente useCaseRegistraUtente;
 
@@ -30,6 +30,7 @@ public class RegisterActivity extends BaseActivity {
         editTarga = findViewById(R.id.editTarga);
         editEmail = findViewById(R.id.editEmailReg);
         editPassword = findViewById(R.id.editPasswordReg);
+        editPassword2 = findViewById(R.id.editPasswordReg2);
         registerButton = findViewById(R.id.registerButton);
 
         // Imposta il listener per il bottone di registrazione
@@ -39,9 +40,10 @@ public class RegisterActivity extends BaseActivity {
             String targa = editTarga.getText().toString().trim();
             String email = editEmail.getText().toString().trim();
             String password = editPassword.getText().toString().trim();
+            String password2 = editPassword2.getText().toString().trim();
 
             // Chiamata al use case per registrare l'utente
-            useCaseRegistraUtente.registraUtente(nome, cognome, targa, email, password, new UseCaseRegistraUtente.OnRegisterCompleteListener() {
+            useCaseRegistraUtente.registraUtente(nome, cognome, targa, email, password, password2, new UseCaseRegistraUtente.OnRegisterCompleteListener() {
                 @Override
                 public void onSuccess() {
                     Toast.makeText(RegisterActivity.this, "Registrazione completata", Toast.LENGTH_SHORT).show();

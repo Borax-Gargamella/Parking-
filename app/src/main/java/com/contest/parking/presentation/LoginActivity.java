@@ -62,7 +62,7 @@ public class LoginActivity extends BaseActivity {
 
                 @Override
                 public void onFailure(Exception e) {
-                    Toast.makeText(LoginActivity.this, "Login fallito: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Login fallito: Credenziali errate", Toast.LENGTH_LONG).show();
                 }
             });
         });

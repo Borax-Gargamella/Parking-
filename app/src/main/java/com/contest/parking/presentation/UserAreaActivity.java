@@ -1,11 +1,14 @@
 package com.contest.parking.presentation;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.contest.parking.R;
@@ -14,11 +17,13 @@ import com.contest.parking.data.model.Utente;
 import com.contest.parking.data.repository.AuthRepository;
 import com.contest.parking.data.repository.StoricoRepository;
 import com.contest.parking.data.repository.UtenteRepository;
+import com.contest.parking.domain.UseCaseAggiornaCredenziali;
 import com.contest.parking.domain.UseCaseAggiornaDatiUtente;
 import com.contest.parking.domain.UseCaseCaricaDatiUtente;
 import com.contest.parking.domain.UseCaseCaricaPrenotazioniNonPagate;
 import com.contest.parking.presentation.adapter.StoricoAdapter;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
@@ -38,6 +43,7 @@ public class UserAreaActivity extends BaseActivity {
     private UseCaseCaricaDatiUtente useCaseCaricaDatiUtente;
     private UseCaseCaricaPrenotazioniNonPagate useCaseCaricaPrenotazioniNonPagate;
     private UseCaseAggiornaDatiUtente useCaseAggiornaDatiUtente;
+    private UseCaseAggiornaCredenziali useCaseAggiornaCredenziali;
 
     // Aggiungi un tuo repository/storico
     private StoricoRepository storicoRepository;
@@ -69,6 +75,8 @@ public class UserAreaActivity extends BaseActivity {
 
         utenteRepository = new UtenteRepository();
         useCaseAggiornaDatiUtente = new UseCaseAggiornaDatiUtente(utenteRepository);
+
+        useCaseAggiornaCredenziali = new UseCaseAggiornaCredenziali();
 
         currentUid = authRepository.getCurrentUserId();
         if (currentUid == null) {
@@ -121,6 +129,9 @@ public class UserAreaActivity extends BaseActivity {
             startActivity(new Intent(UserAreaActivity.this, LoginActivity.class));
             finish();
         });
+
+        // Gestione click modifica credenziali
+        btnModificaCredenziali.setOnClickListener(v -> showAggiornaCredenzialiDialog());
     }
 
     private void caricaDatiUtente() {
@@ -167,6 +178,127 @@ public class UserAreaActivity extends BaseActivity {
                         Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void showAggiornaCredenzialiDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_aggiorna_credenziali, null);
+
+        builder.setView(dialogView)
+                .setNegativeButton("Annulla", (dialog, which) -> dialog.dismiss())
+                .setPositiveButton("Salva", null); // Listener verrà settato successivamente
+
+        AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(dlg -> {
+            // Precompila il campo email con l'email corrente
+            TextInputEditText editEmail = dialogView.findViewById(R.id.editEmail);
+            String currentEmail = textEmail.getText().toString().replace("Email: ", "").trim();
+            editEmail.setText(currentEmail);
+
+            // Riferimenti Campi Password
+            TextInputEditText editCurrentPassword = dialogView.findViewById(R.id.editCurrentPassword);
+            TextInputEditText editNewPassword = dialogView.findViewById(R.id.editNewPassword);
+            TextInputEditText editConfirmPassword = dialogView.findViewById(R.id.editConfirmPassword);
+
+            // Recupero RadioButton
+            RadioGroup radioGroupUpdate = dialogView.findViewById(R.id.radioGroupUpdate);
+            RadioButton rbAggiornaEmail = dialogView.findViewById(R.id.rbAggiornaEmail);
+            RadioButton rbAggiornaPassword = dialogView.findViewById(R.id.rbAggiornaPassword);
+            RadioButton rbAggiornaEntrambi = dialogView.findViewById(R.id.rbAggiornaEntrambi);
+
+            // Gestione cambio RadioButton
+            // Email, Password, Entrambi
+            // Stato iniziale Email
+            radioGroupUpdate.setOnCheckedChangeListener((group, checkedId) -> {
+                if (checkedId == R.id.rbAggiornaEmail) {
+                    // Modalità aggiornamento email: abilita email, nascondi password
+                    editEmail.setEnabled(true);
+                    editNewPassword.setVisibility(View.GONE);
+                    editConfirmPassword.setVisibility(View.GONE);
+                } else if (checkedId == R.id.rbAggiornaPassword) {
+                    // Modalità aggiornamento password: disabilita email, mostra password
+                    editEmail.setEnabled(false);
+                    editNewPassword.setVisibility(View.VISIBLE);
+                    editConfirmPassword.setVisibility(View.VISIBLE);
+                } else if (checkedId == R.id.rbAggiornaEntrambi) {
+                    // Modalità aggiornamento entrambi: abilita tutto
+                    editEmail.setEnabled(true);
+                    editNewPassword.setVisibility(View.VISIBLE);
+                    editConfirmPassword.setVisibility(View.VISIBLE);
+                }
+            });
+
+            // Imposta lo stato iniziale in base alla selezione di default
+            if (rbAggiornaEmail.isChecked()) {
+                editEmail.setEnabled(true);
+                editNewPassword.setVisibility(View.GONE);
+                editConfirmPassword.setVisibility(View.GONE);
+            } else if (rbAggiornaPassword.isChecked()) {
+                editEmail.setEnabled(false);
+                editNewPassword.setVisibility(View.VISIBLE);
+                editConfirmPassword.setVisibility(View.VISIBLE);
+            } else if (rbAggiornaEntrambi.isChecked()) {
+                editEmail.setEnabled(true);
+                editNewPassword.setVisibility(View.VISIBLE);
+                editConfirmPassword.setVisibility(View.VISIBLE);
+            }
+
+            Button btnSalva = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            btnSalva.setOnClickListener(v -> {
+                String newEmail = editEmail.getText().toString().trim();
+                String currentPassword = editCurrentPassword.getText().toString().trim();
+                String newPassword = editNewPassword.getText().toString().trim();
+                String confirmPassword = editConfirmPassword.getText().toString().trim();
+
+                // Determina la modalità in base al radio button selezionato
+                int selectedId = radioGroupUpdate.getCheckedRadioButtonId();
+                if (selectedId == R.id.rbAggiornaEmail) {
+                    // Aggiornamento Email: richiede email e password corrente
+                    // (I campi password nuova non sono visibili, quindi li consideriamo vuoti)
+                    useCaseAggiornaCredenziali.aggiornaCredenzialiEmail(newEmail, currentPassword, new UseCaseAggiornaCredenziali.OnAggiornaCredenzialiListener() {
+                        @Override
+                        public void onSuccess() {
+                            Toast.makeText(UserAreaActivity.this, "Email aggiornata", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                            textEmail.setText("Email: " + newEmail);
+                        }
+                        @Override
+                        public void onFailure(Exception e) {
+                            Toast.makeText(UserAreaActivity.this, "Errore: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } else if (selectedId == R.id.rbAggiornaPassword) {
+                    // Aggiornamento Password: usa l'email corrente e richiede la nuova password
+                    useCaseAggiornaCredenziali.aggiornaCredenzialiPassword(currentEmail, currentPassword, newPassword, confirmPassword, new UseCaseAggiornaCredenziali.OnAggiornaCredenzialiListener() {
+                        @Override
+                        public void onSuccess() {
+                            Toast.makeText(UserAreaActivity.this, "Password aggiornata", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                        @Override
+                        public void onFailure(Exception e) {
+                            Toast.makeText(UserAreaActivity.this, "Errore: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } else if (selectedId == R.id.rbAggiornaEntrambi) {
+                    // Aggiornamento Entrambi: richiede email, password corrente e nuova password
+                    useCaseAggiornaCredenziali.aggiornaCredenzialiEntrambi(newEmail, currentPassword, newPassword, confirmPassword, new UseCaseAggiornaCredenziali.OnAggiornaCredenzialiListener() {
+                        @Override
+                        public void onSuccess() {
+                            Toast.makeText(UserAreaActivity.this, "Credenziali aggiornate", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                            textEmail.setText("Email: " + newEmail);
+                        }
+                        @Override
+                        public void onFailure(Exception e) {
+                            Toast.makeText(UserAreaActivity.this, "Errore: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            });
+        });
+        dialog.show();
     }
 
     private void setupRecyclerView(List<Storico> list) {

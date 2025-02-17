@@ -47,20 +47,16 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
 
     // Firebase Auth
-    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-auth:23.2.0")
 
     // Firebase Firestore
-    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-firestore:25.1.2")
 
     // ZXing per QR code
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
 
     // Gson per gestire JSON
     implementation("com.google.code.gson:gson:2.10.1")
-
-    // Glide (se ti serve per caricare immagini) Per gestire immagini (se vuoi usare Glide o simili, anche se qui hai immagini locali)
-    implementation("com.github.bumptech.glide:glide:4.14.2")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
 }
 
 

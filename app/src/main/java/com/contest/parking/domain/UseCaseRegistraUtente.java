@@ -13,11 +13,11 @@ public class UseCaseRegistraUtente {
         void onFailure(Exception e);
     }
 
-    public void registraUtente(String nome, String cognome, String targa, String email, String password,
+    public void registraUtente(String nome, String cognome, String targa, String email, String password, String password2,
                                OnRegisterCompleteListener listener) {
         try {
             // Validazione degli input tramite Validator
-            Validator.validateRegistrationInputs(nome, cognome, targa, email, password);
+            Validator.validateRegistrationInputs(nome, cognome, targa, email, password, password2);
         } catch (IllegalArgumentException e) {
             listener.onFailure(e);
             return;
