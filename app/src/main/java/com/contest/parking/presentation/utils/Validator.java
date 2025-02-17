@@ -139,11 +139,12 @@ public class Validator {
         }
 
         // Parsing del prezzo base
-        int prezzo;
+        Double prezzo;
         try {
-            prezzo = Integer.parseInt(prezzoStr.trim());
+            prezzo = Double.parseDouble(prezzoStr.trim());
+            //prezzo = 20.0;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException(e + prezzoStr);
             //throw new IllegalArgumentException("Prezzo non valido");
         }
 
