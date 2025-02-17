@@ -67,8 +67,11 @@ public class PaymentActivity extends BaseActivity {
                 @Override
                 public void onSuccess() {
                     Toast.makeText(PaymentActivity.this, "Pagamento effettuato", Toast.LENGTH_SHORT).show();
-                    Intent intent1 = new Intent(PaymentActivity.this, MainActivity.class);
+                    Intent intent1 = new Intent(PaymentActivity.this, UserAreaActivity.class);
+                    intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent1);
+                    finish();
+
                 }
 
                 @Override
