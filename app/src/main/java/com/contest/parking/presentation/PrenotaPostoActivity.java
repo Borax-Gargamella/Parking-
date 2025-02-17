@@ -24,6 +24,7 @@ import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -150,7 +151,8 @@ public class PrenotaPostoActivity extends BaseActivity {
                 // Calcolo del prezzo in base all'intervallo selezionato
                 long days = ((endDay - startDay) / 86400000L) + 1;
                 Double prezzoTot = prezzo * days;
-                editPrezzo.setText(String.format(Locale.getDefault(), "%.2f", prezzoTot));
+                DecimalFormat df = new DecimalFormat("#.00");
+                editPrezzo.setText(df.format(prezzoTot));
             }
 
             @Override
