@@ -151,8 +151,7 @@ public class PrenotaPostoActivity extends BaseActivity {
                 // Calcolo del prezzo in base all'intervallo selezionato
                 long days = ((endDay - startDay) / 86400000L) + 1;
                 Double prezzoTot = prezzo * days;
-                DecimalFormat df = new DecimalFormat("#.00");
-                editPrezzo.setText(df.format(prezzoTot));
+                editPrezzo.setText(String.valueOf(prezzoTot));
             }
 
             @Override
@@ -175,8 +174,6 @@ public class PrenotaPostoActivity extends BaseActivity {
         String dataFineStr = editDataFine.getText().toString().trim();
         String prezzoStr = editPrezzo.getText().toString().trim();
         String targa = editTarga.getText().toString().trim();
-
-        Toast.makeText(this, prezzoStr, Toast.LENGTH_SHORT).show();
 
         // Creazione della UseCase, passando il caso d'uso per la prenotazione e la lista dei range occupati
         UseCaseEffettuaPrenotazione useCase = new UseCaseEffettuaPrenotazione(this, useCasePrenotaPosto, dateOccupate);
