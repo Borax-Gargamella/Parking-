@@ -102,8 +102,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:text="Prenotato
-                    (per oggi)"
+                    android:text="Prenotato\n(per oggi)"
                     android:gravity="center"
                     android:textStyle="bold"
                     android:padding="5dp"/>
@@ -112,7 +111,7 @@
                 android:layout_width="10dp"
                 android:layout_height="20dp"
                 android:layout_columnWeight="1"
-                android:background="@drawable/green_square"
+                android:background="#4ac32c"
                 android:gravity="center"
                 android:layout_margin="10dp"/>
 
