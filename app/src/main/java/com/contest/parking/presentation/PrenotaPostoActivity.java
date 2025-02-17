@@ -176,12 +176,13 @@ public class PrenotaPostoActivity extends BaseActivity {
         Toast.makeText(this, prezzoStr, Toast.LENGTH_SHORT).show();
 
         // Creazione della UseCase, passando il caso d'uso per la prenotazione e la lista dei range occupati
-        UseCaseEffettuaPrenotazione useCase = new UseCaseEffettuaPrenotazione(useCasePrenotaPosto, dateOccupate);
+        UseCaseEffettuaPrenotazione useCase = new UseCaseEffettuaPrenotazione(this, useCasePrenotaPosto, dateOccupate);
 
         useCase.execute(dataInizioStr, dataFineStr, prezzoStr, targa, spotId, utenteId, new UseCaseEffettuaPrenotazione.Callback() {
             @Override
             public void onSuccess() {
                 Toast.makeText(PrenotaPostoActivity.this, "Prenotazione effettuata!", Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(PrenotaPostoActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();

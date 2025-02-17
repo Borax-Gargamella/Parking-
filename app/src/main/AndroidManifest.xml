@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
     <application
             android:allowBackup="true"
             android:dataExtractionRules="@xml/data_extraction_rules"
@@ -43,6 +44,7 @@
         <activity
                 android:name="com.contest.parking.presentation.PrenotaPostoActivity"
                 android:exported="true"/>
+        <receiver android:name="com.contest.parking.domain.PrenotazioneReminderReceiver"/>
 
     </application>
 
