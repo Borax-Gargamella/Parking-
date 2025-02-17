@@ -15,14 +15,15 @@
       "heightPercent": 0.49063
     }
   ],
-  "luogo2": [
+  "luna": [
     {
-      "id": "B1",
-      "xPercent": 0.1,
-      "yPercent": 0.3,
-      "widthPercent": 0.4,
-      "heightPercent": 0.5
+      "id": "lunaA",
+      "xPercent": 0.0045,
+      "yPercent": 0.4393,
+      "widthPercent": 0.9955,
+      "heightPercent": 0.5607
     }
   ]
 }
+
 
