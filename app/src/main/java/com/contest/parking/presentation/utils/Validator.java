@@ -143,7 +143,8 @@ public class Validator {
         try {
             prezzo = Double.parseDouble(prezzoStr.trim());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Prezzo non valido");
+            throw new IllegalArgumentException(e);
+            //throw new IllegalArgumentException("Prezzo non valido");
         }
 
         // Conversione delle date

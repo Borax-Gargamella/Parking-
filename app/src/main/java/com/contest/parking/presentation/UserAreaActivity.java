@@ -288,7 +288,7 @@ public class UserAreaActivity extends BaseActivity {
                         public void onSuccess() {
                             Toast.makeText(UserAreaActivity.this, "Credenziali aggiornate", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
-                            textEmail.setText("Email: " + newEmail);
+                            textEmail.setText(newEmail);
                         }
                         @Override
                         public void onFailure(Exception e) {
