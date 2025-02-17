@@ -13,7 +13,7 @@ android {
         minSdk = 31
         targetSdk = 34
         versionCode = 1
-        versionName = "0.5"
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -55,8 +55,7 @@ dependencies {
     // ZXing per QR code
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
 
-    // Gson per gestire JSON
-    implementation("com.google.code.gson:gson:2.10.1")
+
 }
 
 

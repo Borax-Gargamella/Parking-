@@ -121,7 +121,6 @@ public class StoricoRepository {
         // 1) Esegui la query su Firestore
         Task<QuerySnapshot> queryTask = storicoCollection
                 .whereEqualTo("postoAutoId", postoAutoId)
-                .whereEqualTo("pagato", false)
                 .whereLessThanOrEqualTo("dataInizio", dayEnd)
                 .whereGreaterThanOrEqualTo("dataFine", dayStart)
                 .get();
