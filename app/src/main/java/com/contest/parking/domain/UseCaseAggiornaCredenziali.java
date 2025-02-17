@@ -62,7 +62,7 @@ public class UseCaseAggiornaCredenziali {
         // Re-autenticazione
         reauthenticateUser(user, currentPassword, task -> {
             if (task.isSuccessful()) {
-                user.updateEmail(newEmail).addOnCompleteListener(taskEmail -> {
+                user.verifyBeforeUpdateEmail(newEmail).addOnCompleteListener(taskEmail -> {
                     if (taskEmail.isSuccessful()) {
                         listener.onSuccess();
                     } else {
@@ -176,7 +176,7 @@ public class UseCaseAggiornaCredenziali {
             if (task.isSuccessful()) {
                 // Se l'email è diversa, aggiorna prima l'email
                 if (!user.getEmail().equals(newEmail)) {
-                    user.updateEmail(newEmail).addOnCompleteListener(taskEmail -> {
+                    user.verifyBeforeUpdateEmail(newEmail).addOnCompleteListener(taskEmail -> {
                         if (taskEmail.isSuccessful()) {
                             user.updatePassword(newPassword).addOnCompleteListener(taskPassword -> {
                                 if (taskPassword.isSuccessful()) {

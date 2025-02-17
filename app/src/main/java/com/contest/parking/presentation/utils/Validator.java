@@ -41,6 +41,10 @@ public class Validator {
         if (!isValidPassword(password)) {
             throw new IllegalArgumentException("Password non valida");
         }
+
+        if (!isValidTarga(targa)) {
+            throw new IllegalArgumentException("Targa non valida");
+        }
     }
 
     /**

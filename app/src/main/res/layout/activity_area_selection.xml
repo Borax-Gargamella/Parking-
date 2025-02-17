@@ -19,8 +19,7 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:layout_gravity="top|center_horizontal"
-                android:src="@drawable/sole" />
+                android:layout_gravity="top|center_horizontal"/>
         </FrameLayout>
 
 

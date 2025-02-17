@@ -9,6 +9,7 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.contest.parking.R;
 import com.contest.parking.data.model.Zone;
 import com.contest.parking.data.repository.ZoneRepository;
@@ -47,6 +48,14 @@ public class AreaSelectionActivity extends BaseActivity {
 
         textDescrizione.setText(luogoDescrizione);
         textNome.setText(nome);
+
+        // Ottieni l'ID della risorsa dinamicamente
+        int imageResId = getResources().getIdentifier(luogoId, "drawable", getPackageName());
+        if (imageResId != 0) {
+            imageViewLuogo.setImageResource(imageResId);
+        } else {
+            Toast.makeText(this, "Immagine non trovata", Toast.LENGTH_SHORT).show();
+        }
 
         // Carica il file JSON dagli assets
         useCaseCaricaZone = new UseCaseCaricaZone(new ZoneRepository());
