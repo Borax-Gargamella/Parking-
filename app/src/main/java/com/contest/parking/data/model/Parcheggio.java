@@ -4,7 +4,7 @@ public class Parcheggio {
     private String id;
     private String nome;
     private int postiTot;
-    private Double prezzo;
+    private double prezzo;
     private String luogoId;
     private String imageFolder;
 
