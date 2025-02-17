@@ -139,7 +139,7 @@ public class Validator {
         }
 
         // Parsing del prezzo base
-        double prezzo;
+        int prezzo;
         try {
             prezzo = Integer.parseInt(prezzoStr.trim());
         } catch (NumberFormatException e) {
