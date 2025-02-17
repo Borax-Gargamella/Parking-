@@ -37,11 +37,6 @@ public class MainActivity extends BaseActivity {
         recyclerViewLuoghi = findViewById(R.id.recyclerViewLuoghi);
         recyclerViewLuoghi.setLayoutManager(new LinearLayoutManager(this));
 
-        /*
-        PostoAutoInserter inserter = new PostoAutoInserter(getAssets());
-        inserter.inserisciPostiAuto("postiAutosole.json");
-        */
-
         luogoAdapter = new LuogoAdapter(this, new ArrayList<>());
         recyclerViewLuoghi.setAdapter(luogoAdapter);
 

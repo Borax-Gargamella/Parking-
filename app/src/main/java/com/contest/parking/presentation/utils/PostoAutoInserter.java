@@ -10,6 +10,11 @@ import org.json.JSONObject;
 
 public class PostoAutoInserter {
 
+    /*
+    PostoAutoInserter inserter = new PostoAutoInserter(getAssets());
+        inserter.inserisciPostiAuto("postiAutoluna.json");
+     */
+
     private AssetManager assetManager;
     private PostoAutoRepository postoAutoRepository;
 
