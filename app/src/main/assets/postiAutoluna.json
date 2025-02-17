@@ -1,0 +1,163 @@
+{
+  "parkingAreas": [
+    {
+      "parkingId": "lunaA",
+      "spots": [
+        {
+          "id": "C1",
+          "xPercent": 0.04819,
+          "yPercent": 0.08305,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C2",
+          "xPercent": 0.04819,
+          "yPercent": 0.19166,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C3",
+          "xPercent": 0.04819,
+          "yPercent": 0.30104,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C4",
+          "xPercent": 0.04819,
+          "yPercent": 0.41038,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C5",
+          "xPercent": 0.04819,
+          "yPercent": 0.51938,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C6",
+          "xPercent": 0.04819,
+          "yPercent": 0.62872,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C7",
+          "xPercent": 0.04819,
+          "yPercent": 0.73772,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C8",
+          "xPercent": 0.04819,
+          "yPercent": 0.84674,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C9",
+          "xPercent": 0.48193,
+          "yPercent": 0.19166,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C10",
+          "xPercent": 0.48193,
+          "yPercent": 0.30104,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C11",
+          "xPercent": 0.48193,
+          "yPercent": 0.41038,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C12",
+          "xPercent": 0.48193,
+          "yPercent": 0.51938,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C13",
+          "xPercent": 0.48193,
+          "yPercent": 0.62872,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C14",
+          "xPercent": 0.48193,
+          "yPercent": 0.73772,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C15",
+          "xPercent": 0.48193,
+          "yPercent": 0.84674,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C16",
+          "xPercent": 0.67077,
+          "yPercent": 0.19166,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C17",
+          "xPercent": 0.67077,
+          "yPercent": 0.30104,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C18",
+          "xPercent": 0.67077,
+          "yPercent": 0.41038,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C19",
+          "xPercent": 0.67077,
+          "yPercent": 0.51938,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C20",
+          "xPercent": 0.67077,
+          "yPercent": 0.62872,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C21",
+          "xPercent": 0.67077,
+          "yPercent": 0.73772,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        },
+        {
+          "id": "C22",
+          "xPercent": 0.67077,
+          "yPercent": 0.84674,
+          "widthPercent": 0.15964,
+          "heightPercent": 0.10554
+        }
+      ]
+    }
+  ]
+}
