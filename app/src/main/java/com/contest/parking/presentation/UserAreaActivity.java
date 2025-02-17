@@ -13,6 +13,8 @@ import com.contest.parking.data.model.Storico;
 import com.contest.parking.data.model.Utente;
 import com.contest.parking.data.repository.AuthRepository;
 import com.contest.parking.data.repository.StoricoRepository;
+import com.contest.parking.data.repository.UtenteRepository;
+import com.contest.parking.domain.UseCaseAggiornaDatiUtente;
 import com.contest.parking.domain.UseCaseCaricaDatiUtente;
 import com.contest.parking.domain.UseCaseCaricaPrenotazioniNonPagate;
 import com.contest.parking.presentation.adapter.StoricoAdapter;
@@ -24,16 +26,18 @@ public class UserAreaActivity extends BaseActivity {
 
     private LinearLayout llUserData;
     private TextView textNome, textCognome, textEmail, textTarga, textPostoPrenotato;
-    private MaterialButton btnLogout;
+    private MaterialButton btnLogout, btnModificaDati, btnModificaCredenziali;
 
     private RecyclerView recyclerPrenotazioni; // la "tabella"
     private StoricoAdapter storicoAdapter;
 
+    private UtenteRepository utenteRepository;
     private AuthRepository authRepository;
     private String currentUid;
 
     private UseCaseCaricaDatiUtente useCaseCaricaDatiUtente;
-    private UseCaseCaricaPrenotazioniNonPagate useCaseCaricaPrenotazioniNonPagate; // Nuovo caso d'uso
+    private UseCaseCaricaPrenotazioniNonPagate useCaseCaricaPrenotazioniNonPagate;
+    private UseCaseAggiornaDatiUtente useCaseAggiornaDatiUtente;
 
     // Aggiungi un tuo repository/storico
     private StoricoRepository storicoRepository;
@@ -45,21 +49,26 @@ public class UserAreaActivity extends BaseActivity {
 
         // Binding
         llUserData = findViewById(R.id.llUserData);
-        textNome = findViewById(R.id.textNome);
-        textCognome = findViewById(R.id.textCognome);
+        textNome = findViewById(R.id.editNome);
+        textCognome = findViewById(R.id.editCognome);
         textEmail = findViewById(R.id.textEmail);
-        textTarga = findViewById(R.id.textTarga);
+        textTarga = findViewById(R.id.editTarga);
         textPostoPrenotato = findViewById(R.id.textPostoPrenotato);
         btnLogout = findViewById(R.id.btnLogout);
+        btnModificaDati = findViewById(R.id.btnModificaDati);
+        btnModificaCredenziali = findViewById(R.id.btnModificaCredenziali);
 
         recyclerPrenotazioni = findViewById(R.id.recyclerPrenotazioni);
         recyclerPrenotazioni.setLayoutManager(new LinearLayoutManager(this));
 
         authRepository = new AuthRepository();
         useCaseCaricaDatiUtente = new UseCaseCaricaDatiUtente();
+
         storicoRepository = new StoricoRepository();
         useCaseCaricaPrenotazioniNonPagate = new UseCaseCaricaPrenotazioniNonPagate(storicoRepository);
-        storicoRepository = new StoricoRepository(); // supponendo tu abbia questo
+
+        utenteRepository = new UtenteRepository();
+        useCaseAggiornaDatiUtente = new UseCaseAggiornaDatiUtente(utenteRepository);
 
         currentUid = authRepository.getCurrentUserId();
         if (currentUid == null) {
@@ -70,6 +79,41 @@ public class UserAreaActivity extends BaseActivity {
             caricaDatiUtente();
             caricaPrenotazioniNonPagate();
         }
+
+        // Gestione click modifica Dati Utente
+        btnModificaDati.setOnClickListener(v -> {
+            if (btnModificaDati.getText().toString().equals("Modifica Dati")) {
+                // Abilita la modifica dei campi
+                textNome.setEnabled(true);
+                textCognome.setEnabled(true);
+                textTarga.setEnabled(true);
+                btnModificaDati.setText("Salva");
+            } else {
+                // Raccogli i dati aggiornati
+                String nuovoNome = textNome.getText().toString().trim();
+                String nuovoCognome = textCognome.getText().toString().trim();
+                String nuovaTarga = textTarga.getText().toString().trim();
+                nuovaTarga = nuovaTarga.toUpperCase();
+
+                // Chiama il Use Case per aggiornare i dati
+                useCaseAggiornaDatiUtente.aggiornaDatiUtente(currentUid, nuovoNome, nuovoCognome, nuovaTarga, new UseCaseAggiornaDatiUtente.OnAggiornaDatiUtenteListener() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(UserAreaActivity.this, "Dati aggiornati con successo", Toast.LENGTH_SHORT).show();
+                        // Disabilita i campi e ripristina il testo del bottone
+                        textNome.setEnabled(false);
+                        textCognome.setEnabled(false);
+                        textTarga.setEnabled(false);
+                        btnModificaDati.setText("Modifica Dati");
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+                        Toast.makeText(UserAreaActivity.this, "Errore: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
 
         // Gestione click logout
         btnLogout.setOnClickListener(v -> {
@@ -83,10 +127,10 @@ public class UserAreaActivity extends BaseActivity {
         useCaseCaricaDatiUtente.loadUserData(currentUid, new UseCaseCaricaDatiUtente.OnUserDataLoadedListener() {
             @Override
             public void onSuccess(Utente utente) {
-                textNome.setText("Nome: " + utente.getNome());
-                textCognome.setText("Cognome: " + utente.getCognome());
-                textEmail.setText("Email: " + utente.getEmail());
-                textTarga.setText("Targa: " + utente.getTarga());
+                textNome.setText(utente.getNome());
+                textCognome.setText(utente.getCognome());
+                textEmail.setText(utente.getEmail());
+                textTarga.setText(utente.getTarga());
             }
             @Override
             public void onFailure(Exception e) {
