@@ -149,7 +149,8 @@ public class PrenotaPostoActivity extends BaseActivity {
                 editDataFine.setText(sdf.format(new Date(endDay)));
                 // Calcolo del prezzo in base all'intervallo selezionato
                 long days = ((endDay - startDay) / 86400000L) + 1;
-                editPrezzo.setText(String.valueOf(prezzo * days));
+                Double prezzoTot = prezzo * days;
+                editPrezzo.setText(String.format(Locale.getDefault(), "%.2f", prezzoTot));
             }
 
             @Override
