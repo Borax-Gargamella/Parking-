@@ -180,9 +180,9 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                     @Override
                                     public void onCategoriaLoaded(String categoria) {
                                         if ("disabili".equalsIgnoreCase(categoria)) {
-                                            spotButton.setBackgroundColor(Color.parseColor("#800080"));
+                                            spotButton.setBackgroundColor(Color.parseColor("#EBD300"));
                                         } else if ("elettrico".equalsIgnoreCase(categoria)) {
-                                            spotButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+                                            spotButton.setBackgroundColor(Color.parseColor("#082AD1"));
                                         } else {
                                             // Per "normale" o altre categorie puoi lasciare il colore di default
                                             spotButton.setBackgroundColor(Color.parseColor("#4ac32c"));
