@@ -82,7 +82,8 @@ public class AreaSelectionActivity extends BaseActivity {
 
                         // Crea una view trasparente per la zona (cliccabile)
                         View zoneView = new View(AreaSelectionActivity.this);
-                        zoneView.setBackgroundColor(Color.parseColor("#55FF0000"));
+                        //zoneView.setBackgroundColor(Color.parseColor("#55FF0000"));
+                        zoneView.setBackground(getDrawable(R.drawable.border));
                         zoneView.setClickable(true);
                         zoneView.setOnClickListener(v -> {
                             // Avvia la Activity di dettaglio passando l'ID della zona e del luogo
