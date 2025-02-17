@@ -4,14 +4,14 @@ public class Parcheggio {
     private String id;
     private String nome;
     private int postiTot;
-    private int prezzo;
+    private Double prezzo;
     private String luogoId;
     private String imageFolder;
 
     // Empty constructor for Firestore
     public Parcheggio(){}
 
-    public Parcheggio(String id, String nome, int postiTot, int prezzo, String luogoID) {
+    public Parcheggio(String id, String nome, int postiTot, double prezzo, String luogoID) {
         this.id = id;
         this.nome = nome;
         this.postiTot = postiTot;
@@ -43,11 +43,11 @@ public class Parcheggio {
         this.postiTot = postiTot;
     }
 
-    public int getPrezzo() {
+    public double getPrezzo() {
         return prezzo;
     }
 
-    public void setPrezzo(int prezzo) {
+    public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
     }
 

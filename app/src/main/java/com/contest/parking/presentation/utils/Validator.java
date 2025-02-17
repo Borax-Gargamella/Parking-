@@ -139,7 +139,7 @@ public class Validator {
         }
 
         // Parsing del prezzo base
-        Double prezzo;
+        double prezzo;
         try {
             prezzo = Double.parseDouble(prezzoStr.trim());
             //prezzo = 20.0;

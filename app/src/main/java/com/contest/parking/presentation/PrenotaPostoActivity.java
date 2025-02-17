@@ -71,7 +71,8 @@ public class PrenotaPostoActivity extends BaseActivity {
 
         // Recupera parametri da Intent
         spotId = getIntent().getStringExtra("spotId");
-        prezzo = getIntent().getIntExtra("prezzo", 0);
+        prezzo = getIntent().getDoubleExtra("prezzo", 0.0);
+        Toast.makeText(this, "Prezzo: " + prezzo, Toast.LENGTH_SHORT).show();
 
         // Check validità
         if (spotId == null || spotId.isEmpty()) {
