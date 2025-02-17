@@ -142,7 +142,6 @@ public class Validator {
         double prezzo;
         try {
             prezzo = Double.parseDouble(prezzoStr.trim());
-            //prezzo = 20.0;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(e + prezzoStr);
             //throw new IllegalArgumentException("Prezzo non valido");
@@ -178,9 +177,8 @@ public class Validator {
 
         // Calcola il numero di giorni (inclusivi) e il prezzo totale
         long giorni = ((dataFineGiornoIntero - dataInizioMs) / 86400000L) + 1;
-        double prezzoTotale = prezzo * giorni;
 
-        return new PrenotazioneValidatedData(dataInizioMs, dataFineGiornoIntero, prezzoTotale, giorni);
+        return new PrenotazioneValidatedData(dataInizioMs, dataFineGiornoIntero, prezzo, giorni);
     }
 
     /**

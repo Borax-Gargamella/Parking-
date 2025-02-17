@@ -1,13 +1,8 @@
 package com.contest.parking.domain;
 
-import android.widget.Toast;
 import com.contest.parking.data.model.Storico;
 import com.contest.parking.data.repository.PostoAutoRepository;
 import com.contest.parking.data.repository.StoricoRepository;
-import com.google.android.gms.tasks.OnSuccessListener;
-
-import java.time.LocalDate;
-import java.util.Date;
 
 public class UseCasePrenotaPosto {
 

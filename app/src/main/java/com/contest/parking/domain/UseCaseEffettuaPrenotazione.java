@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 import com.contest.parking.data.model.Range;
@@ -61,6 +62,7 @@ public class UseCaseEffettuaPrenotazione {
             return;
         }
 
+        Log.d("UseCaseEffettuaPrenotazione", "Dati validati: " + validatedData.getPrezzoTotale());
         // Esegue la prenotazione nel DB con i dati validati
         useCasePrenotaPosto.prenotaPosto(
                 spotId,
