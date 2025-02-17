@@ -1,6 +1,5 @@
 package com.contest.parking.data.repository;
 
-import android.widget.Toast;
 import com.contest.parking.data.model.Storico;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -75,22 +74,22 @@ public class StoricoRepository {
                 .addOnFailureListener(e -> callback.onError(e));
     }
 
-    public void getStoricoNonPagatoByUtente(String uid, OnStoricoLoadedListener cb) {
+    public void getStoricoValidoByUtente(String uid, OnStoricoLoadedListener cb) {
+        long currentTime = System.currentTimeMillis();
         storicoCollection
                 .whereEqualTo("utenteId", uid)
-                .whereEqualTo("pagato", false)
+                //.whereEqualTo("pagato", false)
+                .whereGreaterThan("dataFine", currentTime)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     List<Storico> risultato = new ArrayList<>();
                     for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
                         if (doc.exists()) {
                             Storico s = doc.toObject(Storico.class);
-                            // Se "s" deve avere un campo "id" uguale all'ID del documento, impostalo qui
                             s.setId(doc.getId());
                             risultato.add(s);
                         }
                     }
-                    // Chiama il callback con la lista
                     cb.onStoricoLoaded(risultato);
                 })
                 .addOnFailureListener(e -> {

@@ -21,7 +21,7 @@ public class UseCaseCaricaPrenotazioniNonPagate  {
 
     // Esegue il caso d'uso
     public void execute(String currentUid, Callback callback) {
-        storicoRepository.getStoricoNonPagatoByUtente(currentUid, new StoricoRepository.OnStoricoLoadedListener() {
+        storicoRepository.getStoricoValidoByUtente(currentUid, new StoricoRepository.OnStoricoLoadedListener() {
             @Override
             public void onStoricoLoaded(List<Storico> storiciNonPagati) {
                 callback.onSuccess(storiciNonPagati);

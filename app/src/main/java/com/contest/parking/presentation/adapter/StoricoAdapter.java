@@ -1,5 +1,7 @@
 package com.contest.parking.presentation.adapter;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,20 +61,33 @@ public class StoricoAdapter extends RecyclerView.Adapter<StoricoAdapter.ViewHold
         }
 
         public void bind(Storico item, OnPagaClickListener listener) {
-            tvId.setText(item.getPostoAutoId());// o un substring se è troppo lungo
-            tvId.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-
-            //String dataString = "Da: "++ "\na:"+ convertMillisToDate(item.getDataFine());
+            // Imposta i dati
+            tvId.setText(item.getPostoAutoId());
             tvDataInizio.setText(convertMillisToDate(item.getDataInizio()));
             tvDataFine.setText(convertMillisToDate(item.getDataFine()));
             tvId.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
-            // Se 'pagato' è false, mostra il bottone. Altrimenti potresti nasconderlo
+            long currentTime = System.currentTimeMillis();
+
             if (!item.isPagato()) {
+                // Prenotazione non pagata: bottone abilitato e cliccabile
                 btnPaga.setVisibility(View.VISIBLE);
+                btnPaga.setEnabled(true);
                 btnPaga.setOnClickListener(v -> listener.onPagaClick(item));
             } else {
-                btnPaga.setVisibility(View.GONE);
+                // Prenotazione pagata
+                if (item.getDataFine() > currentTime) {
+                    // Se la data di scadenza non è ancora passata:
+                    // Mostra il bottone disabilitato e impostalo con colore grigio
+                    btnPaga.setVisibility(View.VISIBLE);
+                    btnPaga.setEnabled(false);
+                    btnPaga.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                    // Rimuove eventuali listener
+                    btnPaga.setOnClickListener(null);
+                } else {
+                    // Se la data di scadenza è passata, puoi decidere di nascondere il bottone
+                    btnPaga.setVisibility(View.GONE);
+                }
             }
         }
 
