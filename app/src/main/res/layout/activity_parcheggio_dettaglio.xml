@@ -65,9 +65,10 @@
                 android:layout_height="wrap_content"
                 android:columnCount="4"
                 android:rowCount="2"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="30dp"
                 android:verticalSpacing="10dp"
-                android:horizontalSpacing="10dp">
+                android:horizontalSpacing="10dp"
+                android:background="@drawable/description_background">
 
             <!-- Define static items -->
             <TextView
@@ -76,7 +77,8 @@
                     android:layout_columnWeight="1"
                     android:text="Disponibile"
                     android:gravity="center"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:padding="5dp"/>
 
             <TextView
                     android:layout_width="0dp"
@@ -84,7 +86,8 @@
                     android:layout_columnWeight="1"
                     android:text="Disabili"
                     android:gravity="center"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:padding="5dp"/>
 
             <TextView
                     android:layout_width="0dp"
@@ -92,7 +95,8 @@
                     android:layout_columnWeight="1"
                     android:text="Elettrico"
                     android:gravity="center"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:padding="5dp"/>
 
             <TextView
                     android:layout_width="0dp"
@@ -100,15 +104,16 @@
                     android:layout_columnWeight="1"
                     android:text="Prenotato"
                     android:gravity="center"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:padding="5dp"/>
 
             <TextView
-                    android:layout_width="1dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:background="@drawable/green_square"
-                    android:gravity="center"
-                    android:layout_margin="10dp"/>
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:layout_columnWeight="1"
+                android:background="@drawable/green_square"
+                android:gravity="center"
+                android:layout_margin="10dp"/>
 
             <TextView
                     android:layout_width="0dp"
