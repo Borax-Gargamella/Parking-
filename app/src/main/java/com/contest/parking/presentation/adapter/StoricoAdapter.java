@@ -81,6 +81,7 @@ public class StoricoAdapter extends RecyclerView.Adapter<StoricoAdapter.ViewHold
                     // Mostra il bottone disabilitato e impostalo con colore grigio
                     btnPaga.setVisibility(View.VISIBLE);
                     btnPaga.setEnabled(false);
+                    btnPaga.setText("PAGATO");
                     btnPaga.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
                     // Rimuove eventuali listener
                     btnPaga.setOnClickListener(null);

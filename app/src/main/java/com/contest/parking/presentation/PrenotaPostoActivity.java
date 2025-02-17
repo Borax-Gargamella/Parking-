@@ -173,6 +173,8 @@ public class PrenotaPostoActivity extends BaseActivity {
         String prezzoStr = editPrezzo.getText().toString().trim();
         String targa = editTarga.getText().toString().trim();
 
+        Toast.makeText(this, prezzoStr, Toast.LENGTH_SHORT).show();
+
         // Creazione della UseCase, passando il caso d'uso per la prenotazione e la lista dei range occupati
         UseCaseEffettuaPrenotazione useCase = new UseCaseEffettuaPrenotazione(useCasePrenotaPosto, dateOccupate);
 

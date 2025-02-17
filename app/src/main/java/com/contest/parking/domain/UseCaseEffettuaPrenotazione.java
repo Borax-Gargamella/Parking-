@@ -1,5 +1,6 @@
 package com.contest.parking.domain;
 
+import android.widget.Toast;
 import com.contest.parking.data.model.Range;
 import com.contest.parking.presentation.utils.Validator;
 import com.contest.parking.presentation.utils.wrapper.PrenotazioneValidatedData;
