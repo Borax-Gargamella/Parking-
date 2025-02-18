@@ -46,7 +46,7 @@ public class PaymentActivity extends BaseActivity {
         Double importo = intent.getDoubleExtra("importo", 0.0);
 
         try {
-            Bitmap qrBitmap = PagamentoQrCodeGenerator.generateQrCode(data, 400, 400);
+            Bitmap qrBitmap = PagamentoQrCodeGenerator.generateQrCode(data+idStorico+importo, 700, 700);
             qrCodeImage.setImageBitmap(qrBitmap);
         } catch (Exception e) {
             e.printStackTrace();
