@@ -4,7 +4,10 @@
         <!-- Customize principal color -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorSecondary">@color/teal_200</item>
-        <!-- Other item if you want. -->
+        <!-- Colore della status bar -->
+        <item name="android:statusBarColor">@color/purple_500</item>
+        <!-- Colore della navigation bar -->
+        <item name="android:navigationBarColor">@color/purple_500</item>
     </style>
 
     <style name="Theme.Parking" parent="Base.Theme.Parking"/>
