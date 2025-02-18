@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:layout_marginBottom="50dp"
+        android:fillViewport="true">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+        <!-- Titolo -->
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textPaymentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pagamento"
+                android:layout_gravity="center"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+                android:background="#FAFAFA" />
+
+        <!-- Linea colorata sotto il titolo -->
+        <View
+                android:id="@+id/lineBelowTitle"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#5E44A7"
+                android:layout_marginTop="8dp" />
+
+        <!-- Contenuto principale diviso in due colonne -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <!-- Colonna sinistra: QR Code -->
+            <ImageView
+                    android:id="@+id/qrCodeImage"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/placeholder"
+                    android:layout_gravity="center" />
+
+            <!-- Colonna destra: Importo e bottoni -->
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                <TextView
+                        android:id="@+id/textImporto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Importo"
+                        android:layout_gravity="center" />
+
+                <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPagaOnline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vai al sito di pagamento"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_marginTop="18dp"
+                        android:layout_gravity="center" />
+
+                <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSimulaPagamento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Simula pagamento"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_marginTop="24dp"
+                        android:layout_gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

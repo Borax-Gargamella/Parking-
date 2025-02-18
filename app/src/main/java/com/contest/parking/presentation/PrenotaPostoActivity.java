@@ -34,7 +34,7 @@ public class PrenotaPostoActivity extends BaseActivity {
     private TextInputEditText editNome, editCognome, editTarga, editDataInizio, editDataFine, editPrezzo;
     private MaterialButton btnPrenota;
 
-    // Repositories e Use Case (adattali al tuo progetto)
+    // Repositories e Use Case
     private AuthRepository authRepository;
     private UtenteRepository utenteRepository;
     private StoricoRepository storicoRepository;
