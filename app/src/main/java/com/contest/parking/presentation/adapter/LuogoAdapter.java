@@ -44,7 +44,7 @@ public class LuogoAdapter extends RecyclerView.Adapter<LuogoAdapter.LuogoViewHol
         holder.indirizzoText.setText(luogo.getIndirizzo());
 
         // Carica l'immagine dinamicamente in base al campo imageNome
-        String imageName = luogo.getImageNome(); // Assicurati che il modello Luogo abbia questo campo
+        String imageName = luogo.getImageNome();
         if (imageName != null && !imageName.isEmpty()) {
             int imageResId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
             if (imageResId != 0) {

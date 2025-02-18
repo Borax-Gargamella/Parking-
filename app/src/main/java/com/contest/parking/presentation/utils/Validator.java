@@ -175,7 +175,7 @@ public class Validator {
             throw new IllegalArgumentException("Formato targa non valido");
         }
 
-        // Calcola il numero di giorni (inclusivi) e il prezzo totale
+        // Calcola il numero di giorni (inclusivi)
         long giorni = ((dataFineGiornoIntero - dataInizioMs) / 86400000L) + 1;
 
         return new PrenotazioneValidatedData(dataInizioMs, dataFineGiornoIntero, prezzo, giorni);
