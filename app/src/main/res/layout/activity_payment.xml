@@ -22,7 +22,7 @@
             android:id="@+id/lineBelowTitle"
             android:layout_width="0dp"
             android:layout_height="2dp"
-            android:background="?attr/colorPrimary"
+            android:background="#5E44A7"
             android:layout_gravity="center"
             android:layout_marginTop="8dp" />
 

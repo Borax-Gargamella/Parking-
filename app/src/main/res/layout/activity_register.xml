@@ -28,7 +28,7 @@
             android:id="@+id/lineBelowTitle"
             android:layout_width="0dp"
             android:layout_height="2dp"
-            android:background="?attr/colorPrimary"
+            android:background="#5E44A7"
             app:layout_constraintTop_toBottomOf="@id/titleRegister"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -11,7 +11,7 @@
             android:id="@+id/headerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="@color/purple_500"
             android:padding="8dp"
             android:orientation="horizontal"
             android:layout_gravity="top|center_horizontal"
@@ -30,7 +30,14 @@
                 android:text="Parcheggio Smart"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 android:gravity="center"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white"
+                android:background="@color/purple_500"
+                android:padding="12dp"
+                android:textStyle="bold"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3"/>
     </LinearLayout>
 
     <!-- Container per il contenuto specifico di ogni Activity -->
@@ -44,7 +51,7 @@
             android:id="@+id/bottomLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="#5E44A7"
             android:padding="3dp"
             android:orientation="horizontal"
             android:layout_gravity="end|bottom"
