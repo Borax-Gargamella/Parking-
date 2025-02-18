@@ -2,13 +2,10 @@ package com.contest.parking.presentation;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.contest.parking.R;
@@ -45,7 +42,6 @@ public class UserAreaActivity extends BaseActivity {
     private UseCaseAggiornaDatiUtente useCaseAggiornaDatiUtente;
     private UseCaseAggiornaCredenziali useCaseAggiornaCredenziali;
 
-    // Aggiungi un tuo repository/storico
     private StoricoRepository storicoRepository;
 
     @Override

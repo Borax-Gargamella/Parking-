@@ -45,7 +45,7 @@ public class AreaSelectionActivity extends BaseActivity {
         textDescrizione.setText(luogoDescrizione);
         textNome.setText(nome);
 
-        // Ottieni l'ID della risorsa dinamicamente
+        // Ottiene l'ID della risorsa dinamicamente
         int imageResId = getResources().getIdentifier(luogoId, "drawable", getPackageName());
         if (imageResId != 0) {
             imageViewLuogo.setImageResource(imageResId);
@@ -56,7 +56,7 @@ public class AreaSelectionActivity extends BaseActivity {
         // Carica il file JSON dagli assets
         useCaseCaricaZone = new UseCaseCaricaZone(new ZoneRepository());
 
-        // Usa un ViewTreeObserver per attendere che l'ImageView abbia dimensioni definite
+        // Uso un ViewTreeObserver per attendere che l'ImageView abbia dimensioni definite
         imageViewLuogo.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {

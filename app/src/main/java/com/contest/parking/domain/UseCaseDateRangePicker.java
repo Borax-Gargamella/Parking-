@@ -37,7 +37,6 @@ public class UseCaseDateRangePicker {
         long oneDay = 86400000L;
         for (long day = startDay; day <= endDay; day += oneDay) {
             for (Range range : dateOccupate) {
-                // Supponiamo che Range abbia i metodi getStart() e getEnd()
                 if (day >= range.getStart() && day <= range.getEnd()) {
                     return false;
                 }

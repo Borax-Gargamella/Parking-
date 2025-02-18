@@ -25,7 +25,7 @@ public class UseCaseCaricaIntervalliOccupati {
             public void onStoricoLoaded(List<Storico> listaStorico) {
                 List<Range> dateOccupate = new ArrayList<>();
                 for (Storico s : listaStorico) {
-                    // Supponendo che s.getDataInizio() e s.getDataFine() restituiscano valori long (millisecondi)
+                    //s.getDataInizio() e s.getDataFine() restituiscano valori long (millisecondi)
                     dateOccupate.add(new Range(s.getDataInizio(), s.getDataFine()));
                 }
                 listener.onRangesLoaded(dateOccupate);

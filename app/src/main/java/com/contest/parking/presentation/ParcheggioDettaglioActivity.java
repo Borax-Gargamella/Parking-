@@ -46,7 +46,7 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
         textPostiTot = findViewById(R.id.textPostiTot);
         textPrezzo = findViewById(R.id.textPrezzo);
 
-        // Recupera l'ID del parcheggio passato tramite Intent (consiglio usare "parcheggioId")
+        // Recupera l'ID del parcheggio passato tramite Intent
         String idParcheggio = getIntent().getStringExtra("parcheggioId");
         String luogoId = getIntent().getStringExtra("luogoId");
 
@@ -99,13 +99,14 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
 
                             // Rimuovi eventuali overlay già presenti (se l'activity viene ricreata)
                             frameLayoutContainer.removeAllViews();
+
                             // Riaggiungi l'ImageView (opzionale, se il layout lo richiede)
                             frameLayoutContainer.addView(imageViewArea);
 
                             int imageWidth = imageViewArea.getWidth();
                             int imageHeight = imageViewArea.getHeight();
 
-                            // Costruisci il nome del file JSON (es. "postiAuto" + luogoId + ".json")
+                            // Costruisci il nome del file JSON ("postiAuto" + luogoId + ".json")
                             String jsonFileName = "postiAuto" + luogoId + ".json";
                             JSONObject jsonObject = JsonUtils.loadJSONFromAsset(getAssets(), jsonFileName);
                             if (jsonObject == null) {
@@ -120,7 +121,7 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                 return;
                             }
 
-                            // Cerca l'area corrispondente all'ID del parcheggio (o un campo specifico, ad esempio "parkingId")
+                            // Cerca l'area corrispondente all'ID del parcheggio
                             JSONObject areaObj = null;
                             for (int i = 0; i < parkingAreas.length(); i++) {
                                 JSONObject obj = parkingAreas.optJSONObject(i);
@@ -184,14 +185,13 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                         } else if ("elettrico".equalsIgnoreCase(categoria)) {
                                             spotButton.setBackgroundResource(R.drawable.spot_blue_selector);
                                         } else {
-                                            // Per "normale" o altre categorie puoi lasciare il colore di default
+                                            // Per "normale" o altre categorie lasciare il colore di default
                                             spotButton.setBackgroundResource(R.drawable.spot_green_selector);
                                         }
                                     }
 
                                     @Override
                                     public void onError(Exception e) {
-                                        // Gestisci l'errore, per esempio loggandolo
                                         Log.e("SpotColor", "Errore nel recupero della categoria: " + e.getMessage());
                                     }
                                 });

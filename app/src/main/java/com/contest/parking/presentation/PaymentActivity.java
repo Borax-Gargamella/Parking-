@@ -8,13 +8,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 import com.contest.parking.R;
 import com.contest.parking.data.repository.StoricoRepository;
 import com.contest.parking.domain.UseCaseProcessPagamento;
 import com.contest.parking.presentation.utils.PagamentoQrCodeGenerator;
-import com.google.zxing.BarcodeFormat;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class PaymentActivity extends BaseActivity {
 

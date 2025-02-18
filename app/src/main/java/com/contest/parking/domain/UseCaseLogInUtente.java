@@ -1,6 +1,5 @@
 package com.contest.parking.domain;
 
-import android.util.Patterns;
 import androidx.annotation.NonNull;
 import com.contest.parking.data.repository.AuthRepository;
 import com.contest.parking.presentation.utils.Validator;

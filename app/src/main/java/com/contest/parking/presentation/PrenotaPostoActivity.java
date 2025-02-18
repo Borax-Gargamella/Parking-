@@ -8,24 +8,16 @@ import android.widget.Toast;
 import androidx.core.util.Pair;
 import com.contest.parking.R;
 import com.contest.parking.data.model.Range;
-import com.contest.parking.data.model.Storico;
 import com.contest.parking.data.model.Utente;
 import com.contest.parking.data.repository.AuthRepository;
 import com.contest.parking.data.repository.PostoAutoRepository;
 import com.contest.parking.data.repository.StoricoRepository;
 import com.contest.parking.data.repository.UtenteRepository;
 import com.contest.parking.domain.*;
-import com.contest.parking.presentation.utils.CustomDateValidator;
-import com.contest.parking.presentation.utils.Validator;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.datepicker.CalendarConstraints;
-import com.google.android.material.datepicker.CompositeDateValidator;
-import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 

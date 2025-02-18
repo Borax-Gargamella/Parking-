@@ -39,7 +39,7 @@ public class UseCaseAggiornaDatiUtente {
             return;
         }
 
-        // Validazione specifica della targa (esempio, usando un Validator personalizzato)
+        // Validazione specifica della targa usando un Validator personalizzato
         if (!Validator.isValidTarga(targa)) {
             listener.onFailure(new Exception("Formato targa non valido"));
             return;
