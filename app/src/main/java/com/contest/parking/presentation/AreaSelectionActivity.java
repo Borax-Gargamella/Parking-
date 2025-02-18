@@ -1,7 +1,6 @@
 package com.contest.parking.presentation;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
@@ -14,9 +13,6 @@ import com.contest.parking.R;
 import com.contest.parking.data.model.Zone;
 import com.contest.parking.data.repository.ZoneRepository;
 import com.contest.parking.domain.UseCaseCaricaZone;
-import com.contest.parking.presentation.utils.JsonUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -82,8 +78,7 @@ public class AreaSelectionActivity extends BaseActivity {
 
                         // Crea una view trasparente per la zona (cliccabile)
                         View zoneView = new View(AreaSelectionActivity.this);
-                        //zoneView.setBackgroundColor(Color.parseColor("#55FF0000"));
-                        zoneView.setBackground(getDrawable(R.drawable.border));
+                        zoneView.setBackgroundResource(R.drawable.zone_selector);
                         zoneView.setClickable(true);
                         zoneView.setOnClickListener(v -> {
                             // Avvia la Activity di dettaglio passando l'ID della zona e del luogo

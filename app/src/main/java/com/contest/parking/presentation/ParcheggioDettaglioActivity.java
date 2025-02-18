@@ -180,12 +180,12 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                     @Override
                                     public void onCategoriaLoaded(String categoria) {
                                         if ("disabili".equalsIgnoreCase(categoria)) {
-                                            spotButton.setBackgroundColor(Color.parseColor("#EBD300"));
+                                            spotButton.setBackgroundResource(R.drawable.spot_yellow_selector);
                                         } else if ("elettrico".equalsIgnoreCase(categoria)) {
-                                            spotButton.setBackgroundColor(Color.parseColor("#082AD1"));
+                                            spotButton.setBackgroundResource(R.drawable.spot_blue_selector);
                                         } else {
                                             // Per "normale" o altre categorie puoi lasciare il colore di default
-                                            spotButton.setBackgroundColor(Color.parseColor("#4ac32c"));
+                                            spotButton.setBackgroundResource(R.drawable.spot_green_selector);
                                         }
                                     }
 
@@ -201,7 +201,7 @@ public class ParcheggioDettaglioActivity extends BaseActivity {
                                 storicoRepository.isOggiOccupato(spotId)
                                         .addOnSuccessListener(isOccupied -> {
                                             if (isOccupied) {
-                                                spotButton.setBackgroundColor(Color.parseColor("#b8452b"));
+                                                spotButton.setBackgroundResource(R.drawable.spot_red_selector);
                                             }
                                         });
 
