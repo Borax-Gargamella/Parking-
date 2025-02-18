@@ -51,8 +51,7 @@ public class PrenotaPostoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prenota_posto);
-        // Adatta se usi una BaseActivity con un container
+        setActivityLayout(R.layout.activity_prenota_posto);
 
         // Binding
         editNome = findViewById(R.id.editNome);

@@ -2,133 +2,124 @@
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <!-- Include the base layout -->
-    <include
-            layout="@layout/activity_base"
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:padding="16dp">
 
-
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
-
-    <LinearLayout
-            android:layout_marginTop="70dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        <!-- Campo Nome -->
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputNome"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+        <LinearLayout
+                android:layout_marginTop="70dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nome">
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editNome"
+                android:orientation="vertical">
+
+            <!-- Campo Nome -->
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputNome"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:focusable="false"
-                    android:enabled="false"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                    android:hint="Nome">
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editNome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:focusable="false"
+                        android:enabled="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo Cognome -->
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputCognome"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Cognome"
-                android:layout_marginTop="8dp">
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editCognome"
+            <!-- Campo Cognome -->
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputCognome"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:focusable="false"
-                    android:enabled="false"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                    android:hint="Cognome"
+                    android:layout_marginTop="8dp">
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editCognome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:focusable="false"
+                        android:enabled="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo Targa -->
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputTarga"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Targa"
-                android:layout_marginTop="8dp">
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTarga"
+            <!-- Campo Targa -->
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputTarga"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:focusable="false"
-                    android:enabled="false"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                    android:hint="Targa"
+                    android:layout_marginTop="8dp">
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTarga"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:focusable="false"
+                        android:enabled="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo Data Inizio -->
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputDataInizio"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Data Inizio Prenotazione"
-                android:layout_marginTop="8dp">
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editDataInizio"
+            <!-- Campo Data Inizio -->
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputDataInizio"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                    android:hint="Data Inizio Prenotazione"
+                    android:layout_marginTop="8dp">
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editDataInizio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo Data Fine -->
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputDataFine"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Data Fine Prenotazione"
-                android:layout_marginTop="8dp">
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editDataFine"
+            <!-- Campo Data Fine -->
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputDataFine"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                    android:hint="Data Fine Prenotazione"
+                    android:layout_marginTop="8dp">
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editDataFine"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputPrezzo"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Prezzo"
-                android:layout_marginTop="8dp">
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editPrezzo"
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputPrezzo"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                    android:hint="Prezzo"
+                    android:layout_marginTop="8dp">
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editPrezzo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Bottone Prenota -->
-        <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPrenota"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Prenota"
-                android:layout_marginTop="16dp"
-                android:paddingVertical="15dp"
-                android:layout_marginHorizontal="80dp"
-                android:layout_marginBottom="50dp"/>
-    </LinearLayout>
-</ScrollView>
+            <!-- Bottone Prenota -->
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPrenota"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Prenota"
+                    android:layout_marginTop="16dp"
+                    android:paddingVertical="15dp"
+                    android:layout_marginHorizontal="80dp"
+                    android:layout_marginBottom="50dp"/>
+        </LinearLayout>
+    </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

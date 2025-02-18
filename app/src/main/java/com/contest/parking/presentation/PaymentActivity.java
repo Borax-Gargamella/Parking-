@@ -81,14 +81,4 @@ public class PaymentActivity extends BaseActivity {
             });
         });
     }
-
-    private void generateQrCode(String data) {
-        try {
-            BarcodeEncoder encoder = new BarcodeEncoder();
-            Bitmap bitmap = encoder.encodeBitmap(data, BarcodeFormat.QR_CODE, 400, 400);
-            qrCodeImage.setImageBitmap(bitmap);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
